@@ -1,0 +1,49 @@
+import React from 'react';
+import { Box, Avatar, Text, VStack, HStack, Link, Icon, useColorModeValue } from '@chakra-ui/react';
+import { FaDiscord, FaLinkedin, FaEnvelope } from 'react-icons/fa';
+import { Link as RouterLink } from 'react-router-dom';
+import { IMember } from '../interfaces/IMember';
+
+interface MemberCardProps {
+  member: IMember;
+}
+
+export const MemberCard: React.FC<MemberCardProps> = ({ member }) => {
+  const bgColor = useColorModeValue('white', 'gray.800');
+  const borderColor = useColorModeValue('gray.200', 'gray.600');
+
+  return (
+    <Box 
+      as={RouterLink}
+      to={`/members/${member.memberId}`}
+      borderWidth="1px" 
+      borderRadius="lg" 
+      p={6}
+      boxShadow="md" 
+      transition="all 0.3s"
+      _hover={{ transform: 'translateY(-5px)', boxShadow: 'xl' }}
+      bg={bgColor}
+      borderColor={borderColor}
+      textDecoration="none"
+    >
+      <VStack spacing={4} align="center">
+        <Avatar size="xl" name={`${member.firstName} ${member.lastName}`} src={member.profilePicture} />
+        <VStack spacing={1} textAlign="center">
+          <Text fontWeight="bold" fontSize="xl">{`${member.firstName} ${member.lastName}`}</Text>
+          <Text fontSize="sm" color="gray.500">{member.email}</Text>
+        </VStack>
+        <HStack spacing={4}>
+          <Link href={`mailto:${member.email}`} isExternal onClick={(e) => e.stopPropagation()}>
+            <Icon as={FaEnvelope} w={5} h={5} color="gray.500" _hover={{ color: 'blue.500' }} />
+          </Link>
+          <Link href={`https://discord.com/users/${member.discord}`} isExternal onClick={(e) => e.stopPropagation()}>
+            <Icon as={FaDiscord} w={5} h={5} color="gray.500" _hover={{ color: 'blue.500' }} />
+          </Link>
+          <Link href={member.linkedin} isExternal onClick={(e) => e.stopPropagation()}>
+            <Icon as={FaLinkedin} w={5} h={5} color="gray.500" _hover={{ color: 'blue.500' }} />
+          </Link>
+        </HStack>
+      </VStack>
+    </Box>
+  );
+};
