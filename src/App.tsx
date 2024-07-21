@@ -1,6 +1,6 @@
 import React from 'react';
 import { ChakraProvider, theme } from '@chakra-ui/react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { HashRouter as Router, Route, Routes } from 'react-router-dom';
 import { MembersPage } from './pages/MembersPage';
 import { TeamsPage } from './pages/TeamsPage';
 import { EventsPage } from './pages/EventsPage';
