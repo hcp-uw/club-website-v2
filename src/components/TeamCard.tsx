@@ -74,7 +74,7 @@ export const TeamCard: React.FC<TeamCardProps> = ({ team }) => {
         </VStack>
       </MotionBox>
 
-      <Modal isOpen={isOpen} onClose={onClose} size="xl">
+      <Modal isOpen={isOpen && !isLoading} onClose={onClose}>
         <ModalOverlay />
         <ModalContent>
           <ModalHeader>{team.name || `Team ${team.teamId}`}</ModalHeader>

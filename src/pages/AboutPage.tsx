@@ -1,5 +1,5 @@
 import { Layout } from "../components/Layout"
-import { Box, Flex, Spacer, Text, Grid, GridItem } from "@chakra-ui/react"
+import { Box, Flex, Text, Grid, GridItem } from "@chakra-ui/react"
 import { AnimatedTerminal } from "../components/AnimatedTerminal" // Make sure to import the AnimatedTerminal component
 
 export const AboutPage: React.FC = () => {

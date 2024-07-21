@@ -1,4 +1,3 @@
-import React from 'react';
 import { ChakraProvider, theme } from '@chakra-ui/react';
 import { HashRouter as Router, Route, Routes } from 'react-router-dom';
 import { MembersPage } from './pages/MembersPage';
