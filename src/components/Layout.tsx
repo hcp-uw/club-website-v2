@@ -34,6 +34,8 @@ export const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) =>
               <NavItem to="/members">Members</NavItem>
               <NavItem to="/teams">Teams</NavItem>
               <NavItem to="/events">Events</NavItem>
+              <NavItem to="/about">About</NavItem>
+              <NavItem to="/join">Join</NavItem>
             </Flex>
           </Flex>
         </Container>

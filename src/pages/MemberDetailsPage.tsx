@@ -8,6 +8,34 @@ import { FaDiscord, FaLinkedin, FaEnvelope, FaArrowLeft } from 'react-icons/fa';
 import { memberService } from '../service/mock/memberService';
 import { IMember } from '../interfaces/IMember';
 import { Layout } from '../components/Layout';
+import GitHubCalendar from 'react-github-calendar';
+
+1
+interface GHCalProps {
+  username: string;
+}
+
+const GHCal: React.FC<GHCalProps> = ({ username }) => {
+  const centered = {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+  }
+
+  const content = <GitHubCalendar username={extractUsername(username)} colorScheme='light' />
+
+  return (
+    <Box style={centered}>
+      {content}
+    </Box>
+  )
+}
+
+const extractUsername = (maybeUrl: string) =>
+  (maybeUrl.indexOf("/") === -1)
+    ? maybeUrl
+    : new URL(maybeUrl).pathname.split('/')[1]
+
 
 export const MemberDetailsPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -69,6 +97,7 @@ export const MemberDetailsPage: React.FC = () => {
               <Text fontSize="lg" color="gray.500">{member.email}</Text>
             </VStack>
           </HStack>
+          <GHCal username={member.github} />
           <HStack spacing={4}>
             <Link href={`mailto:${member.email}`} isExternal>
               <Icon as={FaEnvelope} w={6} h={6} color="gray.500" _hover={{ color: 'blue.500' }} />
