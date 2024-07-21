@@ -1,12 +1,13 @@
 {
   "name": "club-website-v2",
-  "homepage": "https://hcp-uw.github.io/club-website-v2",
+  "homepage": "https://hcp-uw.github.io/",
   "private": false,
   "version": "0.0.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
+    "serve": "vite preview",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
     "predeploy": "npm run build",
@@ -26,6 +27,7 @@
     "react-router-dom": "^6.25.1"
   },
   "devDependencies": {
+    "@types/node": "^20.14.11",
     "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",
     "@typescript-eslint/eslint-plugin": "^7.15.0",
