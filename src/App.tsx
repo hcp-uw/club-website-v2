@@ -11,7 +11,7 @@ import { JoinPage } from './pages/JoinPage';
 function App() {
   return (
     <ChakraProvider theme={theme}>
-      <Router >
+      <Router>
         <Routes>
           <Route path="/members" element={<MembersPage />} />
           <Route path="/members/:id" element={<MemberDetailsPage />} />
