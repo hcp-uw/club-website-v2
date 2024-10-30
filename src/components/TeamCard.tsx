@@ -1,54 +1,78 @@
-import React, { useState } from 'react';
+import React, { useState } from 'react'
 import {
-  Box, Image, Text, VStack, Link, Badge, Button,
-  Modal, ModalOverlay, ModalContent, ModalHeader, ModalBody, ModalCloseButton, ModalFooter,
-  useDisclosure, Heading, List, ListItem, useColorModeValue, HStack, Avatar
-} from '@chakra-ui/react';
-import { motion } from 'framer-motion';
-import { ITeam } from '../interfaces/ITeam';
-import { teamService } from '../service/teamService';
-import { IMember } from '../interfaces/IMember';
-import { memberService } from '../service/memberService';
+  Box,
+  Image,
+  Text,
+  VStack,
+  Link,
+  Badge,
+  Button,
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalBody,
+  ModalCloseButton,
+  ModalFooter,
+  useDisclosure,
+  Heading,
+  List,
+  ListItem,
+  useColorModeValue,
+  HStack,
+  Avatar
+} from '@chakra-ui/react'
+import { motion } from 'framer-motion'
+import { ITeam } from '../interfaces/ITeam'
+import { teamService } from '../service/teamService'
+import { IMember } from '../interfaces/IMember'
+import { memberService } from '../service/memberService'
 
 interface TeamCardProps {
-  team: ITeam;
+  team: ITeam
 }
 
-const MotionBox = motion(Box);
+const MotionBox = motion(Box)
 
 export const TeamCard: React.FC<TeamCardProps> = ({ team }) => {
-  const { isOpen, onOpen, onClose } = useDisclosure();
-  const [teamMembers, setTeamMembers] = useState<IMember[]>([]);
-  const [isLoading, setIsLoading] = useState(false);
+  const { isOpen, onOpen, onClose } = useDisclosure()
+  const [teamMembers, setTeamMembers] = useState<IMember[]>([])
+  const [isLoading, setIsLoading] = useState(false)
 
-  const bgColor = useColorModeValue('white', 'gray.800');
-  const borderColor = useColorModeValue('gray.200', 'gray.600');
+  const bgColor = useColorModeValue('white', 'gray.800')
+  const borderColor = useColorModeValue('gray.200', 'gray.600')
 
   const handleClick = async () => {
     try {
-      setIsLoading(true);
-      const relations = await teamService.getTeamMembers(team.teamId!);
-      const members = (await Promise.all(
-        relations.map(relation => memberService.getMemberById(relation.memberId))
-      )).filter(member => member !== undefined) as IMember[];
+      setIsLoading(true)
+      const relations = await teamService.getTeamMembers(team.teamId!)
+      const members = (
+        await Promise.all(
+          relations.map(relation =>
+            relation.memberId
+              ? memberService.getMemberById(relation.memberId)
+              : undefined
+          )
+        )
+      ).filter(member => member !== undefined) as IMember[]
 
-      setTeamMembers(members);
-      onOpen();
+      setTeamMembers(members)
+      onOpen()
     } catch (error) {
-      console.error("Error fetching team members:", error);
+      console.error('Error fetching team members:', error)
     } finally {
-      setIsLoading(false);
+      setIsLoading(false)
     }
-  };
+  }
 
   return (
     <>
       <MotionBox
-        borderWidth="1px"
-        borderRadius="lg"
+        borderWidth='1px'
+        borderRadius='lg'
         p={6}
-        boxShadow="md"
-        cursor="pointer"
+        boxShadow='md'
+        cursor='pointer'
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
         transition={{ duration: 0.2 }}
@@ -56,21 +80,35 @@ export const TeamCard: React.FC<TeamCardProps> = ({ team }) => {
         bg={bgColor}
         borderColor={borderColor}
       >
-        <VStack spacing={4} align="center">
+        <VStack spacing={4} align='center'>
           {team.logo && (
-            <Image src={team.logo} alt="Team Logo" boxSize="100px" objectFit="contain" borderRadius="full" />
+            <Image
+              src={team.logo}
+              alt='Team Logo'
+              boxSize='100px'
+              objectFit='contain'
+              borderRadius='full'
+            />
           )}
-          <Text fontWeight="bold" fontSize="xl">{team.name || `Team ${team.teamId}`}</Text>
+          <Text fontWeight='bold' fontSize='xl'>
+            {team.name || `Team ${team.teamId}`}
+          </Text>
           {team.teamId !== null && team.teamId !== undefined && (
-            <Badge colorScheme="green">PM ID: {team.teamId.toString()}</Badge>
+            <Badge colorScheme='green'>PM ID: {team.teamId.toString()}</Badge>
           )}
           {team.deployLink && (
-            <Link href={team.deployLink} isExternal color="blue.500" onClick={(e) => e.stopPropagation()}>
+            <Link
+              href={team.deployLink}
+              isExternal
+              color='blue.500'
+              onClick={e => e.stopPropagation()}
+            >
               View Deployment
             </Link>
           )}
-          <Text fontSize="sm" color="gray.500">
-            Created: {team.createdAt && new Date(team.createdAt).toLocaleDateString()}
+          <Text fontSize='sm' color='gray.500'>
+            Created:{' '}
+            {team.createdAt && new Date(team.createdAt).toLocaleDateString()}
           </Text>
         </VStack>
       </MotionBox>
@@ -81,15 +119,22 @@ export const TeamCard: React.FC<TeamCardProps> = ({ team }) => {
           <ModalHeader>{team.name || `Team ${team.teamId}`}</ModalHeader>
           <ModalCloseButton />
           <ModalBody>
-            <VStack align="start" spacing={4}>
-              <Heading size="md">Team Members</Heading>
-              <List spacing={3} width="100%">
-                {teamMembers.map((member) => (
+            <VStack align='start' spacing={4}>
+              <Heading size='md'>Team Members</Heading>
+              <List spacing={3} width='100%'>
+                {teamMembers.map(member => (
                   <ListItem key={member.memberId?.toString()}>
                     <HStack>
-                      <Avatar size="sm" name={`${member.firstName} ${member.lastName}`} />
-                      <Text>{member.firstName} {member.lastName}</Text>
-                      <Text fontSize="sm" color="gray.500">{member.email}</Text>
+                      <Avatar
+                        size='sm'
+                        name={`${member.firstName} ${member.lastName}`}
+                      />
+                      <Text>
+                        {member.firstName} {member.lastName}
+                      </Text>
+                      <Text fontSize='sm' color='gray.500'>
+                        {member.email}
+                      </Text>
                     </HStack>
                   </ListItem>
                 ))}
@@ -98,12 +143,12 @@ export const TeamCard: React.FC<TeamCardProps> = ({ team }) => {
             </VStack>
           </ModalBody>
           <ModalFooter>
-            <Button colorScheme="blue" mr={3} onClick={onClose}>
+            <Button colorScheme='blue' mr={3} onClick={onClose}>
               Close
             </Button>
           </ModalFooter>
         </ModalContent>
       </Modal>
     </>
-  );
-};
+  )
+}
