@@ -1,30 +1,56 @@
-import axios from 'axios';
 import { IMember } from '../interfaces/IMember';
+import { supabase } from './client';
+import { DBMember } from '../interfaces/DBTypes';
+import { mapDBMemberToIMember } from '../interfaces/mapping';
 
-const API_URL = 'http://localhost:7001';
+
 
 export const memberService = {
   getAllMembers: async (): Promise<IMember[]> => {
-    const response = await axios.get(`${API_URL}/members`);
-    return response.data;
+    const { data, error } = await supabase
+      .from('Members')
+      .select('*')
+      .returns<DBMember[]>();
+
+    if (error) {
+      throw new Error(error.message);
+    }
+
+    if (!data) {
+      return [];
+    }
+
+    return data.map(mapDBMemberToIMember);
   },
 
   getMemberById: async (id: bigint): Promise<IMember> => {
-    const response = await axios.get(`${API_URL}/members/${id}`);
-    return response.data;
+    const { data, error } = await supabase
+      .from('Members')
+      .select('*')
+      .eq('memberId', id)
+      .returns<DBMember>()
+      .single();
+
+    if (error) {
+      throw new Error(error.message);
+    }
+
+    if (!data) {
+      throw new Error('Member not found');
+    }
+
+    return mapDBMemberToIMember(data);
   },
 
   createMember: async (member: Omit<IMember, 'memberId' | 'createdAt'>): Promise<IMember> => {
-    const response = await axios.post(`${API_URL}/members`, member);
-    return response.data;
+    throw new Error('Not implemented');
   },
 
   updateMember: async (id: bigint, member: Partial<IMember>): Promise<IMember> => {
-    const response = await axios.put(`${API_URL}/members/${id}`, member);
-    return response.data;
+    throw new Error('Not implemented');
   },
 
   deleteMember: async (id: bigint): Promise<void> => {
-    await axios.delete(`${API_URL}/members/${id}`);
+    throw new Error('Not implemented');
   },
 };

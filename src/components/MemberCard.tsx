@@ -1,7 +1,7 @@
 import React from 'react';
 import { Box, Avatar, Text, VStack, HStack, Link, Icon, useColorModeValue } from '@chakra-ui/react';
 import { FaDiscord, FaLinkedin, FaEnvelope } from 'react-icons/fa';
-import { Link as RouterLink } from 'react-router-dom';
+import { Link as RouterLink, useNavigate } from 'react-router-dom';
 import { IMember } from '../interfaces/IMember';
 
 interface MemberCardProps {
@@ -11,11 +11,10 @@ interface MemberCardProps {
 export const MemberCard: React.FC<MemberCardProps> = ({ member }) => {
   const bgColor = useColorModeValue('white', 'gray.800');
   const borderColor = useColorModeValue('gray.200', 'gray.600');
-
+  const navigate = useNavigate();
   return (
     <Box 
-      as={RouterLink}
-      to={`/members/${member.memberId}`}
+      onClick={() => navigate(`/members/${member.memberId}`)}
       borderWidth="1px" 
       borderRadius="lg" 
       p={6}

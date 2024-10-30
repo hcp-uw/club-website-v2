@@ -1,30 +1,53 @@
-import axios from 'axios';
 import { IEvent } from '../interfaces/IEvent';
-
-const API_URL = 'your-api-url';
+import { supabase } from './client';
+import { DBEvent } from '../interfaces/DBTypes';
+import { mapDBEventToIEvent } from '../interfaces/mapping';
 
 export const eventService = {
   getAllEvents: async (): Promise<IEvent[]> => {
-    const response = await axios.get(`${API_URL}/events`);
-    return response.data;
+    let { data, error } = await supabase
+      .from('Events')
+      .select('*')
+    if (error) {
+      throw new Error(error.message);
+    }
+
+    if (!data) {
+      return [];
+    }
+
+    return data.map(mapDBEventToIEvent);
   },
 
   getEventById: async (id: bigint): Promise<IEvent> => {
-    const response = await axios.get(`${API_URL}/events/${id}`);
-    return response.data;
+    const { data, error } = await supabase
+      .from('Events')
+      .select('*')
+      .eq('id', id)
+      .returns<DBEvent>()
+      .single();
+
+
+    if (error) {
+      throw new Error(error.message);
+    }
+
+    if (!data) {
+      throw new Error('Event not found');
+    }
+
+    return mapDBEventToIEvent(data);
   },
 
   createEvent: async (event: Omit<IEvent, 'id' | 'createdAt'>): Promise<IEvent> => {
-    const response = await axios.post(`${API_URL}/events`, event);
-    return response.data;
+    throw new Error('Not implemented');
   },
 
   updateEvent: async (id: bigint, event: Partial<IEvent>): Promise<IEvent> => {
-    const response = await axios.put(`${API_URL}/events/${id}`, event);
-    return response.data;
+    throw new Error('Not implemented');
   },
 
   deleteEvent: async (id: bigint): Promise<void> => {
-    await axios.delete(`${API_URL}/events/${id}`);
+    throw new Error('Not implemented');
   },
 };

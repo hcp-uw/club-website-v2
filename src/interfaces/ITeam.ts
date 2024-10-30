@@ -1,10 +1,10 @@
 export interface ITeam {
   teamId?: bigint
-  name?: string | null
+  name?: string
   createdAt?: Date
-  logo?: string | null
-  deployLink?: string | null
-  githubRepo?: string | null
+  logo?: string
+  deployLink?: string
+  githubRepo?: string
 }
 
 export interface ITeamMemberRelation {

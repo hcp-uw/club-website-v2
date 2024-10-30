@@ -6,8 +6,9 @@ import {
 } from '@chakra-ui/react';
 import { motion } from 'framer-motion';
 import { ITeam } from '../interfaces/ITeam';
-import { teamService } from '../service/mock/teamService';
+import { teamService } from '../service/teamService';
 import { IMember } from '../interfaces/IMember';
+import { memberService } from '../service/memberService';
 
 interface TeamCardProps {
   team: ITeam;
@@ -28,7 +29,7 @@ export const TeamCard: React.FC<TeamCardProps> = ({ team }) => {
       setIsLoading(true);
       const relations = await teamService.getTeamMembers(team.teamId!);
       const members = (await Promise.all(
-        relations.map(relation => teamService.getMemberById(relation.memberId))
+        relations.map(relation => memberService.getMemberById(relation.memberId))
       )).filter(member => member !== undefined) as IMember[];
 
       setTeamMembers(members);

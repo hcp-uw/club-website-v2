@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { SimpleGrid, Heading, Spinner, Text, VStack, Input, InputGroup, InputLeftElement } from '@chakra-ui/react';
 import { SearchIcon } from '@chakra-ui/icons';
 import { EventCard } from '../components/EventCard';
-import { eventService } from '../service/mock/eventService';
+import { eventService } from '../service/eventService';
 import { IEvent } from '../interfaces/IEvent';
 import { Layout } from '../components/Layout';
 

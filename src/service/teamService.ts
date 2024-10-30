@@ -1,57 +1,104 @@
-import axios from 'axios'
+import { supabase } from './client'
+import { DBMember, DBTeam, DBTeamMemberRelation } from '../interfaces/DBTypes'
 import { ITeam, ITeamMemberRelation } from '../interfaces/ITeam'
 import { IMember } from '../interfaces/IMember'
+import { mapDBTeamToITeam, mapDBTeamMemberRelationToITeamMemberRelation, mapDBMemberToIMember } from '../interfaces/mapping'
 
 const API_URL = 'your-api-url'
 
 export const teamService = {
   getAllTeams: async (): Promise<ITeam[]> => {
-    const response = await axios.get(`${API_URL}/teams`)
-    return response.data
+    let { data: teamData, error: teamError } = await supabase
+      .from('Teams')
+      .select('*')
+      .returns<DBTeam[]>()
+
+    if (teamError) {
+      throw new Error(teamError.message)
+    }
+
+    if (!teamData) {
+      return []
+    }
+
+    return teamData.map(mapDBTeamToITeam);
   },
 
   getTeamById: async (id: bigint): Promise<ITeam> => {
-    const response = await axios.get(`${API_URL}/teams/${id}`)
-    return response.data
+    let { data: teamData, error: teamError } = await supabase
+      .from('Teams')
+      .select('*')
+      .eq('teamId', id)
+      .returns<DBTeam>()
+      .single()
+
+    if (teamError) {
+      throw new Error(teamError.message)
+    }
+
+    if (!teamData) {
+      throw new Error('Team not found')
+    }
+
+    return mapDBTeamToITeam(teamData)
   },
 
   createTeam: async (
     team: Omit<ITeam, 'teamId' | 'createdAt'>
   ): Promise<ITeam> => {
-    const response = await axios.post(`${API_URL}/teams`, team)
-    return response.data
+    throw new Error('Not implemented')
   },
 
   updateTeam: async (id: bigint, team: Partial<ITeam>): Promise<ITeam> => {
-    const response = await axios.put(`${API_URL}/teams/${id}`, team)
-    return response.data
+    throw new Error('Not implemented')
   },
 
   deleteTeam: async (id: bigint): Promise<void> => {
-    await axios.delete(`${API_URL}/teams/${id}`)
+    throw new Error('Not implemented')
   },
 
-  getTeamMembers: async (teamId: bigint): Promise<ITeamMemberRelation[]> => {
-    const response = await axios.get(`${API_URL}/teams/${teamId}/members`)
-    return response.data
+  getTeamMembers: async (teamId: bigint): Promise<IMember[]> => {
+    const id: number = Number(teamId)
+    let { data: teamMemberData, error: teamMemberError } = await supabase
+      .from('TeamMemberRelation')
+      .select('*')
+      .eq('teamId', id)
+      .returns<DBTeamMemberRelation[]>()
+
+    if (teamMemberError) {
+      throw new Error(teamMemberError.message)
+    }
+
+    if (!teamMemberData) {
+      return []
+    }
+
+    const ids = teamMemberData.map((relation) => relation.memberId)
+    let { data: memberData, error: memberError } = await supabase
+      .from('Members')
+      .select('*')
+      .in('memberId', ids)
+      .returns<DBMember[]>()
+
+    if (memberError) {
+      throw new Error(memberError.message)
+    }
+
+    if (!memberData) {
+      return []
+    }
+
+    return memberData.map(mapDBMemberToIMember)
   },
 
   addTeamMember: async (
     teamId: bigint,
     memberId: bigint
   ): Promise<ITeamMemberRelation> => {
-    const response = await axios.post(`${API_URL}/teams/${teamId}/members`, {
-      memberId
-    })
-    return response.data
+    throw new Error('Not implemented')
   },
 
   removeTeamMember: async (teamId: bigint, memberId: bigint): Promise<void> => {
-    await axios.delete(`${API_URL}/teams/${teamId}/members/${memberId}`)
-  },
-
-  getMemberById: async (id: bigint): Promise<IMember> => {
-    const response = await axios.get(`${API_URL}/members/${id}`)
-    return response.data
+    throw new Error('Not implemented')
   }
 }

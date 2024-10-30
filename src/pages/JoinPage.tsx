@@ -52,9 +52,7 @@ export const JoinPage: React.FC = () => {
             transition={{ duration: 0.8, delay: 0.2 }}
           >
             <Text fontSize='xl' mb={6}>
-              Connect with like-minded developers, share your projects, and grow
-              your skills. Our Discord community is the perfect place to
-              collaborate and learn!
+              Come and build cool projects with us
             </Text>
           </MotionBox>
 

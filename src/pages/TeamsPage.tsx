@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { SimpleGrid, Heading, Spinner, Text, VStack, Input, InputGroup, InputLeftElement } from '@chakra-ui/react';
 import { SearchIcon } from '@chakra-ui/icons';
 import { TeamCard } from '../components/TeamCard';
-import { teamService } from '../service/mock/teamService';
+import { teamService } from '../service/teamService';
 import { ITeam } from '../interfaces/ITeam';
 import { Layout } from '../components/Layout';
 

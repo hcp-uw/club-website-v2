@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { SimpleGrid, Heading, Spinner, Text, VStack, Input, InputGroup, InputLeftElement, Select } from '@chakra-ui/react';
 import { SearchIcon } from '@chakra-ui/icons';
 import { MemberCard } from '../components/MemberCard';
-import { memberService } from '../service/mock/memberService';
+import { memberService } from '../service/memberService';
 import { IMember } from '../interfaces/IMember';
 import { Layout } from '../components/Layout';
 

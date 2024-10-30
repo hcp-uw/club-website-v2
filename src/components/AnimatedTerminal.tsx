@@ -32,6 +32,7 @@ export const AnimatedTerminal: React.FC = () => {
   const [commandIndex, setCommandIndex] = useState(0);
   const [charIndex, setCharIndex] = useState(0);
 
+
   const bgColor = useColorModeValue('gray.100', 'gray.700');
   const textColor = useColorModeValue('green.500', 'green.300');
 
@@ -47,6 +48,8 @@ export const AnimatedTerminal: React.FC = () => {
           setCharIndex(0);
         } else {
           setCommandIndex(0);
+          setCurrentCommand('$ ');
+          setCharIndex(0);
         }
       }, 100);
 

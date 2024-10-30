@@ -5,7 +5,7 @@ import {
   useColorModeValue
 } from '@chakra-ui/react';
 import { FaDiscord, FaLinkedin, FaEnvelope, FaArrowLeft } from 'react-icons/fa';
-import { memberService } from '../service/mock/memberService';
+import { memberService } from '../service/memberService';
 import { IMember } from '../interfaces/IMember';
 import { Layout } from '../components/Layout';
 import GitHubCalendar from 'react-github-calendar';
