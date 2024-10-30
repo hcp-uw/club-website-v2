@@ -44,16 +44,16 @@ export const teamService = {
   },
 
   createTeam: async (
-    team: Omit<ITeam, 'teamId' | 'createdAt'>
+    _team: Omit<ITeam, 'teamId' | 'createdAt'>
   ): Promise<ITeam> => {
     throw new Error('Not implemented')
   },
 
-  updateTeam: async (id: bigint, team: Partial<ITeam>): Promise<ITeam> => {
+  updateTeam: async (_id: bigint, _team: Partial<ITeam>): Promise<ITeam> => {
     throw new Error('Not implemented')
   },
 
-  deleteTeam: async (id: bigint): Promise<void> => {
+  deleteTeam: async (_id: bigint): Promise<void> => {
     throw new Error('Not implemented')
   },
 
@@ -92,13 +92,13 @@ export const teamService = {
   },
 
   addTeamMember: async (
-    teamId: bigint,
-    memberId: bigint
+    _teamId: bigint,
+    _memberId: bigint
   ): Promise<ITeamMemberRelation> => {
     throw new Error('Not implemented')
   },
 
-  removeTeamMember: async (teamId: bigint, memberId: bigint): Promise<void> => {
+  removeTeamMember: async (_teamId: bigint, _memberId: bigint): Promise<void> => {
     throw new Error('Not implemented')
   }
 }

@@ -39,15 +39,15 @@ export const eventService = {
     return mapDBEventToIEvent(data);
   },
 
-  createEvent: async (event: Omit<IEvent, 'id' | 'createdAt'>): Promise<IEvent> => {
+  createEvent: async (_event: Omit<IEvent, 'id' | 'createdAt'>): Promise<IEvent> => {
     throw new Error('Not implemented');
   },
 
-  updateEvent: async (id: bigint, event: Partial<IEvent>): Promise<IEvent> => {
+  updateEvent: async (_id: bigint, _event: Partial<IEvent>): Promise<IEvent> => {
     throw new Error('Not implemented');
   },
 
-  deleteEvent: async (id: bigint): Promise<void> => {
+  deleteEvent: async (_id: bigint): Promise<void> => {
     throw new Error('Not implemented');
   },
 };

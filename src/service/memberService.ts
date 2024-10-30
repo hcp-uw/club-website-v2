@@ -42,15 +42,15 @@ export const memberService = {
     return mapDBMemberToIMember(data);
   },
 
-  createMember: async (member: Omit<IMember, 'memberId' | 'createdAt'>): Promise<IMember> => {
+  createMember: async (_member: Omit<IMember, 'memberId' | 'createdAt'>): Promise<IMember> => {
     throw new Error('Not implemented');
   },
 
-  updateMember: async (id: bigint, member: Partial<IMember>): Promise<IMember> => {
+  updateMember: async (_id: bigint, _member: Partial<IMember>): Promise<IMember> => {
     throw new Error('Not implemented');
   },
 
-  deleteMember: async (id: bigint): Promise<void> => {
+  deleteMember: async (_id: bigint): Promise<void> => {
     throw new Error('Not implemented');
   },
 };
