@@ -13,11 +13,11 @@ export const EventCard: React.FC<EventCardProps> = ({ event }) => {
   const borderColor = useColorModeValue('gray.200', 'gray.600');
 
   return (
-    <Box 
-      borderWidth="1px" 
-      borderRadius="lg" 
-      overflow="hidden" 
-      boxShadow="lg" 
+    <Box
+      borderWidth="1px"
+      borderRadius="lg"
+      overflow="hidden"
+      boxShadow="lg"
       transition="all 0.3s"
       _hover={{ transform: 'translateY(-5px)', boxShadow: 'xl' }}
       bg={bgColor}

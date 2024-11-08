@@ -13,12 +13,12 @@ export const MemberCard: React.FC<MemberCardProps> = ({ member }) => {
   const borderColor = useColorModeValue('gray.200', 'gray.600');
   const navigate = useNavigate();
   return (
-    <Box 
+    <Box
       onClick={() => navigate(`/members/${member.memberId}`)}
-      borderWidth="1px" 
-      borderRadius="lg" 
+      borderWidth="1px"
+      borderRadius="lg"
       p={6}
-      boxShadow="md" 
+      boxShadow="md"
       transition="all 0.3s"
       _hover={{ transform: 'translateY(-5px)', boxShadow: 'xl' }}
       bg={bgColor}

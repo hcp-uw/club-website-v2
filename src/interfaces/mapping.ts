@@ -31,6 +31,7 @@ export const mapDBMemberToIMember = (dbMember: DBMember): IMember => ({
   linkedin: dbMember.linkedin || undefined,
   github: dbMember.github,
   profilePicture: dbMember.profilePicture,
+  lead: dbMember.lead,
 });
 
 export const mapIMemberToDBCreateMember = (member: IMember): DBCreateMember => ({
@@ -41,6 +42,7 @@ export const mapIMemberToDBCreateMember = (member: IMember): DBCreateMember => (
   linkedin: member.linkedin,
   github: member.github,
   profilePicture: member.profilePicture,
+  lead: member.lead,
 });
 
 export const mapDBTeamToITeam = (dbTeam: DBTeam): ITeam => ({
@@ -50,6 +52,7 @@ export const mapDBTeamToITeam = (dbTeam: DBTeam): ITeam => ({
   logo: dbTeam.logo,
   deployLink: dbTeam.deployLink,
   githubRepo: dbTeam.githubRepo,
+  lead: dbTeam.lead,
 });
 
 export const mapITeamToDBCreateTeam = (team: ITeam): DBCreateTeam => ({
@@ -57,6 +60,7 @@ export const mapITeamToDBCreateTeam = (team: ITeam): DBCreateTeam => ({
   githubRepo: team.githubRepo || "",
   logo: team.logo || "",
   deployLink: team.deployLink,
+  lead: team.lead,
 });
 
 export const mapDBTeamMemberRelationToITeamMemberRelation = (dbTeamMemberRelation: DBTeamMemberRelation): ITeamMemberRelation => ({

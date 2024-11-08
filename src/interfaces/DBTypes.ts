@@ -18,6 +18,7 @@ export interface DBMember {
   linkedin?: string;
   profilePicture: string;
   created_at: string;
+  lead: boolean;
 }
 
 export interface DBTeam {
@@ -27,6 +28,7 @@ export interface DBTeam {
   logo: string;
   deployLink?: string;
   created_at: string;
+  lead: boolean;
 }
 
 export interface DBTeamMemberRelation {
@@ -52,6 +54,7 @@ export interface DBCreateMember {
   discord: string;
   linkedin?: string;
   profilePicture: string;
+  lead: boolean;
 }
 
 export interface DBCreateTeam {
@@ -59,4 +62,5 @@ export interface DBCreateTeam {
   githubRepo: string;
   logo: string;
   deployLink?: string;
+  lead: boolean;
 }
