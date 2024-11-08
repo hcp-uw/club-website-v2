@@ -198,11 +198,11 @@ export const Layout: React.FC<{ children: React.ReactNode }> = ({
                     overflow="hidden"
                   >
                     <HStack spacing={{ base: 4, md: 10 }}>
-                      <FooterLink href="mailto:your-email@example.com" icon={<FaEnvelope />} />
-                      <FooterLink href="https://github.com/your-org/your-repo" icon={<FaGithub />} />
+                      <FooterLink href="mailto:hcpuw@uw.edu" icon={<FaEnvelope />} />
+                      <FooterLink href="https://github.com/hcp-uw" icon={<FaGithub />} />
                       <FooterLink href="https://twitter.com/your-twitter" icon={<FaTwitter />} />
-                      <FooterLink href="https://linkedin.com/company/your-company" icon={<FaLinkedin />} />
-                      <FooterLink href="https://instagram.com/your-instagram" icon={<FaInstagram />} />
+                      <FooterLink href="https://www.linkedin.com/company/hcp-uw" icon={<FaLinkedin />} />
+                      <FooterLink href="https://www.instagram.com/hcp.uw/" icon={<FaInstagram />} />
                     </HStack>
                   </MotionBox>
                 )}

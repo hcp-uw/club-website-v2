@@ -16,10 +16,11 @@ export const LeadTeamsPage: React.FC = () => {
   useEffect(() => {
     const fetchTeams = async () => {
       try {
-        const fetchedTeams = await teamService.getAllTeams();
+        const fetchedTeams = await teamService.getAllTeams(true);
         setTeams(fetchedTeams);
         setFilteredTeams(fetchedTeams);
       } catch (err) {
+        console.log(err);
         setError('Failed to fetch teams');
       } finally {
         setLoading(false);
