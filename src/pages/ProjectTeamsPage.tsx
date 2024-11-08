@@ -6,7 +6,7 @@ import { teamService } from '../service/teamService';
 import { ITeam } from '../interfaces/ITeam';
 import { Layout } from '../components/Layout';
 
-export const TeamsPage: React.FC = () => {
+export const ProjectTeamsPage: React.FC = () => {
   const [teams, setTeams] = useState<ITeam[]>([]);
   const [filteredTeams, setFilteredTeams] = useState<ITeam[]>([]);
   const [loading, setLoading] = useState(true);

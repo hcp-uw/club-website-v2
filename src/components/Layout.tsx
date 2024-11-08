@@ -93,10 +93,10 @@ export const Layout: React.FC<{ children: React.ReactNode }> = ({
   const toggleExpand = () => setIsExpanded(!isExpanded);
 
   const navLinks = [
+    { to: '/club_lead_teams', label: 'Club Lead Teams' },
+    { to: '/project_teams', label: 'Project Teams' },
     { to: '/members', label: 'Members' },
-    { to: '/teams', label: 'Teams' },
     { to: '/events', label: 'Events' },
-    { to: '/about', label: 'About' },
     { to: '/join', label: 'Join' }
   ];
 
