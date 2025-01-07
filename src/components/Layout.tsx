@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import {
   Box,
   Flex,
@@ -17,17 +17,25 @@ import {
   DrawerContent,
   DrawerCloseButton,
   useDisclosure,
-  useBreakpointValue
-} from '@chakra-ui/react';
-import { Link as RouterLink } from 'react-router-dom';
-import { FaGithub, FaEnvelope, FaTwitter, FaLinkedin, FaInstagram, FaChevronRight, FaBars } from 'react-icons/fa';
-import { motion, AnimatePresence } from 'framer-motion';
+  useBreakpointValue,
+} from "@chakra-ui/react";
+import { Link as RouterLink } from "react-router-dom";
+import {
+  FaGithub,
+  FaEnvelope,
+  FaTwitter,
+  FaLinkedin,
+  FaInstagram,
+  FaChevronRight,
+  FaBars,
+} from "react-icons/fa";
+import { motion, AnimatePresence } from "framer-motion";
 
 const NavItem = ({
   children,
   to,
   isMobile = false,
-  onClick = () => {}
+  onClick = () => {},
 }: {
   children: React.ReactNode;
   to: string;
@@ -41,8 +49,8 @@ const NavItem = ({
       rounded="md"
       w={isMobile ? "full" : "auto"}
       _hover={{
-        textDecoration: 'none',
-        bg: useColorModeValue('gray.100', 'gray.700')
+        textDecoration: "none",
+        bg: useColorModeValue("gray.100", "gray.700"),
       }}
       onClick={onClick}
     >
@@ -51,7 +59,13 @@ const NavItem = ({
   </RouterLink>
 );
 
-const FooterLink = ({ href, icon }: { href: string; icon: React.ReactElement }) => (
+const FooterLink = ({
+  href,
+  icon,
+}: {
+  href: string;
+  icon: React.ReactElement;
+}) => (
   <Link href={href} isExternal>
     <Box as="span" fontSize="xl">
       {icon}
@@ -63,9 +77,9 @@ const MotionBox = motion(Box);
 
 const Logo = () => {
   const logoText = useBreakpointValue({
-    base: "<HCP/>",  // Mobile version
-    sm: "<HCP/>",    // Still short version for small screens
-    md: "<Husky Coding Project/>"  // Full version for medium screens and up
+    base: "<HCP/>", // Mobile version
+    sm: "<HCP/>", // Still short version for small screens
+    md: "<Husky Coding Project/>", // Full version for medium screens and up
   });
 
   return (
@@ -82,22 +96,23 @@ const Logo = () => {
 };
 
 export const Layout: React.FC<{ children: React.ReactNode }> = ({
-  children
+  children,
 }) => {
   const [isExpanded, setIsExpanded] = useState(false);
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const bgColor = useColorModeValue('gray.50', 'gray.900');
-  const navBgColor = useColorModeValue('white', 'gray.800');
-  const footerBgColor = useColorModeValue('gray.50', 'gray.900');
+  const bgColor = useColorModeValue("gray.50", "gray.900");
+  const navBgColor = useColorModeValue("white", "gray.800");
+  const footerBgColor = useColorModeValue("gray.50", "gray.900");
 
   const toggleExpand = () => setIsExpanded(!isExpanded);
 
   const navLinks = [
-    { to: '/members', label: 'Members' },
-    { to: '/teams', label: 'Teams' },
-    { to: '/events', label: 'Events' },
-    { to: '/about', label: 'About' },
-    { to: '/join', label: 'Join' }
+    { to: "/about", label: "About" },
+    { to: "/events", label: "Events" },
+    { to: "/join", label: "Join" },
+    { to: "/members", label: "Members" },
+    { to: "/teams", label: "Teams" },
+    { to: "/sponsors", label: "Sponsors" },
   ];
 
   return (
@@ -117,7 +132,7 @@ export const Layout: React.FC<{ children: React.ReactNode }> = ({
               </RouterLink>
 
               {/* Desktop Navigation */}
-              <HStack spacing={1} display={{ base: 'none', md: 'flex' }}>
+              <HStack spacing={1} display={{ base: "none", md: "flex" }}>
                 {navLinks.map((link) => (
                   <NavItem key={link.to} to={link.to}>
                     {link.label}
@@ -128,7 +143,7 @@ export const Layout: React.FC<{ children: React.ReactNode }> = ({
 
             {/* Mobile Menu Button */}
             <IconButton
-              display={{ base: 'flex', md: 'none' }}
+              display={{ base: "flex", md: "none" }}
               onClick={onOpen}
               variant="ghost"
               aria-label="Open menu"
@@ -147,12 +162,7 @@ export const Layout: React.FC<{ children: React.ReactNode }> = ({
           <DrawerBody>
             <VStack spacing={4} align="stretch">
               {navLinks.map((link) => (
-                <NavItem
-                  key={link.to}
-                  to={link.to}
-                  isMobile
-                  onClick={onClose}
-                >
+                <NavItem key={link.to} to={link.to} isMobile onClick={onClose}>
                   {link.label}
                 </NavItem>
               ))}
@@ -168,14 +178,14 @@ export const Layout: React.FC<{ children: React.ReactNode }> = ({
       <Box as="footer" bg={footerBgColor} py={6} mt={8}>
         <Container maxW="container.xl">
           <Flex
-            direction={{ base: 'column', md: 'row' }}
+            direction={{ base: "column", md: "row" }}
             justifyContent="space-between"
-            alignItems={{ base: 'flex-start', md: 'center' }}
+            alignItems={{ base: "flex-start", md: "center" }}
             gap={4}
           >
             <Flex
-              direction={{ base: 'column', sm: 'row' }}
-              alignItems={{ base: 'flex-start', sm: 'center' }}
+              direction={{ base: "column", sm: "row" }}
+              alignItems={{ base: "flex-start", sm: "center" }}
               gap={4}
             >
               <Button
@@ -192,23 +202,41 @@ export const Layout: React.FC<{ children: React.ReactNode }> = ({
                 {isExpanded && (
                   <MotionBox
                     initial={{ opacity: 0, width: 0 }}
-                    animate={{ opacity: 1, width: 'auto' }}
+                    animate={{ opacity: 1, width: "auto" }}
                     exit={{ opacity: 0, width: 0 }}
                     transition={{ duration: 0.3 }}
                     overflow="hidden"
                   >
                     <HStack spacing={{ base: 4, md: 10 }}>
-                      <FooterLink href="mailto:your-email@example.com" icon={<FaEnvelope />} />
-                      <FooterLink href="https://github.com/your-org/your-repo" icon={<FaGithub />} />
-                      <FooterLink href="https://twitter.com/your-twitter" icon={<FaTwitter />} />
-                      <FooterLink href="https://linkedin.com/company/your-company" icon={<FaLinkedin />} />
-                      <FooterLink href="https://instagram.com/your-instagram" icon={<FaInstagram />} />
+                      <FooterLink
+                        href="mailto:your-email@example.com"
+                        icon={<FaEnvelope />}
+                      />
+                      <FooterLink
+                        href="https://github.com/your-org/your-repo"
+                        icon={<FaGithub />}
+                      />
+                      <FooterLink
+                        href="https://twitter.com/your-twitter"
+                        icon={<FaTwitter />}
+                      />
+                      <FooterLink
+                        href="https://linkedin.com/company/your-company"
+                        icon={<FaLinkedin />}
+                      />
+                      <FooterLink
+                        href="https://instagram.com/your-instagram"
+                        icon={<FaInstagram />}
+                      />
                     </HStack>
                   </MotionBox>
                 )}
               </AnimatePresence>
             </Flex>
-            <Text>&copy; {new Date().getFullYear()} Husky Coding Project. All rights reserved.</Text>
+            <Text>
+              &copy; {new Date().getFullYear()} Husky Coding Project. All rights
+              reserved.
+            </Text>
           </Flex>
         </Container>
       </Box>
