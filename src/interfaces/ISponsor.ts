@@ -1,8 +1,8 @@
 export interface ISponsor {
     sponsorId: bigint
-    sponsorName: string
-    sponsorLogo: string
-    sponsorLink: string
-    sponsorDescription?: string
+    name: string
+    logo: string
+    website: string
+    description?: string
     createdAt?: Date
   }

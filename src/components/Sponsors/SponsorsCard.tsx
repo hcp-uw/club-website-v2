@@ -1,13 +1,6 @@
 import React from "react";
 import { ISponsor } from "../../interfaces/ISponsor";
-import {
-  Box,
-  useColorModeValue,
-  Text,
-  Image,
-  Link,
-  Flex,
-} from "@chakra-ui/react";
+import { Box, useColorModeValue, Text, Image, Link } from "@chakra-ui/react";
 import { FiExternalLink } from "react-icons/fi";
 import { Link as RouterLink } from "react-router-dom";
 
@@ -25,7 +18,7 @@ export const SponsorCard: React.FC<SponsorsCardProps> = ({ sponsor }) => {
       borderRadius="lg"
       p={6}
       as={RouterLink}
-      to={sponsor.sponsorLink}
+      to={sponsor.website}
       boxShadow="md"
       transition="all 0.3s"
       _hover={{ transform: "translateY(-5px)", boxShadow: "xl" }}
@@ -34,21 +27,17 @@ export const SponsorCard: React.FC<SponsorsCardProps> = ({ sponsor }) => {
       target="_blank"
     >
       <Box>
-        <Image
-          src={`/images/${sponsor.sponsorLogo}`}
-          alt={sponsor.sponsorName}
-          borderRadius="md"
-        />
+        <Image src={sponsor.logo} alt={sponsor.name} borderRadius="md" />
       </Box>
       <Box mt={6}>
         <Text fontWeight="bold" fontSize="xl">
-          {sponsor.sponsorName}
+          {sponsor.name}
         </Text>
-        <Text mt={2}>{sponsor.sponsorDescription}</Text>
+        <Text mt={2}>{sponsor.description}</Text>
       </Box>
       <Box mt={2}>
         <Link
-          href={sponsor.sponsorLink}
+          href={sponsor.website}
           isExternal
           rel="noopener noreferrer"
           color="blue.500"

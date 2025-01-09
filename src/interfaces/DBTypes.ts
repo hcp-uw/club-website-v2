@@ -34,6 +34,7 @@ export interface DBSponsor {
   name: string;
   logo: string;
   website: string;
+  description: string;
   created_at: string;
 }
 

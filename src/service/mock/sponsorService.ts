@@ -4,10 +4,10 @@ import { ISponsor } from "../../interfaces/ISponsor";
 export const mockSponsors: ISponsor[] = [
     {
         sponsorId: 1n,
-        sponsorName: "Skill Cat",
-        sponsorLogo: "skillCatLogo.png", // Ensure this path is correct
-        sponsorLink: "https://www.skillcatapp.com/",
-        sponsorDescription: "SkillCat is an innovative online platform that helps students and professionals gain certifications and skills in the skilled trades.",
+        name: "Skill Cat",
+        logo: "skillCatLogo.png", // Ensure this path is correct
+        website: "https://www.skillcatapp.com/",
+        description: "SkillCat is an innovative online platform that helps students and professionals gain certifications and skills in the skilled trades.",
         createdAt: new Date()
     }
 ];

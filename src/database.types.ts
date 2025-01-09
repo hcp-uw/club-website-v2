@@ -6,6 +6,7 @@ export type Json =
   | { [key: string]: Json | undefined }
   | Json[]
 
+// TODO: define and add a sponsorship table and CRUD operations 
 export type Database = {
   public: {
     Tables: {
@@ -207,6 +208,33 @@ export type Database = {
         }
         Relationships: []
       }
+      Sponsors: {
+        Row: {
+          id: number;
+          name: string;
+          description: string;
+          logo: string;
+          website: string;
+          created_at: string;
+        };
+        Insert: {
+          id?: number;
+          name: string;
+          description: string;
+          logo: string;
+          website: string;
+          created_at?: string;
+        };
+        Update: {
+          id?: number;
+          name?: string;
+          description?: string;
+          logo?: string;
+          website?: string;
+          created_at?: string;
+        };
+        Relationships: [];
+      };
       ProjectRequestRelation: {
         Row: {
           created_at: string
