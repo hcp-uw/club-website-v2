@@ -1,6 +1,7 @@
-import { DBEvent, DBCreateEvent, DBMember, DBCreateMember, DBTeam, DBCreateTeam, DBTeamMemberRelation } from "./DBTypes";
+import { DBEvent, DBCreateEvent, DBMember, DBCreateMember, DBTeam, DBCreateTeam, DBTeamMemberRelation, DBSponsor } from "./DBTypes";
 import { IEvent } from "./IEvent";
 import { IMember } from "./IMember";
+import { ISponsor } from "./ISponsor";
 import { ITeam, ITeamMemberRelation } from "./ITeam";
 
 export const mapDBEventToIEvent = (dbEvent: DBEvent): IEvent => ({
@@ -51,6 +52,16 @@ export const mapDBTeamToITeam = (dbTeam: DBTeam): ITeam => ({
   deployLink: dbTeam.deployLink,
   githubRepo: dbTeam.githubRepo,
 });
+
+export const mapDBSponsorToISponsor = (dbSponsor: DBSponsor): ISponsor => ({
+  sponsorId: BigInt(dbSponsor.sponsorId),
+  name: dbSponsor.name,
+  logo: dbSponsor.logo,
+  website: dbSponsor.website,
+  description: dbSponsor.description,
+  createdAt: new Date(dbSponsor.created_at),
+
+})
 
 export const mapITeamToDBCreateTeam = (team: ITeam): DBCreateTeam => ({
   name: team.name || "",
