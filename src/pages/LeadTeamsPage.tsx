@@ -10,7 +10,7 @@ export const LeadTeamsPage: React.FC = () => {
   const [teams, setTeams] = useState<ITeam[]>([]);
   const [filteredTeams, setFilteredTeams] = useState<ITeam[]>([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+  const [error, setError] = useState();
   const [searchTerm, setSearchTerm] = useState('');
 
   useEffect(() => {
@@ -20,7 +20,7 @@ export const LeadTeamsPage: React.FC = () => {
         setTeams(fetchedTeams);
         setFilteredTeams(fetchedTeams);
       } catch (err) {
-        console.log(err);
+        console.error(err);
         setError('Failed to fetch teams');
       } finally {
         setLoading(false);
