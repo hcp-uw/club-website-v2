@@ -107,11 +107,11 @@ export const Layout: React.FC<{ children: React.ReactNode }> = ({
   const toggleExpand = () => setIsExpanded(!isExpanded);
 
   const navLinks = [
-    { to: "/about", label: "About" },
-    { to: "/events", label: "Events" },
-    { to: "/join", label: "Join" },
-    { to: "/members", label: "Members" },
-    { to: "/teams", label: "Teams" },
+    { to: '/teams/leadership', label: 'Leadership Teams' },
+    { to: '/teams/members', label: 'Project Teams' },
+    { to: '/members', label: 'Members' },
+    { to: '/events', label: 'Events' },
+    { to: '/join', label: 'Join' },
     { to: "/sponsors", label: "Sponsors" },
   ];
 
@@ -209,11 +209,11 @@ export const Layout: React.FC<{ children: React.ReactNode }> = ({
                   >
                     <HStack spacing={{ base: 4, md: 10 }}>
                       <FooterLink
-                        href="mailto:your-email@example.com"
+                        href="mailto:huskycodingproject@gmail.com"
                         icon={<FaEnvelope />}
                       />
                       <FooterLink
-                        href="https://github.com/your-org/your-repo"
+                        href="https://github.com/hcp-uw"
                         icon={<FaGithub />}
                       />
                       <FooterLink
@@ -221,11 +221,11 @@ export const Layout: React.FC<{ children: React.ReactNode }> = ({
                         icon={<FaTwitter />}
                       />
                       <FooterLink
-                        href="https://linkedin.com/company/your-company"
+                        href="https://www.linkedin.com/company/hcp-uw"
                         icon={<FaLinkedin />}
                       />
                       <FooterLink
-                        href="https://instagram.com/your-instagram"
+                        href="https://www.instagram.com/hcp.uw/"
                         icon={<FaInstagram />}
                       />
                     </HStack>

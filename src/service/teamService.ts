@@ -7,16 +7,16 @@ import { mapDBTeamToITeam, mapDBTeamMemberRelationToITeamMemberRelation, mapDBMe
 const API_URL = 'your-api-url'
 
 export const teamService = {
-  getAllTeams: async (): Promise<ITeam[]> => {
+  getAllTeams: async (lead: boolean = false): Promise<ITeam[]> => {
     let { data: teamData, error: teamError } = await supabase
       .from('Teams')
       .select('*')
       .returns<DBTeam[]>()
+      .eq('lead', lead)
 
     if (teamError) {
       throw new Error(teamError.message)
     }
-
     if (!teamData) {
       return []
     }
