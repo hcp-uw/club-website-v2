@@ -31,6 +31,15 @@ export interface DBTeam {
   lead: boolean;
 }
 
+export interface DBSponsor {
+  sponsorId: number;
+  name: string;
+  logo: string;
+  website: string;
+  description: string;
+  created_at: string;
+}
+
 export interface DBTeamMemberRelation {
   id: number;
   teamId: number;

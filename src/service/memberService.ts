@@ -3,8 +3,6 @@ import { supabase } from './client';
 import { DBMember } from '../interfaces/DBTypes';
 import { mapDBMemberToIMember } from '../interfaces/mapping';
 
-
-
 export const memberService = {
   getAllMembers: async (): Promise<IMember[]> => {
     const { data, error } = await supabase
