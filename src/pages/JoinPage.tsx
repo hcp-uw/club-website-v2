@@ -1,11 +1,11 @@
 import React from 'react'
+import { keyframes } from "@emotion/react";
 import {
   Box,
   Text,
   Button,
   VStack,
   Heading,
-  keyframes,
   useColorModeValue
 } from '@chakra-ui/react'
 import { FaDiscord } from 'react-icons/fa'
