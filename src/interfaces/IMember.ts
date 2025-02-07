@@ -10,4 +10,5 @@ export interface IMember {
   linkedin?: string
   github: string
   profilePicture: string
+  lead: boolean
 }

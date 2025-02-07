@@ -20,5 +20,10 @@
   ],
   "[typescript]": {
     "editor.defaultFormatter": "denoland.vscode-deno"
+  },
+  "workbench.colorCustomizations": {
+    "activityBar.background": "#230A92",
+    "titleBar.activeBackground": "#310FCC",
+    "titleBar.activeForeground": "#FBFAFF"
   }
 }

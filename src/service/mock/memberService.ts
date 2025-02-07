@@ -11,7 +11,8 @@ export const mockMembers: IMember[] = [
     discord: 'john_doe#1234',
     linkedin: 'https://www.linkedin.com/johndoe',
     github: 'elimelt',
-    profilePicture: 'john-doe.jpg'
+    profilePicture: 'john-doe.jpg',
+    lead: true,
   },
   {
     memberId: 2n,
@@ -22,7 +23,8 @@ export const mockMembers: IMember[] = [
     discord: 'jane_smith#5678',
     linkedin: 'https://www.linkedin.com/janesmith',
     github: 'janesmith',
-    profilePicture: 'jane-smith.jpg'
+    profilePicture: 'jane-smith.jpg',
+    lead: false
   },
 ];
 

@@ -10,6 +10,7 @@ export const mockTeams: ITeam[] = [
     createdAt: new Date(),
     logo: 'team-a-logo.jpg',
     deployLink: 'https://team-a-deploy.example.com',
+    lead: false,
   },
   {
     teamId: 2n,
@@ -17,6 +18,7 @@ export const mockTeams: ITeam[] = [
     createdAt: new Date(),
     logo: 'https://wivolixjgzmaigovvchs.supabase.co/storage/v1/object/public/club-website-assets/elijah-profile.png?t=2024-07-21T09%3A58%3A03.289Z',
     deployLink: 'https://team-b-deploy.example.com',
+    lead: true,
   },
 ];
 

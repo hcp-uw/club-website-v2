@@ -25,7 +25,7 @@ export const memberService = {
     const { data, error } = await supabase
       .from('Members')
       .select('*')
-      .eq('memberId', id)
+      .eq('memberId', Number(id))
       .returns<DBMember>()
       .single();
 

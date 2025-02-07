@@ -10,7 +10,7 @@ export const LeadTeamsPage: React.FC = () => {
   const [teams, setTeams] = useState<ITeam[]>([]);
   const [filteredTeams, setFilteredTeams] = useState<ITeam[]>([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState();
+  const [error, setError] = useState<string | undefined>(undefined);
   const [searchTerm, setSearchTerm] = useState('');
 
   useEffect(() => {

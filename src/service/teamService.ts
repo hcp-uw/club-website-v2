@@ -6,13 +6,26 @@ import { mapDBTeamToITeam, mapDBTeamMemberRelationToITeamMemberRelation, mapDBMe
 
 const API_URL = 'your-api-url'
 
+// export const teamService = {
+//   getAllTeams: async (lead: boolean = false): Promise<ITeam[]> => {
+//     let { data: teamData, error: teamError } = await supabase
+//       .from('Teams')
+//       .select('*')
+//       .returns<DBTeam[]>()
+//       .eq('lead', lead)
+
+
 export const teamService = {
   getAllTeams: async (lead: boolean = false): Promise<ITeam[]> => {
-    let { data: teamData, error: teamError } = await supabase
+    const query = supabase
       .from('Teams')
-      .select('*')
-      .returns<DBTeam[]>()
-      .eq('lead', lead)
+      .select('*');
+
+    const filteredQuery = lead !== undefined
+      ? query.eq('lead', lead)
+      : query;
+
+    const { data: teamData, error: teamError } = await filteredQuery.returns<DBTeam[]>();
 
     if (teamError) {
       throw new Error(teamError.message)
@@ -28,7 +41,7 @@ export const teamService = {
     let { data: teamData, error: teamError } = await supabase
       .from('Teams')
       .select('*')
-      .eq('teamId', id)
+      .eq('teamId', Number(id))
       .returns<DBTeam>()
       .single()
 

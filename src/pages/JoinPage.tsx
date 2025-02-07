@@ -19,6 +19,7 @@ const pulseKeyframe = keyframes`
 `
 
 const MotionBox = motion(Box)
+const MotionButton = motion(Button)
 
 export const JoinPage: React.FC = () => {
 
@@ -56,13 +57,13 @@ export const JoinPage: React.FC = () => {
             </Text>
           </MotionBox>
 
-          <MotionBox
+          <MotionButton
             as={Button}
             leftIcon={<FaDiscord />}
             size='lg'
             colorScheme='purple'
             _hover={{ transform: 'translateY(-5px)' }}
-            transition='all 0.2s'
+            style={{ transition: 'all 0.2s' }}
             onClick={() =>
               window.open('https://discord.gg/YPT9R4YC', '_blank')
             }
@@ -71,7 +72,7 @@ export const JoinPage: React.FC = () => {
             whileTap={{ scale: 0.95 }}
           >
             Join our Discord
-          </MotionBox>
+          </MotionButton>
 
           <MotionBox
             initial={{ opacity: 0 }}
