@@ -32,10 +32,12 @@ export const ProjectTeamsPage: React.FC = () => {
   const [slidesToShow, setSlidesToShow] = useState(3);
 
   const updateSlidesToShow = () => {
-    if (window.innerWidth < 768) {
-      setSlidesToShow(1);
+    if (window.innerWidth < 640) {
+      setSlidesToShow(1); // Mobile
+    } else if (window.innerWidth < 1024) {
+      setSlidesToShow(2); // Tablet
     } else {
-      setSlidesToShow(3);
+      setSlidesToShow(3); // Desktop
     }
   };
 
@@ -50,8 +52,10 @@ export const ProjectTeamsPage: React.FC = () => {
   const instagramPosts = [
     "https://www.instagram.com/p/DGetPdiJqgx/?img_index=1",
     "https://www.instagram.com/p/DF7IDobx8Mz/?img_index=1",
-    "https://www.instagram.com/p/DF7JIEyPlxx/?img_index=1",
-    "https://www.instagram.com/p/DF7KPH7IzFc/?img_index=1",
+    "https://www.instagram.com/p/C7NRaFXPMIu/?img_index=1",
+    "https://www.instagram.com/p/C6o8KaYS5WS/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==",
+    "https://www.instagram.com/p/C0fZpMEPXKj/?img_index=1",
+    "https://www.instagram.com/p/DCkoN2LSqtw/?img_index=1",
   ];
 
   useEffect(() => {
@@ -99,21 +103,27 @@ export const ProjectTeamsPage: React.FC = () => {
     autoplay: true,
     speed: 500,
     autoplaySpeed: 4000,
-    slidesToShow: slidesToShow, // Now dynamically updating based on window width
+    slidesToShow: slidesToShow,
     slidesToScroll: 1,
+    swipeToSlide: true,
   };
 
   return (
     <Layout>
       <VStack spacing={8} align="stretch">
-        <Heading>Featured Instagram Posts</Heading>
+        <Heading>Featured Projects</Heading>
 
         {/* Instagram Carousel */}
         <div className="w-full flex justify-center sm:max-w-7xl mx-auto items-center">
-          <Slider {...settings} className="w-full">
+          <Slider {...settings} className="w-full flex justify-center mx-auto">
             {instagramPosts.map((post, index) => (
-              <div key={index} className="flex justify-center items-center p-4">
-                <InstagramEmbed url={post} width={328} />
+              <div
+                key={index}
+                className="flex justify-center items-center p-4 w-full"
+              >
+                <div className="flex justify-center w-full">
+                  <InstagramEmbed url={post} width={328} />
+                </div>
               </div>
             ))}
           </Slider>
