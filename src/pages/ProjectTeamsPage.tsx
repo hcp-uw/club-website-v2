@@ -15,6 +15,8 @@ import { teamService } from "../service/teamService";
 import { ITeam } from "../interfaces/ITeam";
 import { Layout } from "../components/Layout";
 import { InstagramEmbed } from "react-social-media-embed";
+
+// Import React Slick for Carousel
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -25,6 +27,24 @@ export const ProjectTeamsPage: React.FC = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [searchTerm, setSearchTerm] = useState("");
+
+  // State to track screen width
+  const [slidesToShow, setSlidesToShow] = useState(3);
+
+  const updateSlidesToShow = () => {
+    if (window.innerWidth < 768) {
+      setSlidesToShow(1);
+    } else {
+      setSlidesToShow(3);
+    }
+  };
+
+  // Effect to update state when window resizes
+  useEffect(() => {
+    updateSlidesToShow();
+    window.addEventListener("resize", updateSlidesToShow);
+    return () => window.removeEventListener("resize", updateSlidesToShow);
+  }, []);
 
   // Instagram Post URLs
   const instagramPosts = [
@@ -79,7 +99,7 @@ export const ProjectTeamsPage: React.FC = () => {
     autoplay: true,
     speed: 500,
     autoplaySpeed: 4000,
-    slidesToShow: 1,
+    slidesToShow: slidesToShow, // Now dynamically updating based on window width
     slidesToScroll: 1,
   };
 
