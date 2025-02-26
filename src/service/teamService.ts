@@ -3,8 +3,12 @@ import { DBMember, DBTeam, DBTeamMemberRelation } from '../interfaces/DBTypes'
 import { ITeam, ITeamMemberRelation } from '../interfaces/ITeam'
 import { IMember } from '../interfaces/IMember'
 import { mapDBTeamToITeam, mapDBTeamMemberRelationToITeamMemberRelation, mapDBMemberToIMember } from '../interfaces/mapping'
+import { Octokit } from "@octokit/core";
 
 const API_URL = 'your-api-url'
+
+const GITHUB_ACCESS_TOKEN = import.meta.env.VITE_GITHUB_TOKEN;
+const ORG_NAME = "hcp-uw";
 
 // export const teamService = {
 //   getAllTeams: async (lead: boolean = false): Promise<ITeam[]> => {
@@ -35,6 +39,40 @@ export const teamService = {
     }
 
     return teamData.map(mapDBTeamToITeam);
+  },
+  /** Fetch teams from GitHub */
+  fetchGitHubTeams: async (): Promise<ITeam[]> => {
+    if (!GITHUB_ACCESS_TOKEN) {
+      console.error("GitHub API token is missing.");
+      return [];
+    }
+
+    const octokit = new Octokit({ auth: GITHUB_ACCESS_TOKEN });
+
+    try {
+      console.log("Fetching GitHub teams...");
+      const response = await octokit.request("GET /orgs/{org}/teams", {
+        org: ORG_NAME,
+        headers: { "X-GitHub-Api-Version": "2022-11-28" },
+      });
+
+      console.log("Fetched GitHub Teams:", response.data);
+
+      // Convert GitHub teams to match ITeam structure
+      return response.data.map((team: { id: number; name: string }) => ({
+        teamId: BigInt(team.id),
+        name: team.name,
+        createdAt: new Date(),
+        logo: "",
+        deployLink: "",
+        githubRepo: "",
+        lead: false,
+      }));
+
+    } catch (error) {
+      console.error("GitHub API Error:", error);
+      return [];
+    }
   },
 
   getTeamById: async (id: bigint): Promise<ITeam> => {

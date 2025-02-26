@@ -5,7 +5,7 @@ export interface ITeam {
   logo?: string
   deployLink?: string
   githubRepo?: string
-  lead: boolean;
+  lead?: boolean;
 }
 
 export interface ITeamMemberRelation {

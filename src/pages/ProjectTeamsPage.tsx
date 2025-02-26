@@ -12,18 +12,17 @@ import {
 import { SearchIcon } from "@chakra-ui/icons";
 import { TeamCard } from "../components/TeamCard";
 import { teamService } from "../service/teamService";
-import { ITeam } from "../interfaces/ITeam";
 import { Layout } from "../components/Layout";
 import { InstagramEmbed } from "react-social-media-embed";
-
-// Import React Slick for Carousel
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
 export const ProjectTeamsPage: React.FC = () => {
-  const [teams, setTeams] = useState<ITeam[]>([]);
-  const [filteredTeams, setFilteredTeams] = useState<ITeam[]>([]);
+  const [teams, setTeams] = useState<{ teamId: bigint; name: string }[]>([]);
+  const [filteredTeams, setFilteredTeams] = useState<
+    { teamId: bigint; name: string }[]
+  >([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [searchTerm, setSearchTerm] = useState("");
@@ -58,14 +57,19 @@ export const ProjectTeamsPage: React.FC = () => {
     "https://www.instagram.com/p/DCkoN2LSqtw/?img_index=1",
   ];
 
+  // Fetch teams from Supabase and GitHub
   useEffect(() => {
     const fetchTeams = async () => {
       try {
-        const fetchedTeams = await teamService.getAllTeams();
-        setTeams(fetchedTeams);
-        setFilteredTeams(fetchedTeams);
+        const fetchedTeams = await teamService.fetchGitHubTeams();
+        const validTeams = fetchedTeams.filter(
+          (team) => team.teamId !== undefined
+        ) as { teamId: bigint; name: string }[];
+        setTeams(validTeams);
+        setFilteredTeams(validTeams);
       } catch (err) {
-        setError("Failed to fetch teams");
+        setError("Failed to fetch teams.");
+        console.error("Team Fetch Error:", err);
       } finally {
         setLoading(false);
       }
@@ -74,9 +78,10 @@ export const ProjectTeamsPage: React.FC = () => {
     fetchTeams();
   }, []);
 
+  // Search filtering
   useEffect(() => {
     const results = teams.filter((team) =>
-      team.name?.toLowerCase().includes(searchTerm.toLowerCase())
+      team.name.toLowerCase().includes(searchTerm.toLowerCase())
     );
     setFilteredTeams(results);
   }, [searchTerm, teams]);
@@ -143,7 +148,7 @@ export const ProjectTeamsPage: React.FC = () => {
         </InputGroup>
         <SimpleGrid columns={[1, 2, 3]} spacing={6}>
           {filteredTeams.map((team) => (
-            <TeamCard key={team.teamId?.toString()} team={team} />
+            <TeamCard key={team.teamId.toString()} team={team} />
           ))}
         </SimpleGrid>
       </VStack>

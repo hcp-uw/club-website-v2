@@ -8,6 +8,7 @@ import { MemberDetailsPage } from "./pages/MemberDetailsPage";
 import { AboutPage } from "./pages/AboutPage";
 import { JoinPage } from "./pages/JoinPage";
 import { SponsorPage } from "./pages/SponsorPage";
+// import { GitHubTeams } from "./pages/GithubTeams";
 import "./App.css";
 
 function App() {
@@ -19,6 +20,7 @@ function App() {
           <Route path="/members/:id" element={<MemberDetailsPage />} />
           <Route path="/teams/leadership" element={<LeadTeamsPage />} />
           <Route path="/teams/members" element={<ProjectTeamsPage />} />
+          {/* <Route path="/teams/githubTeams" element={<GitHubTeams />} /> */}
           <Route path="/events" element={<EventsPage />} />
           <Route path="/about" element={<AboutPage />} />
           <Route path="/join" element={<JoinPage />} />
