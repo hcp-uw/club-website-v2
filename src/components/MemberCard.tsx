@@ -10,12 +10,16 @@ interface MemberCardProps {
 
 export const MemberCard: React.FC<MemberCardProps> = ({ member }) => {
   const bgColor = useColorModeValue('white', 'gray.800');
-  const borderColor = useColorModeValue('gray.200', 'gray.600');
+  // const borderColor = useColorModeValue('gray.200', 'gray.600');
+  const borderColor = member.lead ? 'gold' : useColorModeValue('gray.200', 'gray.600');
+  const borderWidth = member.lead ? '2px' : '1px';
+
   const navigate = useNavigate();
   return (
     <Box
       onClick={() => navigate(`/members/${member.memberId}`)}
-      borderWidth="1px"
+      // borderWidth="1px"
+      borderWidth={borderWidth}
       borderRadius="lg"
       p={6}
       boxShadow="md"
