@@ -35,4 +35,13 @@ jobs:
         if_key_exists: replace
         
     - name: Deploy with scp
-      run: scp -r ./dist/* hcpuw@vergil.u.washington.edu:public_html
+      run: |
+        if [ -f ./.env.local ]; then
+          echo "Copying env file to remote server"
+          scp -r ./.env.local hcpuw@vergil.u.washington.edu:public_html
+        else
+          echo "No env file found, skipping copy"
+        fi
+
+        echo "Copying dist folder to remote server"
+        scp -r ./dist/* hcpuw@vergil.u.washington.edu:public_html
