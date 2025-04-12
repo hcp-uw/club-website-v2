@@ -21,6 +21,8 @@ jobs:
         
     - name: Install dependencies
       run: npm install --legacy-peer-deps
+    - name: Create env file
+      run: echo "${{ secrets.ENV_FILE }}" > .env.local
       
     - name: Build
       run: npm run build-for-vergil
