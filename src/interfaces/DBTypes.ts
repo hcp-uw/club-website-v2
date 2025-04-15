@@ -71,5 +71,5 @@ export interface DBCreateTeam {
   githubRepo: string;
   logo: string;
   deployLink?: string;
-  lead: boolean;
+  lead?: boolean;
 }
