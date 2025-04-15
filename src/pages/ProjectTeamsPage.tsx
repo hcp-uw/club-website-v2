@@ -18,6 +18,7 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
+// TODO: add pagination to
 export const ProjectTeamsPage: React.FC = () => {
   const [teams, setTeams] = useState<{ teamId: bigint; name: string }[]>([]);
   const [filteredTeams, setFilteredTeams] = useState<
@@ -78,6 +79,8 @@ export const ProjectTeamsPage: React.FC = () => {
     fetchTeams();
   }, []);
 
+  console.log("Teams", teams);
+
   // Search filtering
   useEffect(() => {
     const results = teams.filter((team) =>
@@ -113,6 +116,7 @@ export const ProjectTeamsPage: React.FC = () => {
     swipeToSlide: true,
   };
 
+  // TODO: add pagination to Teams section, add members section for Teams Members
   return (
     <Layout>
       <VStack spacing={8} align="stretch">
