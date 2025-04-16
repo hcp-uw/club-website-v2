@@ -31,26 +31,27 @@ export const EventCard: React.FC<EventCardProps> = ({ event }) => {
       _hover={{ transform: 'translateY(-5px)', boxShadow: 'xl' }}
       bg={bgColor}
       borderColor={borderColor}
+      height="400px"
     >
       <Image
         src={event.eventImage}
         alt={event.name}
         objectFit="cover"
-        height="200px"
+        height="40%"
         width="100%"
       />
-      <Box p="6" height="100%">
-        <VStack align="start" spacing="3">
+      <Box p="6" height="60%">
+        <VStack align="start" spacing="3" height="100%">
           <HStack spacing="4">
             {event.createdAt && <EventDate date={new Date(event.createdAt)} />}
             <Heading size="md" noOfLines={2} color="gray.700">
               {event.name}
             </Heading>
           </HStack>
-          <Text noOfLines={2} color="gray.600">
+          <Text noOfLines={4} color="gray.600" whiteSpace="pre-line">
             {event.description}
           </Text>
-          <HStack spacing="4">
+          <HStack spacing="4" marginTop="auto">
             <HStack>
               <FaMapMarkerAlt color="gray.500" />
               <Text fontSize="sm" color="gray.500">
