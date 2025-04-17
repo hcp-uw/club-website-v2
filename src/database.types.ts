@@ -14,29 +14,32 @@ export type Database = {
         Row: {
           created_at: string
           description: string
-          eventImage: string
+          image: string
           id: number
           location: string
           name: string
-          rsvpLink: string
+          start_time: string
+          end_time: string
         }
         Insert: {
           created_at?: string
           description: string
-          eventImage: string
+          image: string
           id?: number
           location: string
           name: string
-          rsvpLink: string
+          start_time: string
+          end_time: string
         }
         Update: {
           created_at?: string
           description?: string
-          eventImage?: string
+          image?: string
           id?: number
           location?: string
           name?: string
-          rsvpLink?: string
+          start_time?: string
+          end_time?: string
         }
         Relationships: []
       }

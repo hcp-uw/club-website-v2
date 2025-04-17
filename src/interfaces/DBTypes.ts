@@ -3,9 +3,10 @@ export interface DBEvent {
   name: string;
   description: string;
   location: string;
-  eventImage: string;
-  rsvpLink: string;
+  image: string;
   created_at: string;
+  start_time: string;
+  end_time: string;
 }
 
 export interface DBMember {
@@ -51,8 +52,9 @@ export interface DBCreateEvent {
   name: string;
   description: string;
   location: string;
-  eventImage: string;
-  rsvpLink: string;
+  image: string;
+  start_time: string;
+  end_time: string;
 }
 
 export interface DBCreateMember {

@@ -34,7 +34,7 @@ export const EventCard: React.FC<EventCardProps> = ({ event }) => {
       height="400px"
     >
       <Image
-        src={event.eventImage}
+        src={event.image}
         alt={event.name}
         objectFit="cover"
         height="40%"
@@ -43,8 +43,8 @@ export const EventCard: React.FC<EventCardProps> = ({ event }) => {
       <Box p="6" height="60%">
         <VStack align="start" spacing="3" height="100%">
           <HStack spacing="5">
-            {event.createdAt && <EventDate date={new Date(event.createdAt)} />}
-            <Heading size="md" noOfLines={2} color="gray.700">
+            <EventDate date={new Date(event.start_time)} />
+            <Heading size="md" noOfLines={2} color="gray.700" lineHeight="1.4">
               {event.name}
             </Heading>
           </HStack>
@@ -61,11 +61,10 @@ export const EventCard: React.FC<EventCardProps> = ({ event }) => {
             <HStack>
               <TimeIcon color="gray.500" />
               <Text fontSize="sm" color="gray.500">
-                {event.createdAt &&
-                  new Date(event.createdAt).toLocaleTimeString([], {
-                    hour: '2-digit',
-                    minute: '2-digit',
-                  })}
+                {new Date(event.start_time).toLocaleTimeString([], {
+                  hour: '2-digit',
+                  minute: '2-digit',
+                })}
               </Text>
             </HStack>
           </HStack>
