@@ -17,6 +17,23 @@ interface EventCardProps {
   event: IEvent;
 }
 
+const formatTime = (date: Date, showAMPM: boolean = true) => {
+  const time = date
+    .toLocaleTimeString('en-US', {
+      hour: 'numeric',
+      minute: '2-digit',
+    })
+    .replace(' ', '');
+
+  return showAMPM ? time : time.replace(/AM|PM/, '');
+};
+
+const getTimeString = (startTime: Date, endTime: Date) => {
+  const sameAMPM = startTime.getHours() < 12 === endTime.getHours() < 12;
+
+  return `${formatTime(startTime, !sameAMPM)}-${formatTime(endTime)}`;
+};
+
 export const EventCard: React.FC<EventCardProps> = ({ event }) => {
   const bgColor = useColorModeValue('white', 'gray.800');
   const borderColor = useColorModeValue('gray.200', 'gray.600');
@@ -61,10 +78,7 @@ export const EventCard: React.FC<EventCardProps> = ({ event }) => {
             <HStack>
               <TimeIcon color="gray.500" />
               <Text fontSize="sm" color="gray.500">
-                {new Date(event.start_time).toLocaleTimeString([], {
-                  hour: '2-digit',
-                  minute: '2-digit',
-                })}
+                {getTimeString(event.start_time, event.end_time)}
               </Text>
             </HStack>
           </HStack>
