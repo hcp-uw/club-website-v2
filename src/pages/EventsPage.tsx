@@ -74,15 +74,35 @@ export const EventsPage: React.FC = () => {
             onChange={(e) => setSearchTerm(e.target.value)}
           />
         </InputGroup>
-        <SimpleGrid
-          columns={{ base: 1, md: 2, lg: 3 }}
-          spacing={6}
-          alignSelf="center"
-        >
-          {filteredEvents.map((event) => (
-            <EventCard key={event.id?.toString()} event={event} />
-          ))}
-        </SimpleGrid>
+        <VStack align="start" gap="5">
+          <Heading size="lg">Upcoming Events</Heading>
+          <SimpleGrid
+            columns={{ base: 1, md: 2, lg: 3 }}
+            spacing={6}
+            alignSelf="center"
+          >
+            {filteredEvents
+              .filter((event) => new Date(event.start_time) >= new Date())
+              .map((event) => (
+                <EventCard key={event.id?.toString()} event={event} />
+              ))}
+          </SimpleGrid>
+        </VStack>
+        <VStack align="start" gap="5">
+          <Heading size="lg">Past Events</Heading>
+          <SimpleGrid
+            columns={{ base: 1, md: 2, lg: 3 }}
+            spacing={6}
+            alignSelf="center"
+          >
+            {filteredEvents
+              .filter((event) => new Date(event.start_time) < new Date())
+              .reverse()
+              .map((event) => (
+                <EventCard key={event.id?.toString()} event={event} />
+              ))}
+          </SimpleGrid>
+        </VStack>
       </VStack>
     </Layout>
   );
