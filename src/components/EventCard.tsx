@@ -8,8 +8,7 @@ import {
   HStack,
   useColorModeValue,
 } from '@chakra-ui/react';
-import { TimeIcon } from '@chakra-ui/icons';
-import { FaMapMarkerAlt } from 'react-icons/fa';
+import { FaMapMarkerAlt, FaRegClock } from 'react-icons/fa';
 import { IEvent } from '../interfaces/IEvent';
 import EventDate from './EventDate';
 
@@ -39,7 +38,7 @@ export const EventCard: React.FC<EventCardProps> = ({ event }) => {
   const borderColor = useColorModeValue('gray.200', 'gray.600');
 
   return (
-    <Box
+    <VStack
       borderWidth="1px"
       borderRadius="lg"
       overflow="hidden"
@@ -48,35 +47,45 @@ export const EventCard: React.FC<EventCardProps> = ({ event }) => {
       _hover={{ transform: 'translateY(-5px)', boxShadow: 'xl' }}
       bg={bgColor}
       borderColor={borderColor}
-      height="400px"
+      maxWidth="sm"
+      minHeight="sm"
+      gap="0"
     >
       <Image
         src={event.image}
         alt={event.name}
         objectFit="cover"
-        height="40%"
+        height="36"
         width="100%"
       />
-      <Box p="6" height="60%">
-        <VStack align="start" spacing="3" height="100%">
+      <Box p="5" paddingTop="4" flex="1" width="100%">
+        <VStack align="start" spacing="2" height="100%">
           <HStack spacing="5">
             <EventDate date={new Date(event.start_time)} />
-            <Heading size="md" noOfLines={2} color="gray.700" lineHeight="1.4">
+            <Heading
+              size="md"
+              noOfLines={2}
+              color="gray.700"
+              lineHeight="1.4"
+              height="2.8em"
+              display="flex"
+              alignItems="center"
+            >
               {event.name}
             </Heading>
           </HStack>
-          <Text noOfLines={4} color="gray.600" whiteSpace="pre-line">
+          <Text color="gray.600" whiteSpace="pre-line">
             {event.description}
           </Text>
           <HStack spacing="4" marginTop="auto">
             <HStack>
-              <FaMapMarkerAlt color="gray.500" />
+              <FaMapMarkerAlt color="gray" />
               <Text fontSize="sm" color="gray.500">
                 {event.location}
               </Text>
             </HStack>
             <HStack>
-              <TimeIcon color="gray.500" />
+              <FaRegClock color="gray" />
               <Text fontSize="sm" color="gray.500">
                 {getTimeString(event.start_time, event.end_time)}
               </Text>
@@ -84,6 +93,6 @@ export const EventCard: React.FC<EventCardProps> = ({ event }) => {
           </HStack>
         </VStack>
       </Box>
-    </Box>
+    </VStack>
   );
 };
