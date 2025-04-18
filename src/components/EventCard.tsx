@@ -47,7 +47,7 @@ export const EventCard: React.FC<EventCardProps> = ({ event }) => {
       _hover={{ transform: 'translateY(-5px)', boxShadow: 'xl' }}
       bg={bgColor}
       borderColor={borderColor}
-      maxWidth="sm"
+      maxWidth={{ base: 'sm', lg: '100%' }}
       minHeight="sm"
       gap="0"
     >
