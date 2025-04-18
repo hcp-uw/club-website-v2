@@ -39,8 +39,10 @@ export const EventsPage: React.FC = () => {
   }, []);
 
   useEffect(() => {
-    const results = events.filter((event) =>
-      event.name.toLowerCase().includes(searchTerm.toLowerCase())
+    const results = events.filter(
+      (event) =>
+        event.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        event.description.toLowerCase().includes(searchTerm.toLowerCase())
     );
     setFilteredEvents(results);
   }, [searchTerm, events]);
