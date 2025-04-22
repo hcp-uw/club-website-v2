@@ -79,8 +79,6 @@ export const ProjectTeamsPage: React.FC = () => {
     fetchTeams();
   }, []);
 
-  console.log("Teams", teams);
-
   // Search filtering
   useEffect(() => {
     const results = teams.filter((team) =>
