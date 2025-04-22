@@ -5,5 +5,5 @@ export interface IEvent {
   description: string
   location: string
   rsvpLink: string
-  eventImage: string
+  image: string
 }

@@ -11,7 +11,6 @@ interface EventCardProps {
 export const EventCard: React.FC<EventCardProps> = ({ event }) => {
   const bgColor = useColorModeValue('white', 'gray.800');
   const borderColor = useColorModeValue('gray.200', 'gray.600');
-
   return (
     <Box
       borderWidth="1px"
@@ -23,7 +22,7 @@ export const EventCard: React.FC<EventCardProps> = ({ event }) => {
       bg={bgColor}
       borderColor={borderColor}
     >
-      <Image src={event.eventImage} alt={event.name} objectFit="cover" height="200px" width="100%" />
+      <Image src={event.image} alt={event.name} objectFit="cover" height="200px" width="100%" />
       <Box p={6}>
         <VStack align="start" spacing={3}>
           <Heading size="md">{event.name}</Heading>
