@@ -53,6 +53,7 @@ export const teamService = {
       const response = await octokit.request("GET /orgs/{org}/teams", {
         org: ORG_NAME,
         headers: { "X-GitHub-Api-Version": "2022-11-28" },
+        per_page: 100, // TODO: add pagination to teams section 
       });
 
       // Convert GitHub teams to match ITeam structure

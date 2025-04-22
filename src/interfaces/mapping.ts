@@ -73,7 +73,7 @@ export const mapITeamToDBCreateTeam = (team: ITeam): DBCreateTeam => ({
   githubRepo: team.githubRepo || "",
   logo: team.logo || "",
   deployLink: team.deployLink,
-  lead: team.lead,
+  lead: team.lead || false,
 });
 
 export const mapDBTeamMemberRelationToITeamMemberRelation = (dbTeamMemberRelation: DBTeamMemberRelation): ITeamMemberRelation => ({
