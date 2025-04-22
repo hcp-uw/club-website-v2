@@ -18,6 +18,7 @@ export type Database = {
           image: string
           location: string
           name: string
+          rsvp_link: string | null
           start_time: string
         }
         Insert: {
@@ -28,6 +29,7 @@ export type Database = {
           image: string
           location: string
           name: string
+          rsvp_link?: string | null
           start_time: string
         }
         Update: {
@@ -38,6 +40,7 @@ export type Database = {
           image?: string
           location?: string
           name?: string
+          rsvp_link?: string | null
           start_time?: string
         }
         Relationships: []

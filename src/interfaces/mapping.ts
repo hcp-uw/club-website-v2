@@ -9,16 +9,16 @@ export const mapDBEventToIEvent = (dbEvent: DBEvent): IEvent => ({
   createdAt: new Date(dbEvent.created_at),
   name: dbEvent.name,
   description: dbEvent.description,
+  rsvpLink: dbEvent.rsvp_link || undefined,
   location: dbEvent.location,
-  rsvpLink: dbEvent.rsvpLink,
-  eventImage: dbEvent.eventImage,
+  eventImage: dbEvent.image,
 });
 
 export const mapIEventToDBCreateEvent = (event: IEvent): DBCreateEvent => ({
   name: event.name,
   description: event.description,
   location: event.location,
-  rsvpLink: event.rsvpLink,
+  rsvpLink: event.rsvpLink || undefined,
   eventImage: event.eventImage,
 });
 
