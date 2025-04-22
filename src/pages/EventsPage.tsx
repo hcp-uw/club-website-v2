@@ -26,6 +26,11 @@ export const EventsPage: React.FC = () => {
     const fetchEvents = async () => {
       try {
         const fetchedEvents = await eventService.getAllEvents();
+        fetchedEvents.sort((a, b) => {
+          return (
+            new Date(a.start_time).getTime() - new Date(b.start_time).getTime()
+          );
+        });
         setEvents(fetchedEvents);
         setFilteredEvents(fetchedEvents);
       } catch (err) {
