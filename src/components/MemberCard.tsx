@@ -13,13 +13,13 @@ import {
 import { FaDiscord, FaLinkedin, FaEnvelope } from 'react-icons/fa';
 import { Link as RouterLink, useNavigate } from 'react-router-dom';
 import { IMember } from '../interfaces/IMember';
-import { VALID_TEAMS } from '../interfaces/DBTypes';
+import { Team } from '../interfaces/DBTypes';
 
 interface MemberCardProps {
   member: IMember;
 }
 
-const COLOR_MAP: Record<(typeof VALID_TEAMS)[number], string> = {
+const COLOR_MAP: Record<Team, string> = {
   communications: 'red',
   design: 'blue',
   finance: 'green',

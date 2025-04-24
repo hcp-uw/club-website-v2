@@ -1,4 +1,4 @@
-export const VALID_TEAMS = [
+const VALID_TEAMS = [
   'onboarding',
   'education',
   'tech',
@@ -7,6 +7,8 @@ export const VALID_TEAMS = [
   'finance',
   'co-chair',
 ] as const;
+
+export type Team = (typeof VALID_TEAMS)[number];
 
 export interface DBEvent {
   id: number;
@@ -29,7 +31,7 @@ export interface DBMember {
   profilePicture: string;
   created_at: string;
   lead: boolean;
-  teamleads: (typeof VALID_TEAMS)[number];
+  teamleads: Team;
 }
 
 export interface DBTeam {

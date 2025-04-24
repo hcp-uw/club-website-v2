@@ -1,4 +1,4 @@
-import { VALID_TEAMS } from './DBTypes';
+import { Team } from './DBTypes';
 
 export interface IMember {
   memberId?: bigint;
@@ -11,5 +11,5 @@ export interface IMember {
   github: string;
   profilePicture: string;
   lead: boolean;
-  team: (typeof VALID_TEAMS)[number];
+  team: Team;
 }
