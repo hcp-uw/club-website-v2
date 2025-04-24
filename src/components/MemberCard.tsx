@@ -26,6 +26,7 @@ const COLOR_MAP: Record<(typeof VALID_TEAMS)[number], string> = {
   education: 'purple',
   onboarding: 'pink',
   tech: 'yellow',
+  'co-chair': 'orange',
 };
 
 export const MemberCard: React.FC<MemberCardProps> = ({ member }) => {

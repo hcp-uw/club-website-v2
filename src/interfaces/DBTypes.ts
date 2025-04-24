@@ -5,6 +5,7 @@ export const VALID_TEAMS = [
   'communications',
   'design',
   'finance',
+  'co-chair',
 ] as const;
 
 export interface DBEvent {
