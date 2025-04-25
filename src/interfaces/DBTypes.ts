@@ -1,3 +1,15 @@
+const VALID_TEAMS = [
+  'onboarding',
+  'education',
+  'tech',
+  'communications',
+  'design',
+  'finance',
+  'co-chair',
+] as const;
+
+export type Team = (typeof VALID_TEAMS)[number];
+
 export interface DBEvent {
   id: number;
   name: string;
@@ -19,6 +31,7 @@ export interface DBMember {
   profilePicture: string;
   created_at: string;
   lead: boolean;
+  teamleads: Team;
 }
 
 export interface DBTeam {
