@@ -13,6 +13,7 @@ export const mockMembers: IMember[] = [
     github: 'elimelt',
     profilePicture: 'john-doe.jpg',
     lead: true,
+    team: 'communications',
   },
   {
     memberId: 2n,
@@ -24,7 +25,8 @@ export const mockMembers: IMember[] = [
     linkedin: 'https://www.linkedin.com/janesmith',
     github: 'janesmith',
     profilePicture: 'jane-smith.jpg',
-    lead: false
+    lead: false,
+    team: 'design',
   },
 ];
 
@@ -34,10 +36,12 @@ export const memberService = {
   },
 
   getMemberById: async (id: bigint): Promise<IMember | undefined> => {
-    return mockMembers.find(member => member.memberId === id);
+    return mockMembers.find((member) => member.memberId === id);
   },
 
-  createMember: async (member: Omit<IMember, 'memberId' | 'createdAt'>): Promise<IMember> => {
+  createMember: async (
+    member: Omit<IMember, 'memberId' | 'createdAt'>
+  ): Promise<IMember> => {
     const newMember: IMember = {
       memberId: BigInt(mockMembers.length + 1),
       createdAt: new Date(),
@@ -47,8 +51,11 @@ export const memberService = {
     return newMember;
   },
 
-  updateMember: async (id: bigint, member: Partial<IMember>): Promise<IMember | undefined> => {
-    const index = mockMembers.findIndex(m => m.memberId === id);
+  updateMember: async (
+    id: bigint,
+    member: Partial<IMember>
+  ): Promise<IMember | undefined> => {
+    const index = mockMembers.findIndex((m) => m.memberId === id);
     if (index !== -1) {
       mockMembers[index] = { ...mockMembers[index], ...member };
       return mockMembers[index];
@@ -57,7 +64,7 @@ export const memberService = {
   },
 
   deleteMember: async (id: bigint): Promise<void> => {
-    const index = mockMembers.findIndex(member => member.memberId === id);
+    const index = mockMembers.findIndex((member) => member.memberId === id);
     if (index !== -1) {
       mockMembers.splice(index, 1);
     }
