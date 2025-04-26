@@ -86,7 +86,8 @@ export const EventsPage: React.FC = () => {
           <SimpleGrid
             columns={{ base: 1, md: 2, lg: 3 }}
             spacing={6}
-            alignSelf="center"
+            width="100%"
+            placeItems="center"
           >
             {filteredEvents
               .filter((event) => new Date(event.start_time) >= new Date())
@@ -100,7 +101,8 @@ export const EventsPage: React.FC = () => {
           <SimpleGrid
             columns={{ base: 1, md: 2, lg: 3 }}
             spacing={6}
-            alignSelf="center"
+            width="100%"
+            placeItems="center"
           >
             {filteredEvents
               .filter((event) => new Date(event.start_time) < new Date())
