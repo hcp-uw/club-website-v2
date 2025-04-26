@@ -15,8 +15,8 @@ export interface DBEvent {
   name: string;
   description: string;
   location: string;
-  eventImage: string;
-  rsvpLink: string;
+  image: string;
+  rsvp_link: string | null;
   created_at: string;
 }
 
@@ -65,7 +65,7 @@ export interface DBCreateEvent {
   description: string;
   location: string;
   eventImage: string;
-  rsvpLink: string;
+  rsvpLink?: string;
 }
 
 export interface DBCreateMember {

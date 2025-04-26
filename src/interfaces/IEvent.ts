@@ -4,6 +4,6 @@ export interface IEvent {
   name: string
   description: string
   location: string
-  rsvpLink: string
+  rsvpLink?: string
   eventImage: string
 }
