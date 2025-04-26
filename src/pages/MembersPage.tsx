@@ -1,5 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import { SimpleGrid, Heading, Spinner, Text, VStack, Input, InputGroup, InputLeftElement, Select } from '@chakra-ui/react';
+import {
+  SimpleGrid,
+  Heading,
+  Spinner,
+  Text,
+  VStack,
+  Input,
+  InputGroup,
+  InputLeftElement,
+  Select,
+} from '@chakra-ui/react';
 import { SearchIcon } from '@chakra-ui/icons';
 import { MemberCard } from '../components/MemberCard';
 import { memberService } from '../service/memberService';
@@ -13,6 +23,34 @@ enum SearchBy {
   DISCORD = 'Discord',
 }
 
+const leadSortingFunction = (a: IMember, b: IMember) => {
+  if (a.lead === b.lead) return 0;
+  return a.lead ? -1 : 1;
+};
+
+// Taking in an object for readability's sake when rendering
+const renderMembers = (data: { members: IMember[]; isLead: boolean }) => {
+  const { members, isLead } = data;
+
+  const filteredMembers = members.filter((member) => member.lead === isLead);
+
+  if (filteredMembers.length === 0) {
+    return <></>;
+  }
+  return (
+    <>
+      <Text fontSize="xl" fontWeight="bold">
+        {isLead ? 'Team Leads' : 'All Members'}
+      </Text>
+      <SimpleGrid columns={[1, 2, 3, 4]} spacing={6}>
+        {filteredMembers.map((member) => (
+          <MemberCard key={member.memberId?.toString()} member={member} />
+        ))}
+      </SimpleGrid>
+    </>
+  );
+};
+
 export const MembersPage: React.FC = () => {
   const [members, setMembers] = useState<IMember[]>([]);
   const [filteredMembers, setFilteredMembers] = useState<IMember[]>([]);
@@ -25,6 +63,7 @@ export const MembersPage: React.FC = () => {
     const fetchMembers = async () => {
       try {
         const fetchedMembers = await memberService.getAllMembers();
+        fetchedMembers.sort(leadSortingFunction);
         setMembers(fetchedMembers);
         setFilteredMembers(fetchedMembers);
       } catch (err) {
@@ -41,40 +80,54 @@ export const MembersPage: React.FC = () => {
     let results;
     switch (searchBy) {
       case SearchBy.FIRST_NAME:
-        results = members.filter(member =>
+        results = members.filter((member) =>
           member.firstName.toLowerCase().includes(searchTerm.toLowerCase())
         );
         break;
       case SearchBy.LAST_NAME:
-        results = members.filter(member =>
+        results = members.filter((member) =>
           member.lastName.toLowerCase().includes(searchTerm.toLowerCase())
         );
         break;
       case SearchBy.EMAIL:
-        results = members.filter(member =>
+        results = members.filter((member) =>
           member.email.toLowerCase().includes(searchTerm.toLowerCase())
         );
         break;
       case SearchBy.DISCORD:
-        results = members.filter(member =>
+        results = members.filter((member) =>
           member.discord.toLowerCase().includes(searchTerm.toLowerCase())
         );
         break;
       default:
         results = members;
     }
+    results.sort(leadSortingFunction);
     setFilteredMembers(results);
   }, [searchTerm, members, searchBy]);
 
-  if (loading) return <Layout><Spinner size="xl" /></Layout>;
-  if (error) return <Layout><Text color="red.500">{error}</Text></Layout>;
+  if (loading)
+    return (
+      <Layout>
+        <Spinner size="xl" />
+      </Layout>
+    );
+  if (error)
+    return (
+      <Layout>
+        <Text color="red.500">{error}</Text>
+      </Layout>
+    );
 
   return (
     <Layout>
       <VStack spacing={8} align="stretch">
         <Heading>Members</Heading>
         <InputGroup>
-          <InputLeftElement pointerEvents="none" children={<SearchIcon color="gray.300" />} />
+          <InputLeftElement
+            pointerEvents="none"
+            children={<SearchIcon color="gray.300" />}
+          />
           <Input
             type="text"
             placeholder="Search members..."
@@ -87,16 +140,15 @@ export const MembersPage: React.FC = () => {
             w="15%"
             paddingLeft={6}
           >
-            {Object.values(SearchBy).map(value => (
-              <option key={value} value={value}>{value}</option>
+            {Object.values(SearchBy).map((value) => (
+              <option key={value} value={value}>
+                {value}
+              </option>
             ))}
           </Select>
         </InputGroup>
-        <SimpleGrid columns={[1, 2, 3, 4]} spacing={6}>
-          {filteredMembers.map(member => (
-            <MemberCard key={member.memberId?.toString()} member={member} />
-          ))}
-        </SimpleGrid>
+        {renderMembers({ members: filteredMembers, isLead: true })}
+        {renderMembers({ members: filteredMembers, isLead: false })}
       </VStack>
     </Layout>
   );

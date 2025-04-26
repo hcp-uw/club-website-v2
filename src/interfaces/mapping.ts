@@ -1,14 +1,24 @@
-import { DBEvent, DBCreateEvent, DBMember, DBCreateMember, DBTeam, DBCreateTeam, DBTeamMemberRelation, DBSponsor } from "./DBTypes";
-import { IEvent } from "./IEvent";
-import { IMember } from "./IMember";
-import { ISponsor } from "./ISponsor";
-import { ITeam, ITeamMemberRelation } from "./ITeam";
+import {
+  DBEvent,
+  DBCreateEvent,
+  DBMember,
+  DBCreateMember,
+  DBTeam,
+  DBCreateTeam,
+  DBTeamMemberRelation,
+  DBSponsor,
+} from './DBTypes';
+import { IEvent } from './IEvent';
+import { IMember } from './IMember';
+import { ISponsor } from './ISponsor';
+import { ITeam, ITeamMemberRelation } from './ITeam';
 
 export const mapDBEventToIEvent = (dbEvent: DBEvent): IEvent => ({
   id: BigInt(dbEvent.id),
   createdAt: new Date(dbEvent.created_at),
   name: dbEvent.name,
   description: dbEvent.description,
+  rsvpLink: dbEvent.rsvp_link || undefined,
   location: dbEvent.location,
   image: dbEvent.image,
   start_time: new Date(dbEvent.start_time),
@@ -22,30 +32,21 @@ export const mapIEventToDBCreateEvent = (event: IEvent): DBCreateEvent => ({
   image: event.image,
   start_time: event.start_time.toISOString(),
   end_time: event.end_time.toISOString(),
+  rsvpLink: event.rsvpLink || undefined,
 });
 
 export const mapDBMemberToIMember = (dbMember: DBMember): IMember => ({
+  ...dbMember,
   memberId: BigInt(dbMember.memberId),
   createdAt: new Date(dbMember.created_at),
-  firstName: dbMember.firstName,
-  lastName: dbMember.lastName,
-  email: dbMember.email,
-  discord: dbMember.discord,
   linkedin: dbMember.linkedin || undefined,
-  github: dbMember.github,
-  profilePicture: dbMember.profilePicture,
-  lead: dbMember.lead,
+  team: dbMember.teamleads,
 });
 
-export const mapIMemberToDBCreateMember = (member: IMember): DBCreateMember => ({
-  firstName: member.firstName,
-  lastName: member.lastName,
-  email: member.email,
-  discord: member.discord,
-  linkedin: member.linkedin,
-  github: member.github,
-  profilePicture: member.profilePicture,
-  lead: member.lead,
+export const mapIMemberToDBCreateMember = (
+  member: IMember
+): DBCreateMember => ({
+  ...member,
 });
 
 export const mapDBTeamToITeam = (dbTeam: DBTeam): ITeam => ({
@@ -65,18 +66,19 @@ export const mapDBSponsorToISponsor = (dbSponsor: DBSponsor): ISponsor => ({
   website: dbSponsor.website,
   description: dbSponsor.description,
   createdAt: new Date(dbSponsor.created_at),
-
-})
+});
 
 export const mapITeamToDBCreateTeam = (team: ITeam): DBCreateTeam => ({
-  name: team.name || "",
-  githubRepo: team.githubRepo || "",
-  logo: team.logo || "",
+  name: team.name || '',
+  githubRepo: team.githubRepo || '',
+  logo: team.logo || '',
   deployLink: team.deployLink,
   lead: team.lead || false,
 });
 
-export const mapDBTeamMemberRelationToITeamMemberRelation = (dbTeamMemberRelation: DBTeamMemberRelation): ITeamMemberRelation => ({
+export const mapDBTeamMemberRelationToITeamMemberRelation = (
+  dbTeamMemberRelation: DBTeamMemberRelation
+): ITeamMemberRelation => ({
   id: BigInt(dbTeamMemberRelation.id),
   createdAt: new Date(dbTeamMemberRelation.created_at),
   teamId: BigInt(dbTeamMemberRelation.teamId),

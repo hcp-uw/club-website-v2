@@ -24,7 +24,7 @@ export const sponsorService = {
     const { data, error } = await supabase
       .from('Sponsors')
       .select('*')
-      .eq('sponsorId', id)
+      .eq('sponsorId', Number(id))
       .returns<DBSponsor>()
       .single();
 
