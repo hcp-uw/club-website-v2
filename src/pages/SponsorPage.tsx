@@ -23,7 +23,6 @@ export const SponsorPage: React.FC = () => {
     };
     fetchSponsors();
   }, []);
-  console.log(sponsors);
 
   if (loading)
     return (

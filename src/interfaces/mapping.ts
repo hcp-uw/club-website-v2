@@ -20,15 +20,19 @@ export const mapDBEventToIEvent = (dbEvent: DBEvent): IEvent => ({
   description: dbEvent.description,
   rsvpLink: dbEvent.rsvp_link || undefined,
   location: dbEvent.location,
-  eventImage: dbEvent.image,
+  image: dbEvent.image,
+  start_time: new Date(dbEvent.start_time),
+  end_time: new Date(dbEvent.end_time),
 });
 
 export const mapIEventToDBCreateEvent = (event: IEvent): DBCreateEvent => ({
   name: event.name,
   description: event.description,
   location: event.location,
+  image: event.image,
+  start_time: event.start_time.toISOString(),
+  end_time: event.end_time.toISOString(),
   rsvpLink: event.rsvpLink || undefined,
-  eventImage: event.eventImage,
 });
 
 export const mapDBMemberToIMember = (dbMember: DBMember): IMember => ({

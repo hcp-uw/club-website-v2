@@ -8,8 +8,9 @@ export const mockEvents: IEvent[] = [
     name: 'Mock Event 1',
     description: 'Mock description for Event 1',
     location: 'Mock Location 1',
-    rsvpLink: 'https://example.com/rsvp/1',
-    eventImage: 'mock-event-1.jpg',
+    image: 'mock-event-1.jpg',
+    start_time: new Date(),
+    end_time: new Date(),
   },
   {
     id: 2n,
@@ -17,8 +18,9 @@ export const mockEvents: IEvent[] = [
     name: 'Mock Event 2',
     description: 'Mock description for Event 2',
     location: 'Mock Location 2',
-    rsvpLink: 'https://example.com/rsvp/2',
-    eventImage: 'mock-event-2.jpg',
+    image: 'mock-event-2.jpg',
+    start_time: new Date(),
+    end_time: new Date(),
   },
 ];
 

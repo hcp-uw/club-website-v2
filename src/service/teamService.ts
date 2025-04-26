@@ -50,14 +50,11 @@ export const teamService = {
     const octokit = new Octokit({ auth: GITHUB_ACCESS_TOKEN });
 
     try {
-      console.log("Fetching GitHub teams...");
       const response = await octokit.request("GET /orgs/{org}/teams", {
         org: ORG_NAME,
         headers: { "X-GitHub-Api-Version": "2022-11-28" },
         per_page: 100, // TODO: add pagination to teams section 
       });
-
-      // console.log("Fetched GitHub Teams:", response.data);
 
       // Convert GitHub teams to match ITeam structure
       return response.data.map((team: { id: number; name: string }) => ({
