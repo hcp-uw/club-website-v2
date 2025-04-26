@@ -62,17 +62,9 @@ export const EventCard: React.FC<EventCardProps> = ({ event }) => {
       />
       <Box p="5" paddingTop="4" flex="1" width="100%">
         <VStack align="start" spacing="2" height="100%">
-          <HStack spacing="5">
+          <HStack spacing="5" height="3em">
             <EventDate date={new Date(event.start_time)} />
-            <Heading
-              size="md"
-              noOfLines={2}
-              color="gray.700"
-              lineHeight="1.4"
-              height="2.8em"
-              display="flex"
-              alignItems="center"
-            >
+            <Heading size="md" noOfLines={2} color="gray.700" lineHeight="1.4">
               {event.name}
             </Heading>
           </HStack>
@@ -82,13 +74,13 @@ export const EventCard: React.FC<EventCardProps> = ({ event }) => {
           <HStack spacing="4" marginTop="auto">
             <HStack>
               <FaMapMarkerAlt color="gray" />
-              <Text fontSize="sm" color="gray.500">
+              <Text fontSize="sm" color="gray.500" noOfLines={1}>
                 {event.location}
               </Text>
             </HStack>
             <HStack>
               <FaRegClock color="gray" />
-              <Text fontSize="sm" color="gray.500">
+              <Text fontSize="sm" color="gray.500" whiteSpace="nowrap">
                 {getTimeString(event.start_time, event.end_time)}
               </Text>
             </HStack>
