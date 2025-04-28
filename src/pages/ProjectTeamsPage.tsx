@@ -20,9 +20,9 @@ import "slick-carousel/slick/slick-theme.css";
 
 // TODO: add pagination to
 export const ProjectTeamsPage: React.FC = () => {
-  const [teams, setTeams] = useState<{ teamId: bigint; name: string }[]>([]);
+  const [teams, setTeams] = useState<{ teamId: bigint; name: string; logo: string }[]>([]);
   const [filteredTeams, setFilteredTeams] = useState<
-    { teamId: bigint; name: string }[]
+    { teamId: bigint; name: string; logo:string }[]
   >([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -40,6 +40,8 @@ export const ProjectTeamsPage: React.FC = () => {
       setSlidesToShow(3); // Desktop
     }
   };
+
+  const SUPABASE_STORAGE_URL = "https://wivolixjgzmaigovvchs.supabase.co/storage/v1/object/public/club-website-assets/Teams/"
 
   // Effect to update state when window resizes
   useEffect(() => {
@@ -65,7 +67,7 @@ export const ProjectTeamsPage: React.FC = () => {
         const fetchedTeams = await teamService.fetchGitHubTeams();
         const validTeams = fetchedTeams.filter(
           (team) => team.teamId !== undefined
-        ) as { teamId: bigint; name: string }[];
+        ) as { teamId: bigint; name: string; logo: string }[];
         setTeams(validTeams);
         setFilteredTeams(validTeams);
       } catch (err) {
@@ -151,9 +153,12 @@ export const ProjectTeamsPage: React.FC = () => {
           />
         </InputGroup>
         <SimpleGrid columns={[1, 2, 3]} spacing={6}>
-          {filteredTeams.map((team) => (
-            <TeamCard key={team.teamId.toString()} team={team} />
-          ))}
+          {filteredTeams.map((team) => {
+            const logoUrl = `${SUPABASE_STORAGE_URL}${team.teamId}-logo.png`;
+            return (
+              <TeamCard key={team.teamId.toString()} team={{...team, logo: team.logo}} />
+            )
+          })}
         </SimpleGrid>
       </VStack>
     </Layout>

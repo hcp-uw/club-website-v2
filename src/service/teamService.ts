@@ -61,7 +61,7 @@ export const teamService = {
         teamId: BigInt(team.id),
         name: team.name,
         createdAt: new Date(),
-        logo: "",
+        logo: `https://wivolixjgzmaigovvchs.supabase.co/storage/v1/object/public/club-website-assets/Teams/${team.name.toLowerCase()}-logo.png`,
         deployLink: "",
         githubRepo: "",
         lead: false,
