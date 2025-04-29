@@ -7,10 +7,12 @@ import {
   VStack,
   HStack,
   useColorModeValue,
+  Button,
 } from '@chakra-ui/react';
 import { FaMapMarkerAlt, FaRegClock } from 'react-icons/fa';
 import { IEvent } from '../interfaces/IEvent';
 import EventDate from './EventDate';
+import { FiExternalLink } from 'react-icons/fi';
 
 interface EventCardProps {
   event: IEvent;
@@ -53,6 +55,7 @@ export const EventCard: React.FC<EventCardProps> = ({ event }) => {
       minHeight="sm"
       gap="0"
     >
+      {/* Event Image */}
       <Image
         src={event.image}
         alt={event.name}
@@ -60,18 +63,41 @@ export const EventCard: React.FC<EventCardProps> = ({ event }) => {
         height="36"
         width="100%"
       />
-      <Box p="5" paddingTop="4" flex="1" width="100%">
-        <VStack align="start" spacing="2" height="100%">
-          <HStack spacing="5" height="3em">
-            <EventDate date={new Date(event.start_time)} />
-            <Heading size="md" noOfLines={2} color="gray.700" lineHeight="1.4">
-              {event.name}
-            </Heading>
-          </HStack>
-          <Text color="gray.600" whiteSpace="pre-line">
-            {event.description}
-          </Text>
-          <HStack spacing="4" marginTop="auto">
+      <VStack
+        align="start"
+        spacing="3"
+        p="5"
+        paddingTop="4"
+        width="100%"
+        height="100%"
+      >
+        {/* Event Title and Date */}
+        <HStack spacing="5" height="3em">
+          <EventDate date={new Date(event.start_time)} />
+          <Heading size="md" noOfLines={2} color="gray.700" lineHeight="1.4">
+            {event.name}
+          </Heading>
+        </HStack>
+        {/* Event Description */}
+        <Text color="gray.600" whiteSpace="pre-line">
+          {event.description}
+        </Text>
+        {/* Card Footer */}
+        <VStack marginTop="auto" width="100%" align="start" spacing="2">
+          <Button
+            as="a"
+            href={event.rsvpLink}
+            target="_blank"
+            colorScheme="purple"
+            size="sm"
+            rightIcon={<FiExternalLink color="white" />}
+            _hover={{
+              cursor: 'pointer',
+            }}
+          >
+            RSVP Link
+          </Button>
+          <HStack spacing="4">
             <HStack>
               <FaMapMarkerAlt color="gray" />
               <Text fontSize="sm" color="gray.500" noOfLines={1}>
@@ -86,7 +112,7 @@ export const EventCard: React.FC<EventCardProps> = ({ event }) => {
             </HStack>
           </HStack>
         </VStack>
-      </Box>
+      </VStack>
     </VStack>
   );
 };
