@@ -29,13 +29,16 @@ const GHCal: React.FC<GHCalProps> = ({ username }) => {
   };
 
   const content = (
-    <GitHubCalendar username={extractUsername(username)} colorScheme="light" />
+    <GitHubCalendar
+      username={extractGithubUsername(username)}
+      colorScheme="light"
+    />
   );
 
   return <Box style={centered}>{content}</Box>;
 };
 
-const extractUsername = (maybeUrl: string) => {
+const extractGithubUsername = (maybeUrl: string) => {
   if (maybeUrl.startsWith('https://')) {
     return maybeUrl.split('/')[3];
   }
