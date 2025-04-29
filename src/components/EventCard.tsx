@@ -1,6 +1,5 @@
 import React from 'react';
 import {
-  Box,
   Image,
   Heading,
   Text,
@@ -83,20 +82,22 @@ export const EventCard: React.FC<EventCardProps> = ({ event }) => {
           {event.description}
         </Text>
         {/* Card Footer */}
-        <VStack marginTop="auto" width="100%" align="start" spacing="2">
-          <Button
-            as="a"
-            href={event.rsvpLink}
-            target="_blank"
-            colorScheme="purple"
-            size="sm"
-            rightIcon={<FiExternalLink color="white" />}
-            _hover={{
-              cursor: 'pointer',
-            }}
-          >
-            RSVP Link
-          </Button>
+        <VStack marginTop="auto" width="100%" align="start" spacing="3">
+          {event.link_url && event.link_title && (
+            <Button
+              as="a"
+              href={event.link_url}
+              target="_blank"
+              colorScheme="purple"
+              size="sm"
+              rightIcon={<FiExternalLink color="white" />}
+              _hover={{
+                cursor: 'pointer',
+              }}
+            >
+              {event.link_title}
+            </Button>
+          )}
           <HStack spacing="4">
             <HStack>
               <FaMapMarkerAlt color="gray" />
