@@ -7,5 +7,6 @@ export interface IEvent {
   image: string;
   start_time: Date;
   end_time: Date;
-  rsvpLink?: string;
+  link_url?: string;
+  link_title?: string;
 }

@@ -18,11 +18,12 @@ export const mapDBEventToIEvent = (dbEvent: DBEvent): IEvent => ({
   createdAt: new Date(dbEvent.created_at),
   name: dbEvent.name,
   description: dbEvent.description,
-  rsvpLink: dbEvent.rsvp_link || undefined,
   location: dbEvent.location,
   image: dbEvent.image,
   start_time: new Date(dbEvent.start_time),
   end_time: new Date(dbEvent.end_time),
+  link_url: dbEvent.link_url || undefined,
+  link_title: dbEvent.link_title || undefined,
 });
 
 export const mapIEventToDBCreateEvent = (event: IEvent): DBCreateEvent => ({
@@ -32,7 +33,8 @@ export const mapIEventToDBCreateEvent = (event: IEvent): DBCreateEvent => ({
   image: event.image,
   start_time: event.start_time.toISOString(),
   end_time: event.end_time.toISOString(),
-  rsvpLink: event.rsvpLink || undefined,
+  link_url: event.link_url || undefined,
+  link_title: event.link_title || undefined,
 });
 
 export const mapDBMemberToIMember = (dbMember: DBMember): IMember => ({
