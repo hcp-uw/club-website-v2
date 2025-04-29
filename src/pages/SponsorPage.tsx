@@ -4,6 +4,7 @@ import { Text, SimpleGrid, VStack, Heading, Spinner } from "@chakra-ui/react";
 import { SponsorCard } from "../components/Sponsors/SponsorsCard";
 import { sponsorService } from "../service/sponsorService";
 import { ISponsor } from "../interfaces/ISponsor";
+import { Helmet } from "react-helmet-async";
 
 export const SponsorPage: React.FC = () => {
   const [sponsors, setSponsors] = useState<ISponsor[]>([]);
@@ -39,6 +40,14 @@ export const SponsorPage: React.FC = () => {
 
   return (
     <Layout>
+      <Helmet>
+        <title>Husky Coding Project Sponsors</title>
+        <meta
+          name="description"
+          content="Meet the sponsors who support Husky Coding Project’s mission to empower student developers and innovators. Learn how our sponsors help drive technical education, community projects, and career growth at the University of Washington."
+        />
+      </Helmet>
+
       <VStack spacing={8} align="stretch">
         <Heading>Sponsors</Heading>
         <SimpleGrid columns={[1, 2, 3, 4]} spacing={6} gap="40px">

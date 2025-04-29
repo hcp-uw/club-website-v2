@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 import {
   SimpleGrid,
   Heading,
@@ -9,18 +9,19 @@ import {
   InputGroup,
   InputLeftElement,
   Select,
-} from '@chakra-ui/react';
-import { SearchIcon } from '@chakra-ui/icons';
-import { MemberCard } from '../components/MemberCard';
-import { memberService } from '../service/memberService';
-import { IMember } from '../interfaces/IMember';
-import { Layout } from '../components/Layout';
+} from "@chakra-ui/react";
+import { SearchIcon } from "@chakra-ui/icons";
+import { MemberCard } from "../components/MemberCard";
+import { memberService } from "../service/memberService";
+import { IMember } from "../interfaces/IMember";
+import { Layout } from "../components/Layout";
+import { Helmet } from "react-helmet-async";
 
 enum SearchBy {
-  FIRST_NAME = 'First Name',
-  LAST_NAME = 'Last Name',
-  EMAIL = 'Email',
-  DISCORD = 'Discord',
+  FIRST_NAME = "First Name",
+  LAST_NAME = "Last Name",
+  EMAIL = "Email",
+  DISCORD = "Discord",
 }
 
 const leadSortingFunction = (a: IMember, b: IMember) => {
@@ -40,7 +41,7 @@ const renderMembers = (data: { members: IMember[]; isLead: boolean }) => {
   return (
     <>
       <Text fontSize="xl" fontWeight="bold">
-        {isLead ? 'Team Leads' : 'All Members'}
+        {isLead ? "Team Leads" : "All Members"}
       </Text>
       <SimpleGrid columns={[1, 2, 3, 4]} spacing={6}>
         {filteredMembers.map((member) => (
@@ -56,7 +57,7 @@ export const MembersPage: React.FC = () => {
   const [filteredMembers, setFilteredMembers] = useState<IMember[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const [searchTerm, setSearchTerm] = useState('');
+  const [searchTerm, setSearchTerm] = useState("");
   const [searchBy, setSearchBy] = useState<SearchBy>(SearchBy.FIRST_NAME);
 
   useEffect(() => {
@@ -67,7 +68,7 @@ export const MembersPage: React.FC = () => {
         setMembers(fetchedMembers);
         setFilteredMembers(fetchedMembers);
       } catch (err) {
-        setError('Failed to fetch members');
+        setError("Failed to fetch members");
       } finally {
         setLoading(false);
       }
@@ -121,6 +122,13 @@ export const MembersPage: React.FC = () => {
 
   return (
     <Layout>
+      <Helmet>
+        <title>Husky Coding Project Members</title>
+        <meta
+          name="description"
+          content="Meet the talented members of Husky Coding Project — a community of developers, designers, and innovators at the University of Washington. Learn more about our team leads and members who collaboratively build impactful software projects, advance their technical skills, and drive innovation through teamwork and creativity."
+        />
+      </Helmet>
       <VStack spacing={8} align="stretch">
         <Heading>Members</Heading>
         <InputGroup>
