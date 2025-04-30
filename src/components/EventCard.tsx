@@ -72,7 +72,7 @@ export const EventCard: React.FC<EventCardProps> = ({ event }) => {
       >
         {/* Event Title and Date */}
         <HStack spacing="5" height="3em">
-          <EventDate date={new Date(event.start_time)} />
+          <EventDate date={new Date(event.startTime)} />
           <Heading size="md" noOfLines={2} color="gray.700" lineHeight="1.4">
             {event.name}
           </Heading>
@@ -83,10 +83,10 @@ export const EventCard: React.FC<EventCardProps> = ({ event }) => {
         </Text>
         {/* Card Footer */}
         <VStack marginTop="auto" width="100%" align="start" spacing="3">
-          {event.link_url && event.link_title && (
+          {event.linkURL && event.linkTitle && (
             <Button
               as="a"
-              href={event.link_url}
+              href={event.linkURL}
               target="_blank"
               colorScheme="purple"
               size="sm"
@@ -95,7 +95,7 @@ export const EventCard: React.FC<EventCardProps> = ({ event }) => {
                 cursor: 'pointer',
               }}
             >
-              {event.link_title}
+              {event.linkTitle}
             </Button>
           )}
           <HStack spacing="4">
@@ -108,7 +108,7 @@ export const EventCard: React.FC<EventCardProps> = ({ event }) => {
             <HStack>
               <FaRegClock color="gray" />
               <Text fontSize="sm" color="gray.500" whiteSpace="nowrap">
-                {getTimeString(event.start_time, event.end_time)}
+                {getTimeString(event.startTime, event.endTime)}
               </Text>
             </HStack>
           </HStack>

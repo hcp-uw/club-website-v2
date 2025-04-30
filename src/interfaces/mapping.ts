@@ -20,10 +20,10 @@ export const mapDBEventToIEvent = (dbEvent: DBEvent): IEvent => ({
   description: dbEvent.description,
   location: dbEvent.location,
   image: dbEvent.image,
-  start_time: new Date(dbEvent.start_time),
-  end_time: new Date(dbEvent.end_time),
-  link_url: dbEvent.link_url || undefined,
-  link_title: dbEvent.link_title || undefined,
+  startTime: new Date(dbEvent.start_time),
+  endTime: new Date(dbEvent.end_time),
+  linkURL: dbEvent.link_url || undefined,
+  linkTitle: dbEvent.link_title || undefined,
 });
 
 export const mapIEventToDBCreateEvent = (event: IEvent): DBCreateEvent => ({
@@ -31,10 +31,10 @@ export const mapIEventToDBCreateEvent = (event: IEvent): DBCreateEvent => ({
   description: event.description,
   location: event.location,
   image: event.image,
-  start_time: event.start_time.toISOString(),
-  end_time: event.end_time.toISOString(),
-  link_url: event.link_url || undefined,
-  link_title: event.link_title || undefined,
+  start_time: event.startTime.toISOString(),
+  end_time: event.endTime.toISOString(),
+  link_url: event.linkURL || undefined,
+  link_title: event.linkTitle || undefined,
 });
 
 export const mapDBMemberToIMember = (dbMember: DBMember): IMember => ({
