@@ -17,8 +17,9 @@ import { InstagramEmbed } from "react-social-media-embed";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import { Helmet } from "react-helmet-async";
 
-// TODO: add pagination to
+// TODO: add pagination
 export const ProjectTeamsPage: React.FC = () => {
   const [teams, setTeams] = useState<{ teamId: bigint; name: string }[]>([]);
   const [filteredTeams, setFilteredTeams] = useState<
@@ -119,6 +120,14 @@ export const ProjectTeamsPage: React.FC = () => {
   // TODO: add pagination to Teams section, add members section for Teams Members
   return (
     <Layout>
+      <Helmet>
+        <title>Husky Coding Project Project Teams</title>
+        <meta
+          name="description"
+          content="Explore the innovative project teams at Husky Coding Project. Discover how our talented developers, designers, and engineers collaborate to build real-world software solutions, drive technical innovation, and create impact at the University of Washington and beyond."
+        />
+      </Helmet>
+
       <VStack spacing={8} align="stretch">
         <Heading>Featured Projects</Heading>
 
