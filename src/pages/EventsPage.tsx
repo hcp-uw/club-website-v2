@@ -90,7 +90,7 @@ export const EventsPage: React.FC = () => {
             placeItems="center"
           >
             {filteredEvents
-              .filter((event) => new Date(event.startTime) >= new Date())
+              .filter((event) => new Date() <= new Date(event.endTime))
               .map((event) => (
                 <EventCard key={event.id?.toString()} event={event} />
               ))}
@@ -105,7 +105,7 @@ export const EventsPage: React.FC = () => {
             placeItems="center"
           >
             {filteredEvents
-              .filter((event) => new Date(event.startTime) < new Date())
+              .filter((event) => new Date() > new Date(event.endTime))
               .reverse()
               .map((event) => (
                 <EventCard key={event.id?.toString()} event={event} />
