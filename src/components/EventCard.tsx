@@ -7,6 +7,7 @@ import {
   HStack,
   useColorModeValue,
   Button,
+  Icon,
 } from '@chakra-ui/react';
 import { FaMapMarkerAlt, FaRegClock } from 'react-icons/fa';
 import { IEvent } from '../interfaces/IEvent';
@@ -36,7 +37,9 @@ const getTimeString = (startTime: Date, endTime: Date) => {
 
 export const EventCard: React.FC<EventCardProps> = ({ event }) => {
   const bgColor = useColorModeValue('white', 'gray.800');
-  const borderColor = useColorModeValue('gray.200', 'gray.600');
+  const headerColor = useColorModeValue('gray.700', 'gray.200');
+  const descriptionColor = useColorModeValue('gray.600', 'gray.300');
+  const footerColor = useColorModeValue('gray.500', 'gray.400');
 
   return (
     <VStack
@@ -47,7 +50,6 @@ export const EventCard: React.FC<EventCardProps> = ({ event }) => {
       transition="all 0.3s"
       _hover={{ transform: 'translateY(-5px)', boxShadow: 'xl' }}
       bg={bgColor}
-      borderColor={borderColor}
       width={{ base: 'sm', md: '100%' }}
       maxWidth="100%" // for mobile
       height="100%"
@@ -73,12 +75,12 @@ export const EventCard: React.FC<EventCardProps> = ({ event }) => {
         {/* Event Title and Date */}
         <HStack spacing="5" height="3em">
           <EventDate date={new Date(event.startTime)} />
-          <Heading size="md" noOfLines={2} color="gray.700" lineHeight="1.4">
+          <Heading size="md" noOfLines={2} color={headerColor} lineHeight="1.4">
             {event.name}
           </Heading>
         </HStack>
         {/* Event Description */}
-        <Text color="gray.600" whiteSpace="pre-line">
+        <Text color={descriptionColor} whiteSpace="pre-line">
           {event.description}
         </Text>
         {/* Card Footer */}
@@ -88,7 +90,8 @@ export const EventCard: React.FC<EventCardProps> = ({ event }) => {
               as="a"
               href={event.linkURL}
               target="_blank"
-              colorScheme="purple"
+              backgroundColor="purple.500"
+              color="white"
               size="sm"
               rightIcon={<FiExternalLink color="white" />}
               _hover={{
@@ -100,14 +103,14 @@ export const EventCard: React.FC<EventCardProps> = ({ event }) => {
           )}
           <HStack spacing="4">
             <HStack>
-              <FaMapMarkerAlt color="gray" />
-              <Text fontSize="sm" color="gray.500" noOfLines={1}>
+              <Icon as={FaMapMarkerAlt} color={footerColor} />
+              <Text fontSize="sm" color={footerColor} noOfLines={1}>
                 {event.location}
               </Text>
             </HStack>
             <HStack>
-              <FaRegClock color="gray" />
-              <Text fontSize="sm" color="gray.500" whiteSpace="nowrap">
+              <Icon as={FaRegClock} color={footerColor} />
+              <Text fontSize="sm" color={footerColor} whiteSpace="nowrap">
                 {getTimeString(event.startTime, event.endTime)}
               </Text>
             </HStack>
