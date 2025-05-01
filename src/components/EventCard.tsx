@@ -41,20 +41,25 @@ export const EventCard: React.FC<EventCardProps> = ({ event }) => {
   const descriptionColor = useColorModeValue('gray.600', 'gray.300');
   const footerColor = useColorModeValue('gray.500', 'gray.400');
 
+  const now = new Date();
+  const isOngoing =
+    now >= new Date(event.startTime) && now <= new Date(event.endTime);
+
   return (
     <VStack
+      position="relative"
       borderWidth="1px"
       borderRadius="lg"
       overflow="hidden"
       boxShadow="lg"
       transition="all 0.3s"
-      _hover={{ transform: 'translateY(-5px)', boxShadow: 'xl' }}
       bg={bgColor}
       width={{ base: 'sm', md: '100%' }}
       maxWidth="100%" // for mobile
       height="100%"
       minHeight="sm"
       gap="0"
+      _hover={{ transform: 'translateY(-5px)', boxShadow: 'xl' }}
     >
       {/* Event Image */}
       <Image
@@ -64,6 +69,22 @@ export const EventCard: React.FC<EventCardProps> = ({ event }) => {
         height="36"
         width="100%"
       />
+      {/* Ongoing Badge */}
+      {isOngoing && (
+        <Text
+          position="absolute"
+          top="2"
+          left="2"
+          padding="1"
+          borderRadius="md"
+          color="white"
+          backgroundColor="purple.500"
+          fontSize="sm"
+          fontWeight="500"
+        >
+          Ongoing
+        </Text>
+      )}
       <VStack
         align="start"
         spacing="3"
@@ -83,8 +104,8 @@ export const EventCard: React.FC<EventCardProps> = ({ event }) => {
         <Text color={descriptionColor} whiteSpace="pre-line">
           {event.description}
         </Text>
-        {/* Card Footer */}
         <VStack marginTop="auto" width="100%" align="start" spacing="3">
+          {/* Event Link */}
           {event.linkURL && event.linkTitle && (
             <Button
               as="a"
@@ -101,6 +122,7 @@ export const EventCard: React.FC<EventCardProps> = ({ event }) => {
               {event.linkTitle}
             </Button>
           )}
+          {/* Card Footer */}
           <HStack spacing="4">
             <HStack>
               <Icon as={FaMapMarkerAlt} color={footerColor} />
