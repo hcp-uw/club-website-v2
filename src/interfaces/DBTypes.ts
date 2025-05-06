@@ -1,4 +1,4 @@
-const VALID_TEAMS = [
+export const VALID_TEAMS = [
   'onboarding',
   'education',
   'tech',

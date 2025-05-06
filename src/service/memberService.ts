@@ -1,7 +1,8 @@
 import { IMember } from '../interfaces/IMember';
 import { supabase } from './client';
-import { DBMember } from '../interfaces/DBTypes';
+import { DBMember, Team} from '../interfaces/DBTypes';
 import { mapDBMemberToIMember } from '../interfaces/mapping';
+
 
 export const memberService = {
   getAllMembers: async (): Promise<IMember[]> => {
@@ -51,4 +52,43 @@ export const memberService = {
   deleteMember: async (_id: bigint): Promise<void> => {
     throw new Error('Not implemented');
   },
+
+  getAllLeads: async (): Promise<IMember[]> => {
+    const { data, error } = await supabase
+    .from('Members')
+    .select('*')
+    .eq('lead', true)
+    .returns<DBMember[]>();
+
+  if (error) {
+    throw new Error(error.message);
+  }
+
+  if (!data) {
+    return [];
+  }
+
+  return data.map(mapDBMemberToIMember);
+  },
+
+  getMembersbyTeam: async (teamlead: Team): Promise<IMember[]> => {
+    const { data, error } = await supabase
+    .from('Members')
+    .select('*')
+    .eq('teamleads', teamlead)
+    .returns<DBMember[]>()
+
+  if (error) {
+    throw new Error(error.message);
+  }
+
+  if (!data) {
+    throw new Error('Member not found');
+  }
+
+  return data.map(mapDBMemberToIMember);
+},
+
+
+
 };
