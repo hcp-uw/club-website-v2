@@ -5,7 +5,8 @@ export interface IEvent {
   description: string;
   location: string;
   image: string;
-  start_time: Date;
-  end_time: Date;
-  rsvpLink?: string;
+  startTime: Date;
+  endTime: Date;
+  linkURL?: string;
+  linkTitle?: string;
 }
