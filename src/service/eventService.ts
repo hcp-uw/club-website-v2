@@ -8,6 +8,7 @@ export const eventService = {
     let { data, error } = await supabase
       .from('Events')
       .select('*')
+      .returns<DBEvent[]>();
     if (error) {
       throw new Error(error.message);
     }
@@ -27,7 +28,6 @@ export const eventService = {
       .returns<DBEvent>()
       .single();
 
-
     if (error) {
       throw new Error(error.message);
     }
@@ -39,11 +39,16 @@ export const eventService = {
     return mapDBEventToIEvent(data);
   },
 
-  createEvent: async (_event: Omit<IEvent, 'id' | 'createdAt'>): Promise<IEvent> => {
+  createEvent: async (
+    _event: Omit<IEvent, 'id' | 'createdAt'>
+  ): Promise<IEvent> => {
     throw new Error('Not implemented');
   },
 
-  updateEvent: async (_id: bigint, _event: Partial<IEvent>): Promise<IEvent> => {
+  updateEvent: async (
+    _id: bigint,
+    _event: Partial<IEvent>
+  ): Promise<IEvent> => {
     throw new Error('Not implemented');
   },
 
