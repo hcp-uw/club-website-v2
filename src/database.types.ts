@@ -13,168 +13,37 @@ export type Database = {
         Row: {
           created_at: string;
           description: string;
+          end_time: string;
           id: number;
           image: string;
+          link_title: string | null;
+          link_url: string | null;
           location: string;
           name: string;
           start_time: string;
-          end_time: string;
-          rsvp_link: string | null;
         };
         Insert: {
           created_at?: string;
           description: string;
+          end_time: string;
           id?: number;
           image: string;
+          link_title?: string | null;
+          link_url?: string | null;
           location: string;
           name: string;
           start_time: string;
-          end_time: string;
-          rsvp_link?: string | null;
         };
         Update: {
           created_at?: string;
           description?: string;
+          end_time?: string;
           id?: number;
           image?: string;
+          link_title?: string | null;
+          link_url?: string | null;
           location?: string;
           name?: string;
-          start_time?: string;
-          end_time?: string;
-          rsvp_link?: string | null;
-        };
-        Relationships: [];
-      };
-      ghmembers: {
-        Row: {
-          avatar_url: string;
-          events_url: string;
-          followers_url: string;
-          following_url: string;
-          gists_url: string;
-          gravatar_id: string;
-          html_url: string;
-          id: number;
-          login: string;
-          organizations_url: string;
-          received_events_url: string;
-          repos_url: string;
-          site_admin: boolean;
-          starred_url: string;
-          type: string;
-          url: string;
-        };
-        Insert: {
-          avatar_url: string;
-          events_url: string;
-          followers_url: string;
-          following_url: string;
-          gists_url: string;
-          gravatar_id: string;
-          html_url: string;
-          id: number;
-          login: string;
-          organizations_url: string;
-          received_events_url: string;
-          repos_url: string;
-          site_admin: boolean;
-          starred_url: string;
-          type: string;
-          url: string;
-        };
-        Update: {
-          avatar_url?: string;
-          events_url?: string;
-          followers_url?: string;
-          following_url?: string;
-          gists_url?: string;
-          gravatar_id?: string;
-          html_url?: string;
-          id?: number;
-          login?: string;
-          organizations_url?: string;
-          received_events_url?: string;
-          repos_url?: string;
-          site_admin?: boolean;
-          starred_url?: string;
-          type?: string;
-          url?: string;
-        };
-        Relationships: [];
-      };
-      ghteammembers: {
-        Row: {
-          member_id: number;
-          team_id: number;
-        };
-        Insert: {
-          member_id: number;
-          team_id?: number;
-        };
-        Update: {
-          member_id?: number;
-          team_id?: number;
-        };
-        Relationships: [
-          {
-            foreignKeyName: 'public_ghteammembers_member_id_fkey';
-            columns: ['member_id'];
-            isOneToOne: false;
-            referencedRelation: 'ghmembers';
-            referencedColumns: ['id'];
-          },
-          {
-            foreignKeyName: 'public_ghteammembers_team_id_fkey';
-            columns: ['team_id'];
-            isOneToOne: false;
-            referencedRelation: 'ghteams';
-            referencedColumns: ['id'];
-          }
-        ];
-      };
-      ghteams: {
-        Row: {
-          description: string;
-          html_url: string;
-          id: number;
-          members_url: string;
-          name: string;
-          notification_setting: string;
-          parent_id: number | null;
-          permission: string;
-          privacy: string;
-          repositories_url: string;
-          slug: string;
-          url: string;
-        };
-        Insert: {
-          description?: string;
-          html_url: string;
-          id?: number;
-          members_url: string;
-          name: string;
-          notification_setting: string;
-          parent_id?: number | null;
-          permission: string;
-          privacy: string;
-          repositories_url: string;
-          slug: string;
-          url: string;
-        };
-        Update: {
-          description?: string;
-          html_url?: string;
-          id?: number;
-          members_url?: string;
-          name?: string;
-          notification_setting?: string;
-          parent_id?: number | null;
-          permission?: string;
-          privacy?: string;
-          repositories_url?: string;
-          slug?: string;
-          url?: string;
-          rsvp_link?: string | null;
           start_time?: string;
         };
         Relationships: [];
