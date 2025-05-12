@@ -20,8 +20,6 @@ import { Helmet } from "react-helmet-async";
 enum SearchBy {
   FIRST_NAME = "First Name",
   LAST_NAME = "Last Name",
-  EMAIL = "Email",
-  DISCORD = "Discord",
 }
 
 const leadSortingFunction = (a: IMember, b: IMember) => {
@@ -33,9 +31,13 @@ const leadSortingFunction = (a: IMember, b: IMember) => {
 const renderMembers = (data: { members: IMember[]; isLead: boolean }) => {
   const { members, isLead } = data;
 
-  const filteredMembers = members.filter((member) => member.lead === isLead);
+  const processedMembers = members.filter((member) => member.lead === isLead).sort((a, b) => {
+    if (a.firstName < b.firstName) return -1;
+    if (a.firstName > b.firstName) return 1;
+    return 0;
+  });
 
-  if (filteredMembers.length === 0) {
+  if (processedMembers.length === 0) {
     return <></>;
   }
   return (
@@ -44,7 +46,7 @@ const renderMembers = (data: { members: IMember[]; isLead: boolean }) => {
         {isLead ? "Team Leads" : "All Members"}
       </Text>
       <SimpleGrid columns={[1, 2, 3, 4]} spacing={6}>
-        {filteredMembers.map((member) => (
+        {processedMembers.map((member) => (
           <MemberCard key={member.memberId?.toString()} member={member} />
         ))}
       </SimpleGrid>
@@ -88,16 +90,6 @@ export const MembersPage: React.FC = () => {
       case SearchBy.LAST_NAME:
         results = members.filter((member) =>
           member.lastName.toLowerCase().includes(searchTerm.toLowerCase())
-        );
-        break;
-      case SearchBy.EMAIL:
-        results = members.filter((member) =>
-          member.email.toLowerCase().includes(searchTerm.toLowerCase())
-        );
-        break;
-      case SearchBy.DISCORD:
-        results = members.filter((member) =>
-          member.discord.toLowerCase().includes(searchTerm.toLowerCase())
         );
         break;
       default:

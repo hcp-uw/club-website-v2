@@ -93,9 +93,6 @@ export const TeamCard: React.FC<TeamCardProps> = ({ team }) => {
           <Text fontWeight='bold' fontSize='xl'>
             {team.name || `Team ${team.teamId}`}
           </Text>
-          {team.teamId !== null && team.teamId !== undefined && (
-            <Badge colorScheme='green'>PM ID: {team.teamId.toString()}</Badge>
-          )}
           {team.deployLink && (
             <Link
               href={team.deployLink}
@@ -106,10 +103,6 @@ export const TeamCard: React.FC<TeamCardProps> = ({ team }) => {
               View Deployment
             </Link>
           )}
-          <Text fontSize='sm' color='gray.500'>
-            Created:{' '}
-            {team.createdAt && new Date(team.createdAt).toLocaleDateString()}
-          </Text>
         </VStack>
       </MotionBox>
 
