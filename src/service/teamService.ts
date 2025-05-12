@@ -41,37 +41,37 @@ export const teamService = {
     return teamData.map(mapDBTeamToITeam);
   },
   /** Fetch teams from GitHub */
-  fetchGitHubTeams: async (): Promise<ITeam[]> => {
-    if (!GITHUB_ACCESS_TOKEN) {
-      console.error("GitHub API token is missing.");
-      return [];
-    }
+  // fetchGitHubTeams: async (): Promise<ITeam[]> => {
+  //   if (!GITHUB_ACCESS_TOKEN) {
+  //     console.error("GitHub API token is missing.");
+  //     return [];
+  //   }
 
-    const octokit = new Octokit({ auth: GITHUB_ACCESS_TOKEN });
+  //   const octokit = new Octokit({ auth: GITHUB_ACCESS_TOKEN });
 
-    try {
-      const response = await octokit.request("GET /orgs/{org}/teams", {
-        org: ORG_NAME,
-        headers: { "X-GitHub-Api-Version": "2022-11-28" },
-        per_page: 100, // TODO: add pagination to teams section 
-      });
+  //   try {
+  //     const response = await octokit.request("GET /orgs/{org}/teams", {
+  //       org: ORG_NAME,
+  //       headers: { "X-GitHub-Api-Version": "2022-11-28" },
+  //       per_page: 100, // TODO: add pagination to teams section 
+  //     });
 
-      // Convert GitHub teams to match ITeam structure
-      return response.data.map((team: { id: number; name: string }) => ({
-        teamId: BigInt(team.id),
-        name: team.name,
-        createdAt: new Date(),
-        logo: `https://wivolixjgzmaigovvchs.supabase.co/storage/v1/object/public/club-website-assets/Teams/${team.name.toLowerCase()}-logo.png`,
-        deployLink: "",
-        githubRepo: "",
-        lead: false,
-      }));
+  //     // Convert GitHub teams to match ITeam structure
+  //     return response.data.map((team: { id: number; name: string }) => ({
+  //       teamId: BigInt(team.id),
+  //       name: team.name,
+  //       createdAt: new Date(),
+  //       logo: `https://wivolixjgzmaigovvchs.supabase.co/storage/v1/object/public/club-website-assets/Teams/${team.name.toLowerCase()}-logo.png`,
+  //       deployLink: "",
+  //       githubRepo: "",
+  //       lead: false,
+  //     }));
 
-    } catch (error) {
-      console.error("GitHub API Error:", error);
-      return [];
-    }
-  },
+  //   } catch (error) {
+  //     console.error("GitHub API Error:", error);
+  //     return [];
+  //   }
+  // },
 
   getTeamById: async (id: bigint): Promise<ITeam> => {
     let { data: teamData, error: teamError } = await supabase
