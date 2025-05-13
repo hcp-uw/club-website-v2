@@ -181,7 +181,7 @@ export const Layout: React.FC<{ children: React.ReactNode }> = ({
         {children}
       </Container>
 
-      <Box as="footer" bg={footerBgColor} py={6}>
+      <Box as="footer" bg={footerBgColor} py={6} mt={6}>
         <Container maxW="container.xl">
           <Flex
             direction={{ base: 'column', md: 'row' }}
@@ -189,57 +189,29 @@ export const Layout: React.FC<{ children: React.ReactNode }> = ({
             alignItems={{ base: 'flex-start', md: 'center' }}
             gap={4}
           >
-            <Flex
-              direction={{ base: 'column', sm: 'row' }}
-              alignItems={{ base: 'flex-start', sm: 'center' }}
-              gap={4}
-            >
-              <Button
-                onClick={toggleExpand}
-                variant="link"
-                fontWeight="bold"
-                rightIcon={<FaChevronRight />}
-                transform={isExpanded ? 'scaleY(1.01)' : 'none'}
-                transition="transform 0.3s"
-              >
-                Connect with us
-              </Button>
-              <AnimatePresence>
-                {isExpanded && (
-                  <MotionBox
-                    initial={{ opacity: 0, width: 0 }}
-                    animate={{ opacity: 1, width: 'auto' }}
-                    exit={{ opacity: 0, width: 0 }}
-                    transition={{ duration: 0.3 }}
-                    overflow="hidden"
-                  >
-                    <HStack spacing={{ base: 4, md: 10 }}>
-                      <FooterLink
-                        href="mailto:huskycodingproject@gmail.com"
-                        icon={<FaEnvelope />}
-                      />
-                      <FooterLink
-                        href="https://github.com/hcp-uw"
-                        icon={<FaGithub />}
-                      />
-                      <FooterLink
-                        href="https://twitter.com/your-twitter"
-                        icon={<FaTwitter />}
-                      />
-                      <FooterLink
-                        href="https://www.linkedin.com/company/hcp-uw"
-                        icon={<FaLinkedin />}
-                      />
-                      <FooterLink
-                        href="https://www.instagram.com/hcp.uw/"
-                        icon={<FaInstagram />}
-                      />
-                    </HStack>
-                  </MotionBox>
-                )}
-              </AnimatePresence>
-            </Flex>
-            <Text>
+            <HStack spacing={{ base: 4, md: 10 }} pl="4">
+              <FooterLink
+                href="mailto:huskycodingproject@gmail.com"
+                icon={<FaEnvelope />}
+              />
+              <FooterLink
+                href="https://github.com/hcp-uw"
+                icon={<FaGithub />}
+              />
+              <FooterLink
+                href="https://twitter.com/your-twitter"
+                icon={<FaTwitter />}
+              />
+              <FooterLink
+                href="https://www.linkedin.com/company/hcp-uw"
+                icon={<FaLinkedin />}
+              />
+              <FooterLink
+                href="https://www.instagram.com/hcp.uw/"
+                icon={<FaInstagram />}
+              />
+            </HStack>
+            <Text pl="4" pr="4">
               &copy; {new Date().getFullYear()} Husky Coding Project. All rights
               reserved.
             </Text>
