@@ -23,7 +23,6 @@ const MotionBox = motion(Box);
 const MotionButton = motion(Button);
 
 export const JoinPage: React.FC = () => {
-  const bgColor = useColorModeValue('grey.100', 'gray.800');
   const textColor = useColorModeValue('gray.800', 'gray.100');
 
   return (
@@ -39,9 +38,7 @@ export const JoinPage: React.FC = () => {
         display="flex"
         alignItems="center"
         justifyContent="center"
-        height="100%"
         flex="1"
-        bg={bgColor}
         color={textColor}
       >
         <VStack spacing={8} align="center" maxWidth="600px" textAlign="center">
