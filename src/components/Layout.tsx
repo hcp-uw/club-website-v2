@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {
   Box,
   Flex,
@@ -7,7 +7,6 @@ import {
   Text,
   Link,
   HStack,
-  Button,
   IconButton,
   VStack,
   Drawer,
@@ -26,10 +25,8 @@ import {
   FaTwitter,
   FaLinkedin,
   FaInstagram,
-  FaChevronRight,
   FaBars,
 } from 'react-icons/fa';
-import { motion, AnimatePresence } from 'framer-motion';
 
 const NavItem = ({
   children,
@@ -73,8 +70,6 @@ const FooterLink = ({
   </Link>
 );
 
-const MotionBox = motion(Box);
-
 const Logo = () => {
   const logoText = useBreakpointValue({
     base: '<HCP/>', // Mobile version
@@ -98,17 +93,14 @@ const Logo = () => {
 export const Layout: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
-  const [isExpanded, setIsExpanded] = useState(false);
   const { isOpen, onOpen, onClose } = useDisclosure();
   const bgColor = useColorModeValue('gray.50', 'gray.900');
   const navBgColor = useColorModeValue('white', 'gray.800');
   const footerBgColor = useColorModeValue('gray.50', 'gray.900');
 
-  const toggleExpand = () => setIsExpanded(!isExpanded);
-
   const navLinks = [
-    { to: '/teams/leadership', label: 'Leadership Teams' },
-    { to: '/teams/members', label: 'Project Teams' },
+    { to: '/teams/leadership', label: 'Leadership' },
+    { to: '/teams/members', label: 'Projects' },
     { to: '/members', label: 'Members' },
     { to: '/events', label: 'Events' },
     { to: '/join', label: 'Join' },
@@ -132,7 +124,7 @@ export const Layout: React.FC<{ children: React.ReactNode }> = ({
               </RouterLink>
 
               {/* Desktop Navigation */}
-              <HStack spacing={1} display={{ base: 'none', md: 'flex' }}>
+              <HStack spacing={1} display={{ base: 'none', lg: 'flex' }}>
                 {navLinks.map((link) => (
                   <NavItem key={link.to} to={link.to}>
                     {link.label}
@@ -143,7 +135,7 @@ export const Layout: React.FC<{ children: React.ReactNode }> = ({
 
             {/* Mobile Menu Button */}
             <IconButton
-              display={{ base: 'flex', md: 'none' }}
+              display={{ base: 'flex', lg: 'none' }}
               onClick={onOpen}
               variant="ghost"
               aria-label="Open menu"
