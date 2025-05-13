@@ -37,7 +37,12 @@ export const LeadTeamsPage: React.FC = () => {
     setFilteredTeams(results);
   }, [searchTerm, teams]);
 
-  if (loading) return <Layout><Spinner size="xl" /></Layout>;
+  if (loading) return (
+    <Layout>
+      <VStack justify="center" align="center" minH="80vh">
+        <Spinner size="xl" />
+      </VStack>
+    </Layout>)
   if (error) return <Layout><Text color="red.500">{error}</Text></Layout>;
 
   return (
