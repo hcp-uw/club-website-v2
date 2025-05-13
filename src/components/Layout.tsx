@@ -17,6 +17,9 @@ import {
   DrawerCloseButton,
   useDisclosure,
   useBreakpointValue,
+  Button,
+  useColorMode,
+  Icon,
 } from '@chakra-ui/react';
 import { Link as RouterLink } from 'react-router-dom';
 import {
@@ -27,6 +30,7 @@ import {
   FaInstagram,
   FaBars,
 } from 'react-icons/fa';
+import { MdOutlineDarkMode, MdOutlineLightMode } from 'react-icons/md';
 
 const NavItem = ({
   children,
@@ -93,6 +97,7 @@ const Logo = () => {
 export const Layout: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
+  const { colorMode, setColorMode } = useColorMode();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const bgColor = useColorModeValue('gray.50', 'gray.900');
   const navBgColor = useColorModeValue('white', 'gray.800');
@@ -106,6 +111,10 @@ export const Layout: React.FC<{ children: React.ReactNode }> = ({
     { to: '/join', label: 'Join' },
     { to: '/sponsors', label: 'Sponsors' },
   ];
+
+  const handleToggle = () => {
+    setColorMode(colorMode === 'light' ? 'dark' : 'light');
+  };
 
   return (
     <Box minH="100vh" bg={bgColor} display="flex" flexDirection="column">
@@ -134,13 +143,24 @@ export const Layout: React.FC<{ children: React.ReactNode }> = ({
             </Flex>
 
             {/* Mobile Menu Button */}
-            <IconButton
-              display={{ base: 'flex', lg: 'none' }}
-              onClick={onOpen}
-              variant="ghost"
-              aria-label="Open menu"
-              icon={<FaBars />}
-            />
+            <Flex>
+              <Button onClick={handleToggle}>
+                <Icon
+                  as={
+                    colorMode === 'light'
+                      ? MdOutlineLightMode
+                      : MdOutlineDarkMode
+                  }
+                />
+              </Button>
+              <IconButton
+                display={{ base: 'flex', lg: 'none' }}
+                onClick={onOpen}
+                variant="ghost"
+                aria-label="Open menu"
+                icon={<FaBars />}
+              />
+            </Flex>
           </Flex>
         </Container>
       </Box>
