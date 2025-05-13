@@ -1,5 +1,9 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 
 #root {
   margin: 0 auto;
+}
+
+html {
+  scrollbar-gutter: stable;
 }
