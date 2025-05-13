@@ -31,34 +31,35 @@ interface TeamCardProps {
 
 const MotionBox = motion(Box)
 
-export const TeamLeadCard: React.FC<TeamCardProps> = ({team}) => {
+const formatTeamName = (team: string): string => {
+  return team[0].toUpperCase() + team.slice(1) + ' Team'
+};
 
-  const formatTeamName = (team: string): string => {
-    return team[0].toUpperCase() + team.slice(1) + ' Team'
-  };
+export const TeamLeadCard: React.FC<TeamCardProps> = ({team}) => {
 
   const TEAM_NAME = formatTeamName(team)
 
   const { isOpen, onOpen, onClose } = useDisclosure()
   const [teamMembers, setTeamMembers] = useState<IMember[]>([])
   const [isLoading, setIsLoading] = useState(false)
-
+  const [isError, setError] = useState(false)
 
   const teamColor = COLOR_MAP[team]
   const borderColor = useColorModeValue(`${teamColor}.300`, `${teamColor}.500`)
   const bgColor = useColorModeValue('white', 'gray.800')
 
   const handleClick = async () => {
-
     try {
       setIsLoading(true)
       const teamLeads = await memberService.getMembersbyTeam(team)
 
       setTeamMembers(teamLeads)
+      setError(false)
       onOpen()
 
     } catch (error) {
       console.error('Error fetching team members:', error)
+      setError(true)
     } finally {
       setIsLoading(false)
     }
@@ -81,19 +82,21 @@ export const TeamLeadCard: React.FC<TeamCardProps> = ({team}) => {
       >
         <VStack spacing={4} align='center'>
           <Text fontWeight='bold' fontSize='xl'>
-            {`${TEAM_NAME}`}
+            {isLoading ? 'Loading team leads...'  : TEAM_NAME}
           </Text>
+          {isError && <Text color='red.500'>Error loading team leads</Text>}
+
         </VStack>
       </MotionBox>
-
+      
       <Modal isOpen={isOpen && !isLoading} onClose={onClose}>
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader>{`${TEAM_NAME}`}</ModalHeader>
+          <ModalHeader>{TEAM_NAME}</ModalHeader>
           <ModalCloseButton />
           <ModalBody>
             <VStack align='start' spacing={4}>
-              <Heading size='md'>Team Members</Heading>
+              {/* <Heading size='md'>Team Members</Heading> */}
               <List spacing={3} width='100%'>
                 {teamMembers.map(member => (
                   <ListItem key={member.memberId?.toString()}>
