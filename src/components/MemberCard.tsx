@@ -4,15 +4,15 @@ import {
   Avatar,
   Text,
   VStack,
-  HStack,
-  Link,
-  Icon,
   useColorModeValue,
   Badge,
 } from '@chakra-ui/react';
 import { FaDiscord, FaLinkedin, FaEnvelope } from 'react-icons/fa';
 import { Link as RouterLink, useNavigate } from 'react-router-dom';
 import { COLOR_MAP, IMember } from '../interfaces/IMember';
+import { useNavigate } from 'react-router-dom';
+import { IMember } from '../interfaces/IMember';
+import { Team } from '../interfaces/DBTypes';
 
 interface MemberCardProps {
   member: IMember;
@@ -51,51 +51,7 @@ export const MemberCard: React.FC<MemberCardProps> = ({ member }) => {
           {member.lead && (
             <Badge colorScheme={COLOR_MAP[member.team]}>{member.team}</Badge>
           )}
-          <Text fontSize="sm" color="gray.500">
-            {member.email}
-          </Text>
         </VStack>
-        <HStack spacing={4}>
-          <Link
-            href={`mailto:${member.email}`}
-            isExternal
-            onClick={(e) => e.stopPropagation()}
-          >
-            <Icon
-              as={FaEnvelope}
-              w={5}
-              h={5}
-              color="gray.500"
-              _hover={{ color: 'blue.500' }}
-            />
-          </Link>
-          <Link
-            href={`https://discord.com/users/${member.discord}`}
-            isExternal
-            onClick={(e) => e.stopPropagation()}
-          >
-            <Icon
-              as={FaDiscord}
-              w={5}
-              h={5}
-              color="gray.500"
-              _hover={{ color: 'blue.500' }}
-            />
-          </Link>
-          <Link
-            href={member.linkedin}
-            isExternal
-            onClick={(e) => e.stopPropagation()}
-          >
-            <Icon
-              as={FaLinkedin}
-              w={5}
-              h={5}
-              color="gray.500"
-              _hover={{ color: 'blue.500' }}
-            />
-          </Link>
-        </HStack>
       </VStack>
     </Box>
   );

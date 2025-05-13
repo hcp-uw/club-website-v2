@@ -29,7 +29,7 @@ export const EventsPage: React.FC = () => {
         const fetchedEvents = await eventService.getAllEvents();
         fetchedEvents.sort((a, b) => {
           return (
-            new Date(a.start_time).getTime() - new Date(b.start_time).getTime()
+            new Date(a.startTime).getTime() - new Date(b.startTime).getTime()
           );
         });
         setEvents(fetchedEvents);
@@ -98,7 +98,7 @@ export const EventsPage: React.FC = () => {
             placeItems="center"
           >
             {filteredEvents
-              .filter((event) => new Date(event.start_time) >= new Date())
+              .filter((event) => new Date() <= new Date(event.endTime))
               .map((event) => (
                 <EventCard key={event.id?.toString()} event={event} />
               ))}
@@ -113,7 +113,7 @@ export const EventsPage: React.FC = () => {
             placeItems="center"
           >
             {filteredEvents
-              .filter((event) => new Date(event.start_time) < new Date())
+              .filter((event) => new Date() > new Date(event.endTime))
               .reverse()
               .map((event) => (
                 <EventCard key={event.id?.toString()} event={event} />
