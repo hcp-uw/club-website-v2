@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 import {
   Box,
   Flex,
@@ -18,8 +18,8 @@ import {
   DrawerCloseButton,
   useDisclosure,
   useBreakpointValue,
-} from "@chakra-ui/react";
-import { Link as RouterLink } from "react-router-dom";
+} from '@chakra-ui/react';
+import { Link as RouterLink } from 'react-router-dom';
 import {
   FaGithub,
   FaEnvelope,
@@ -28,8 +28,8 @@ import {
   FaInstagram,
   FaChevronRight,
   FaBars,
-} from "react-icons/fa";
-import { motion, AnimatePresence } from "framer-motion";
+} from 'react-icons/fa';
+import { motion, AnimatePresence } from 'framer-motion';
 
 const NavItem = ({
   children,
@@ -47,10 +47,10 @@ const NavItem = ({
       px={4}
       py={2}
       rounded="md"
-      w={isMobile ? "full" : "auto"}
+      w={isMobile ? 'full' : 'auto'}
       _hover={{
-        textDecoration: "none",
-        bg: useColorModeValue("gray.100", "gray.700"),
+        textDecoration: 'none',
+        bg: useColorModeValue('gray.100', 'gray.700'),
       }}
       onClick={onClick}
     >
@@ -77,9 +77,9 @@ const MotionBox = motion(Box);
 
 const Logo = () => {
   const logoText = useBreakpointValue({
-    base: "<HCP/>", // Mobile version
-    sm: "<HCP/>", // Still short version for small screens
-    md: "<Husky Coding Project/>", // Full version for medium screens and up
+    base: '<HCP/>', // Mobile version
+    sm: '<HCP/>', // Still short version for small screens
+    md: '<Husky Coding Project/>', // Full version for medium screens and up
   });
 
   return (
@@ -100,9 +100,9 @@ export const Layout: React.FC<{ children: React.ReactNode }> = ({
 }) => {
   const [isExpanded, setIsExpanded] = useState(false);
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const bgColor = useColorModeValue("gray.50", "gray.900");
-  const navBgColor = useColorModeValue("white", "gray.800");
-  const footerBgColor = useColorModeValue("gray.50", "gray.900");
+  const bgColor = useColorModeValue('gray.50', 'gray.900');
+  const navBgColor = useColorModeValue('white', 'gray.800');
+  const footerBgColor = useColorModeValue('gray.50', 'gray.900');
 
   const toggleExpand = () => setIsExpanded(!isExpanded);
 
@@ -112,7 +112,7 @@ export const Layout: React.FC<{ children: React.ReactNode }> = ({
     { to: '/members', label: 'Members' },
     { to: '/events', label: 'Events' },
     { to: '/join', label: 'Join' },
-    { to: "/sponsors", label: "Sponsors" },
+    { to: '/sponsors', label: 'Sponsors' },
   ];
 
   return (
@@ -132,7 +132,7 @@ export const Layout: React.FC<{ children: React.ReactNode }> = ({
               </RouterLink>
 
               {/* Desktop Navigation */}
-              <HStack spacing={1} display={{ base: "none", md: "flex" }}>
+              <HStack spacing={1} display={{ base: 'none', md: 'flex' }}>
                 {navLinks.map((link) => (
                   <NavItem key={link.to} to={link.to}>
                     {link.label}
@@ -143,7 +143,7 @@ export const Layout: React.FC<{ children: React.ReactNode }> = ({
 
             {/* Mobile Menu Button */}
             <IconButton
-              display={{ base: "flex", md: "none" }}
+              display={{ base: 'flex', md: 'none' }}
               onClick={onOpen}
               variant="ghost"
               aria-label="Open menu"
@@ -171,21 +171,27 @@ export const Layout: React.FC<{ children: React.ReactNode }> = ({
         </DrawerContent>
       </Drawer>
 
-      <Container maxW="container.xl" pt={20} flex={1}>
+      <Container
+        maxW="container.xl"
+        pt={20}
+        flex="1"
+        display="flex"
+        flexDirection="column"
+      >
         {children}
       </Container>
 
-      <Box as="footer" bg={footerBgColor} py={6} mt={8}>
+      <Box as="footer" bg={footerBgColor} py={6}>
         <Container maxW="container.xl">
           <Flex
-            direction={{ base: "column", md: "row" }}
+            direction={{ base: 'column', md: 'row' }}
             justifyContent="space-between"
-            alignItems={{ base: "flex-start", md: "center" }}
+            alignItems={{ base: 'flex-start', md: 'center' }}
             gap={4}
           >
             <Flex
-              direction={{ base: "column", sm: "row" }}
-              alignItems={{ base: "flex-start", sm: "center" }}
+              direction={{ base: 'column', sm: 'row' }}
+              alignItems={{ base: 'flex-start', sm: 'center' }}
               gap={4}
             >
               <Button
@@ -193,7 +199,7 @@ export const Layout: React.FC<{ children: React.ReactNode }> = ({
                 variant="link"
                 fontWeight="bold"
                 rightIcon={<FaChevronRight />}
-                transform={isExpanded ? "scaleY(1.01)" : "none"}
+                transform={isExpanded ? 'scaleY(1.01)' : 'none'}
                 transition="transform 0.3s"
               >
                 Connect with us
@@ -202,7 +208,7 @@ export const Layout: React.FC<{ children: React.ReactNode }> = ({
                 {isExpanded && (
                   <MotionBox
                     initial={{ opacity: 0, width: 0 }}
-                    animate={{ opacity: 1, width: "auto" }}
+                    animate={{ opacity: 1, width: 'auto' }}
                     exit={{ opacity: 0, width: 0 }}
                     transition={{ duration: 0.3 }}
                     overflow="hidden"

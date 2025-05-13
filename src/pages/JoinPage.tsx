@@ -1,5 +1,5 @@
-import React from "react";
-import { keyframes } from "@emotion/react";
+import React from 'react';
+import { keyframes } from '@emotion/react';
 import {
   Box,
   Text,
@@ -7,11 +7,11 @@ import {
   VStack,
   Heading,
   useColorModeValue,
-} from "@chakra-ui/react";
-import { FaDiscord } from "react-icons/fa";
-import { motion } from "framer-motion";
-import { Helmet } from "react-helmet-async";
-import { Layout } from "../components/Layout";
+} from '@chakra-ui/react';
+import { FaDiscord } from 'react-icons/fa';
+import { motion } from 'framer-motion';
+import { Helmet } from 'react-helmet-async';
+import { Layout } from '../components/Layout';
 
 const pulseKeyframe = keyframes`
   0% { box-shadow: 0 0 0 0 rgba(88, 101, 242, 0.7); }
@@ -23,8 +23,8 @@ const MotionBox = motion(Box);
 const MotionButton = motion(Button);
 
 export const JoinPage: React.FC = () => {
-  const bgColor = useColorModeValue("grey.100", "gray.800");
-  const textColor = useColorModeValue("gray.800", "gray.100");
+  const bgColor = useColorModeValue('grey.100', 'gray.800');
+  const textColor = useColorModeValue('gray.800', 'gray.100');
 
   return (
     <Layout>
@@ -36,10 +36,11 @@ export const JoinPage: React.FC = () => {
         />
       </Helmet>
       <Box
-        minHeight="100vh"
         display="flex"
         alignItems="center"
         justifyContent="center"
+        height="100%"
+        flex="1"
         bg={bgColor}
         color={textColor}
       >
@@ -69,10 +70,10 @@ export const JoinPage: React.FC = () => {
             leftIcon={<FaDiscord />}
             size="lg"
             colorScheme="purple"
-            _hover={{ transform: "translateY(-5px)" }}
-            style={{ transition: "all 0.2s" }}
+            _hover={{ transform: 'translateY(-5px)' }}
+            style={{ transition: 'all 0.2s' }}
             onClick={() =>
-              window.open("https://discord.gg/WDh6VPmjyY", "_blank")
+              window.open('https://discord.gg/WDh6VPmjyY', '_blank')
             }
             animation={`${pulseKeyframe} 2s infinite`}
             whileHover={{ scale: 1.05 }}
