@@ -143,7 +143,7 @@ export const Layout: React.FC<{ children: React.ReactNode }> = ({
             </Flex>
 
             {/* Mobile Menu Button */}
-            <Flex>
+            <Flex gap="2">
               <Button onClick={handleToggle}>
                 <Icon
                   as={
