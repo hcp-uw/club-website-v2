@@ -217,10 +217,6 @@ export const Layout: React.FC<{ children: React.ReactNode }> = ({
                         icon={<FaGithub />}
                       />
                       <FooterLink
-                        href="https://twitter.com/your-twitter"
-                        icon={<FaTwitter />}
-                      />
-                      <FooterLink
                         href="https://www.linkedin.com/company/hcp-uw"
                         icon={<FaLinkedin />}
                       />
