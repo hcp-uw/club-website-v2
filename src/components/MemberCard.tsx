@@ -7,6 +7,9 @@ import {
   useColorModeValue,
   Badge,
 } from '@chakra-ui/react';
+import { FaDiscord, FaLinkedin, FaEnvelope } from 'react-icons/fa';
+import { Link as RouterLink, useNavigate } from 'react-router-dom';
+import { COLOR_MAP, IMember } from '../interfaces/IMember';
 import { useNavigate } from 'react-router-dom';
 import { IMember } from '../interfaces/IMember';
 import { Team } from '../interfaces/DBTypes';
@@ -15,19 +18,8 @@ interface MemberCardProps {
   member: IMember;
 }
 
-const COLOR_MAP: Record<Team, string> = {
-  communications: 'red',
-  design: 'blue',
-  finance: 'green',
-  education: 'purple',
-  onboarding: 'pink',
-  tech: 'yellow',
-  'co-chair': 'orange',
-};
-
 export const MemberCard: React.FC<MemberCardProps> = ({ member }) => {
   const bgColor = useColorModeValue('white', 'gray.800');
-  // const borderColor = useColorModeValue('gray.200', 'gray.600');
   const borderColor = useColorModeValue('gray.200', 'gray.600');
   const borderWidth = member.lead ? '2px' : '1px';
 
@@ -35,7 +27,6 @@ export const MemberCard: React.FC<MemberCardProps> = ({ member }) => {
   return (
     <Box
       onClick={() => navigate(`/members/${member.memberId}`)}
-      // borderWidth="1px"
       borderWidth={borderWidth}
       borderRadius="lg"
       p={6}
