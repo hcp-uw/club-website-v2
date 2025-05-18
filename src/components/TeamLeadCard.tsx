@@ -3,7 +3,6 @@ import {
   Box,
   Text,
   VStack,
-  Button,
   Modal,
   ModalOverlay,
   ModalContent,
@@ -12,7 +11,6 @@ import {
   ModalCloseButton,
   ModalFooter,
   useDisclosure,
-  Heading,
   List,
   ListItem,
   useColorModeValue,
@@ -25,6 +23,7 @@ import { IMember, COLOR_MAP } from '../interfaces/IMember';
 import { memberService } from '../service/memberService';
 import { Team } from '../interfaces/DBTypes';
 import { ITeam, LEADERSHIP_ID_MAP } from '../interfaces/ITeam';
+import { useNavigate } from 'react-router-dom';
 
 interface TeamCardProps {
   team: ITeam;
@@ -38,10 +37,13 @@ export const TeamLeadCard: React.FC<TeamCardProps> = ({ team }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setError] = useState(false);
 
+  const navigate = useNavigate();
+
   const teamIDName = LEADERSHIP_ID_MAP[Number(team.teamId)] as Team;
   const teamColor = COLOR_MAP[teamIDName];
   const borderColor = useColorModeValue(`${teamColor}.300`, `${teamColor}.500`);
   const bgColor = useColorModeValue('white', 'gray.800');
+  const hoverColor = useColorModeValue('gray.200', 'gray.600');
 
   const handleClick = async () => {
     try {
@@ -104,19 +106,24 @@ export const TeamLeadCard: React.FC<TeamCardProps> = ({ team }) => {
           <ModalCloseButton />
           <ModalBody>
             <VStack align="start" spacing={4}>
-              <List spacing={3} width="100%">
+              <List spacing="1" width="100%">
                 {teamMembers.map((member) => (
                   <ListItem key={member.memberId?.toString()}>
-                    <HStack>
+                    <HStack
+                      onClick={() => navigate(`/members/${member.memberId}`)}
+                      cursor="pointer"
+                      borderRadius="md"
+                      _hover={{
+                        bgColor: hoverColor,
+                      }}
+                      p="2"
+                    >
                       <Avatar
                         size="sm"
                         name={`${member.firstName} ${member.lastName}`}
                       />
                       <Text>
                         {member.firstName} {member.lastName}
-                      </Text>
-                      <Text fontSize="sm" color="gray.500">
-                        {member.email}
                       </Text>
                     </HStack>
                   </ListItem>
@@ -125,11 +132,7 @@ export const TeamLeadCard: React.FC<TeamCardProps> = ({ team }) => {
               {teamMembers.length === 0 && <Text>No team members found.</Text>}
             </VStack>
           </ModalBody>
-          <ModalFooter>
-            <Button colorScheme="blue" mr={3} onClick={onClose}>
-              Close
-            </Button>
-          </ModalFooter>
+          <ModalFooter></ModalFooter>
         </ModalContent>
       </Modal>
     </>
