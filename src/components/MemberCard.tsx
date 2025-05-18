@@ -10,8 +10,6 @@ import {
 import { FaDiscord, FaLinkedin, FaEnvelope } from 'react-icons/fa';
 import { Link as RouterLink, useNavigate } from 'react-router-dom';
 import { COLOR_MAP, IMember } from '../interfaces/IMember';
-import { useNavigate } from 'react-router-dom';
-import { IMember } from '../interfaces/IMember';
 import { Team } from '../interfaces/DBTypes';
 
 interface MemberCardProps {
