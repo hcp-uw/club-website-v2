@@ -45,6 +45,7 @@ export interface DBTeam {
   deployLink?: string;
   created_at: string;
   lead: boolean;
+  description: string;
 }
 
 export interface DBSponsor {
@@ -91,4 +92,5 @@ export interface DBCreateTeam {
   logo: string;
   deployLink?: string;
   lead?: boolean;
+  description: string;
 }

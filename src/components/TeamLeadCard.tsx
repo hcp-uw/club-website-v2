@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
 import {
   Box,
   Text,
@@ -17,98 +17,105 @@ import {
   ListItem,
   useColorModeValue,
   HStack,
-  Avatar
-} from '@chakra-ui/react'
-import { motion } from 'framer-motion'
-import { IMember, COLOR_MAP } from '../interfaces/IMember'
-import { memberService } from '../service/memberService'
-
-import { Team } from '../interfaces/DBTypes'
+  Avatar,
+  Image,
+} from '@chakra-ui/react';
+import { motion } from 'framer-motion';
+import { IMember, COLOR_MAP } from '../interfaces/IMember';
+import { memberService } from '../service/memberService';
+import { Team } from '../interfaces/DBTypes';
+import { ITeam, LEADERSHIP_ID_MAP } from '../interfaces/ITeam';
 
 interface TeamCardProps {
-  team: Team
+  team: ITeam;
 }
 
-const MotionBox = motion(Box)
+const MotionBox = motion(Box);
 
-const formatTeamName = (team: string): string => {
-  return team[0].toUpperCase() + team.slice(1) + ' Team'
-};
+export const TeamLeadCard: React.FC<TeamCardProps> = ({ team }) => {
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const [teamMembers, setTeamMembers] = useState<IMember[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [isError, setError] = useState(false);
 
-export const TeamLeadCard: React.FC<TeamCardProps> = ({team}) => {
-
-  const TEAM_NAME = formatTeamName(team)
-
-  const { isOpen, onOpen, onClose } = useDisclosure()
-  const [teamMembers, setTeamMembers] = useState<IMember[]>([])
-  const [isLoading, setIsLoading] = useState(false)
-  const [isError, setError] = useState(false)
-
-  const teamColor = COLOR_MAP[team]
-  const borderColor = useColorModeValue(`${teamColor}.300`, `${teamColor}.500`)
-  const bgColor = useColorModeValue('white', 'gray.800')
+  const teamIDName = LEADERSHIP_ID_MAP[Number(team.teamId)] as Team;
+  const teamColor = COLOR_MAP[teamIDName];
+  const borderColor = useColorModeValue(`${teamColor}.300`, `${teamColor}.500`);
+  const bgColor = useColorModeValue('white', 'gray.800');
 
   const handleClick = async () => {
     try {
-      setIsLoading(true)
-      const teamLeads = await memberService.getMembersbyTeam(team)
+      setIsLoading(true);
+      const teamLeads = await memberService.getMembersbyTeam(teamIDName);
 
-      setTeamMembers(teamLeads)
-      setError(false)
-      onOpen()
-
+      setTeamMembers(teamLeads);
+      setError(false);
+      onOpen();
     } catch (error) {
-      console.error('Error fetching team members:', error)
-      setError(true)
+      console.error('Error fetching team members:', error);
+      setError(true);
     } finally {
-      setIsLoading(false)
+      setIsLoading(false);
     }
-  }
+  };
 
   return (
     <>
       <MotionBox
-        borderWidth='1px'
-        borderRadius='lg'
-        p={6}
-        boxShadow='md'
-        cursor='pointer'
+        borderWidth="1px"
+        borderRadius="lg"
+        boxShadow="md"
+        cursor="pointer"
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
         transition={{ duration: 0.2 }}
         onClick={handleClick}
         bg={bgColor}
         borderColor={borderColor}
+        overflow="hidden"
+        minHeight="sm"
       >
-        <VStack spacing={4} align='center'>
-          <Text fontWeight='bold' fontSize='xl'>
-            {isLoading ? 'Loading team leads...'  : TEAM_NAME}
+        <Image
+          src={team.logo}
+          alt="Team Logo"
+          objectFit="cover"
+          height="48"
+          width="100%"
+        />
+        <VStack
+          align="start"
+          spacing="3"
+          p="5"
+          paddingTop="4"
+          width="100%"
+          height="100%"
+        >
+          <Text fontWeight="bold" fontSize="xl">
+            {team.name}
           </Text>
-          {isError && <Text color='red.500'>Error loading team leads</Text>}
-
+          <Text whiteSpace="pre-line">{team.description}</Text>
         </VStack>
       </MotionBox>
-      
+
       <Modal isOpen={isOpen && !isLoading} onClose={onClose}>
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader>{TEAM_NAME}</ModalHeader>
+          <ModalHeader>{team.name}</ModalHeader>
           <ModalCloseButton />
           <ModalBody>
-            <VStack align='start' spacing={4}>
-              {/* <Heading size='md'>Team Members</Heading> */}
-              <List spacing={3} width='100%'>
-                {teamMembers.map(member => (
+            <VStack align="start" spacing={4}>
+              <List spacing={3} width="100%">
+                {teamMembers.map((member) => (
                   <ListItem key={member.memberId?.toString()}>
                     <HStack>
                       <Avatar
-                        size='sm'
+                        size="sm"
                         name={`${member.firstName} ${member.lastName}`}
                       />
                       <Text>
                         {member.firstName} {member.lastName}
                       </Text>
-                      <Text fontSize='sm' color='gray.500'>
+                      <Text fontSize="sm" color="gray.500">
                         {member.email}
                       </Text>
                     </HStack>
@@ -119,12 +126,12 @@ export const TeamLeadCard: React.FC<TeamCardProps> = ({team}) => {
             </VStack>
           </ModalBody>
           <ModalFooter>
-            <Button colorScheme='blue' mr={3} onClick={onClose}>
+            <Button colorScheme="blue" mr={3} onClick={onClose}>
               Close
             </Button>
           </ModalFooter>
         </ModalContent>
       </Modal>
     </>
-  )
-}
+  );
+};
