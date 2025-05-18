@@ -28,7 +28,7 @@ export const JoinPage: React.FC = () => {
   return (
     <Layout>
       <Helmet>
-        <title>Join the Husky Coding Project</title>
+        <title>Join HCP</title>
         <meta
           name="description"
           content="Join the Husky Coding Project community on Discord to collaborate on projects and gain software development experience."

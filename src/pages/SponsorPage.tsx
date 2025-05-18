@@ -43,7 +43,7 @@ export const SponsorPage: React.FC = () => {
   return (
     <Layout>
       <Helmet>
-        <title>Husky Coding Project Sponsors</title>
+        <title>Sponsors</title>
         <meta
           name="description"
           content="Meet the sponsors who support Husky Coding Project’s mission to empower student developers and innovators. Learn how our sponsors help drive technical education, community projects, and career growth at the University of Washington."

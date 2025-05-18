@@ -115,7 +115,7 @@ export const MembersPage: React.FC = () => {
   return (
     <Layout>
       <Helmet>
-        <title>Husky Coding Project Members</title>
+        <title>Members</title>
         <meta
           name="description"
           content="Meet the talented members of Husky Coding Project — a community of developers, designers, and innovators at the University of Washington. Learn more about our team leads and members who collaboratively build impactful software projects, advance their technical skills, and drive innovation through teamwork and creativity."

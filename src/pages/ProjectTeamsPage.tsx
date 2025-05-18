@@ -121,7 +121,7 @@ export const ProjectTeamsPage: React.FC = () => {
   return (
     <Layout>
       <Helmet>
-        <title>Husky Coding Project Project Teams</title>
+        <title>Projects</title>
         <meta
           name="description"
           content="Explore the innovative project teams at Husky Coding Project. Discover how our talented developers, designers, and engineers collaborate to build real-world software solutions, drive technical innovation, and create impact at the University of Washington and beyond."

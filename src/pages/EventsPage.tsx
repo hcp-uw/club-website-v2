@@ -71,7 +71,7 @@ export const EventsPage: React.FC = () => {
   return (
     <Layout>
       <Helmet>
-        <title>Husky Coding Project Events</title>
+        <title>Events</title>
         <meta
           name="description"
           content="Stay updated on upcoming and past events hosted by Husky Coding Project. Join workshops, hackathons, info sessions, and networking opportunities designed to empower student developers and foster a thriving tech community at the University of Washington."
