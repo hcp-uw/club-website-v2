@@ -91,7 +91,9 @@ export const ProjectTeamsPage: React.FC = () => {
   if (loading)
     return (
       <Layout>
-        <Spinner size="xl" />
+        <VStack justify="center" align="center" minH="80vh">
+          <Spinner size="xl" />
+        </VStack>
       </Layout>
     );
 

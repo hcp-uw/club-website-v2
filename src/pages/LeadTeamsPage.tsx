@@ -9,8 +9,8 @@ export const LeadTeamsPage: React.FC = () => {
       <VStack spacing={8} align="stretch">
         <Heading>Leadership Teams</Heading>
         <SimpleGrid columns={[1, 2, 3]} spacing={6}>
-        {VALID_TEAMS.map((team, i) => (
-          <TeamLeadCard key={i} team={team} />
+          {VALID_TEAMS.map((team, i) => (
+            <TeamLeadCard key={i} team={team} />
           ))}
         </SimpleGrid>
       </VStack>
