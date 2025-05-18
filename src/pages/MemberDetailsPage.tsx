@@ -80,7 +80,7 @@ export const MemberDetailsPage: React.FC = () => {
   if (loading)
     return (
       <Layout>
-        <VStack justify="center" align="center" minH="80vh">
+        <VStack flex="1" justify="center" align="center">
           <Spinner size="xl" />
         </VStack>
       </Layout>
