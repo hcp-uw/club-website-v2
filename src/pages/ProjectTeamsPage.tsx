@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from 'react';
 import {
   SimpleGrid,
   Heading,
@@ -8,16 +8,16 @@ import {
   Input,
   InputGroup,
   InputLeftElement,
-} from "@chakra-ui/react";
-import { SearchIcon } from "@chakra-ui/icons";
-import { TeamCard } from "../components/TeamCard";
-import { teamService } from "../service/teamService";
-import { Layout } from "../components/Layout";
-import { InstagramEmbed } from "react-social-media-embed";
-import Slider from "react-slick";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
-import { Helmet } from "react-helmet-async";
+} from '@chakra-ui/react';
+import { SearchIcon } from '@chakra-ui/icons';
+import { TeamCard } from '../components/TeamCard';
+import { teamService } from '../service/teamService';
+import { Layout } from '../components/Layout';
+import { InstagramEmbed } from 'react-social-media-embed';
+import Slider from 'react-slick';
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
+import { Helmet } from 'react-helmet-async';
 
 // TODO: add pagination
 export const ProjectTeamsPage: React.FC = () => {
@@ -27,7 +27,7 @@ export const ProjectTeamsPage: React.FC = () => {
   >([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const [searchTerm, setSearchTerm] = useState("");
+  const [searchTerm, setSearchTerm] = useState('');
 
   // State to track screen width
   const [slidesToShow, setSlidesToShow] = useState(3);
@@ -45,18 +45,18 @@ export const ProjectTeamsPage: React.FC = () => {
   // Effect to update state when window resizes
   useEffect(() => {
     updateSlidesToShow();
-    window.addEventListener("resize", updateSlidesToShow);
-    return () => window.removeEventListener("resize", updateSlidesToShow);
+    window.addEventListener('resize', updateSlidesToShow);
+    return () => window.removeEventListener('resize', updateSlidesToShow);
   }, []);
 
   // Instagram Post URLs
   const instagramPosts = [
-    "https://www.instagram.com/p/DGetPdiJqgx/?img_index=1",
-    "https://www.instagram.com/p/DF7IDobx8Mz/?img_index=1",
-    "https://www.instagram.com/p/C7NRaFXPMIu/?img_index=1",
-    "https://www.instagram.com/p/C6o8KaYS5WS/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==",
-    "https://www.instagram.com/p/C0fZpMEPXKj/?img_index=1",
-    "https://www.instagram.com/p/DCkoN2LSqtw/?img_index=1",
+    'https://www.instagram.com/p/DGetPdiJqgx/?img_index=1',
+    'https://www.instagram.com/p/DF7IDobx8Mz/?img_index=1',
+    'https://www.instagram.com/p/C7NRaFXPMIu/?img_index=1',
+    'https://www.instagram.com/p/C6o8KaYS5WS/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==',
+    'https://www.instagram.com/p/C0fZpMEPXKj/?img_index=1',
+    'https://www.instagram.com/p/DCkoN2LSqtw/?img_index=1',
   ];
 
   // Fetch teams from Supabase and GitHub
@@ -70,8 +70,8 @@ export const ProjectTeamsPage: React.FC = () => {
         setTeams(validTeams);
         setFilteredTeams(validTeams);
       } catch (err) {
-        setError("Failed to fetch teams.");
-        console.error("Team Fetch Error:", err);
+        setError('Failed to fetch teams.');
+        console.error('Team Fetch Error:', err);
       } finally {
         setLoading(false);
       }
@@ -91,7 +91,7 @@ export const ProjectTeamsPage: React.FC = () => {
   if (loading)
     return (
       <Layout>
-        <VStack justify="center" align="center" minH="80vh">
+        <VStack flex="1" justify="center" align="center">
           <Spinner size="xl" />
         </VStack>
       </Layout>
@@ -121,7 +121,7 @@ export const ProjectTeamsPage: React.FC = () => {
   return (
     <Layout>
       <Helmet>
-        <title>Husky Coding Project Project Teams</title>
+        <title>Projects</title>
         <meta
           name="description"
           content="Explore the innovative project teams at Husky Coding Project. Discover how our talented developers, designers, and engineers collaborate to build real-world software solutions, drive technical innovation, and create impact at the University of Washington and beyond."

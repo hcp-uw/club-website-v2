@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from 'react';
 import {
   SimpleGrid,
   Heading,
@@ -8,20 +8,20 @@ import {
   Input,
   InputGroup,
   InputLeftElement,
-} from "@chakra-ui/react";
-import { SearchIcon } from "@chakra-ui/icons";
-import { EventCard } from "../components/EventCard";
-import { eventService } from "../service/eventService";
-import { IEvent } from "../interfaces/IEvent";
-import { Layout } from "../components/Layout";
-import { Helmet } from "react-helmet-async";
+} from '@chakra-ui/react';
+import { SearchIcon } from '@chakra-ui/icons';
+import { EventCard } from '../components/EventCard';
+import { eventService } from '../service/eventService';
+import { IEvent } from '../interfaces/IEvent';
+import { Layout } from '../components/Layout';
+import { Helmet } from 'react-helmet-async';
 
 export const EventsPage: React.FC = () => {
   const [events, setEvents] = useState<IEvent[]>([]);
   const [filteredEvents, setFilteredEvents] = useState<IEvent[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const [searchTerm, setSearchTerm] = useState("");
+  const [searchTerm, setSearchTerm] = useState('');
 
   useEffect(() => {
     const fetchEvents = async () => {
@@ -35,7 +35,7 @@ export const EventsPage: React.FC = () => {
         setEvents(fetchedEvents);
         setFilteredEvents(fetchedEvents);
       } catch (err) {
-        setError("Failed to fetch events");
+        setError('Failed to fetch events');
       } finally {
         setLoading(false);
       }
@@ -56,7 +56,7 @@ export const EventsPage: React.FC = () => {
   if (loading)
     return (
       <Layout>
-        <VStack justify="center" align="center" minH="80vh">
+        <VStack flex="1" justify="center" align="center">
           <Spinner size="xl" />
         </VStack>
       </Layout>
@@ -71,7 +71,7 @@ export const EventsPage: React.FC = () => {
   return (
     <Layout>
       <Helmet>
-        <title>Husky Coding Project Events</title>
+        <title>Events</title>
         <meta
           name="description"
           content="Stay updated on upcoming and past events hosted by Husky Coding Project. Join workshops, hackathons, info sessions, and networking opportunities designed to empower student developers and foster a thriving tech community at the University of Washington."

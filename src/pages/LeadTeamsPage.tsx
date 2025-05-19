@@ -4,6 +4,7 @@ import { Layout } from '../components/Layout';
 import { useEffect, useState } from 'react';
 import { teamService } from '../service/teamService';
 import { ITeam } from '../interfaces/ITeam';
+import { Helmet } from 'react-helmet-async';
 
 export const LeadTeamsPage: React.FC = () => {
   const [teams, setTeams] = useState<ITeam[]>([]);
@@ -46,8 +47,15 @@ export const LeadTeamsPage: React.FC = () => {
 
   return (
     <Layout>
+      <Helmet>
+        <title>Leadership</title>
+        <meta
+          name="description"
+          content="Meet the leadership teams of Husky Coding Project. Learn about our dedicated team leads and their roles in guiding our community."
+        />
+      </Helmet>
       <VStack spacing={8} align="stretch">
-        <Heading>Leadership Teams</Heading>
+        <Heading>Leadership</Heading>
         <SimpleGrid columns={[1, 2, 3]} spacing={6}>
           {leadershipTeams.map((team) => (
             <TeamLeadCard key={team.name} team={team} />

@@ -1,5 +1,5 @@
-import React from "react";
-import { keyframes } from "@emotion/react";
+import React from 'react';
+import { keyframes } from '@emotion/react';
 import {
   Box,
   Text,
@@ -7,11 +7,11 @@ import {
   VStack,
   Heading,
   useColorModeValue,
-} from "@chakra-ui/react";
-import { FaDiscord } from "react-icons/fa";
-import { motion } from "framer-motion";
-import { Helmet } from "react-helmet-async";
-import { Layout } from "../components/Layout";
+} from '@chakra-ui/react';
+import { FaDiscord } from 'react-icons/fa';
+import { motion } from 'framer-motion';
+import { Helmet } from 'react-helmet-async';
+import { Layout } from '../components/Layout';
 
 const pulseKeyframe = keyframes`
   0% { box-shadow: 0 0 0 0 rgba(88, 101, 242, 0.7); }
@@ -23,24 +23,22 @@ const MotionBox = motion(Box);
 const MotionButton = motion(Button);
 
 export const JoinPage: React.FC = () => {
-  const bgColor = useColorModeValue("grey.100", "gray.800");
-  const textColor = useColorModeValue("gray.800", "gray.100");
+  const textColor = useColorModeValue('gray.800', 'gray.100');
 
   return (
     <Layout>
       <Helmet>
-        <title>Join the Husky Coding Project</title>
+        <title>Join HCP</title>
         <meta
           name="description"
           content="Join the Husky Coding Project community on Discord to collaborate on projects and gain software development experience."
         />
       </Helmet>
       <Box
-        minHeight="100vh"
         display="flex"
         alignItems="center"
         justifyContent="center"
-        bg={bgColor}
+        flex="1"
         color={textColor}
       >
         <VStack spacing={8} align="center" maxWidth="600px" textAlign="center">
@@ -69,10 +67,10 @@ export const JoinPage: React.FC = () => {
             leftIcon={<FaDiscord />}
             size="lg"
             colorScheme="purple"
-            _hover={{ transform: "translateY(-5px)" }}
-            style={{ transition: "all 0.2s" }}
+            _hover={{ transform: 'translateY(-5px)' }}
+            style={{ transition: 'all 0.2s' }}
             onClick={() =>
-              window.open("https://discord.gg/WDh6VPmjyY", "_blank")
+              window.open('https://discord.gg/WDh6VPmjyY', '_blank')
             }
             animation={`${pulseKeyframe} 2s infinite`}
             whileHover={{ scale: 1.05 }}
