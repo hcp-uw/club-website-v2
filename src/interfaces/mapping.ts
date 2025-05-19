@@ -59,6 +59,7 @@ export const mapDBTeamToITeam = (dbTeam: DBTeam): ITeam => ({
   deployLink: dbTeam.deployLink,
   githubRepo: dbTeam.githubRepo,
   lead: dbTeam.lead,
+  description: dbTeam.description,
 });
 
 export const mapDBSponsorToISponsor = (dbSponsor: DBSponsor): ISponsor => ({
@@ -76,6 +77,7 @@ export const mapITeamToDBCreateTeam = (team: ITeam): DBCreateTeam => ({
   logo: team.logo || '',
   deployLink: team.deployLink,
   lead: team.lead || false,
+  description: team.description || '',
 });
 
 export const mapDBTeamMemberRelationToITeamMemberRelation = (
