@@ -19,12 +19,12 @@ import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import { Helmet } from 'react-helmet-async';
 
-// TODO: add pagination
+
+type TeamData = { teamId: bigint; name: string; logo: string };
+
 export const ProjectTeamsPage: React.FC = () => {
-  const [teams, setTeams] = useState<{ teamId: bigint; name: string }[]>([]);
-  const [filteredTeams, setFilteredTeams] = useState<
-    { teamId: bigint; name: string }[]
-  >([]);
+  const [teams, setTeams] = useState<TeamData[]>([]);
+  const [filteredTeams, setFilteredTeams] = useState<TeamData[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [searchTerm, setSearchTerm] = useState('');
@@ -63,10 +63,10 @@ export const ProjectTeamsPage: React.FC = () => {
   useEffect(() => {
     const fetchTeams = async () => {
       try {
-        const fetchedTeams = await teamService.fetchGitHubTeams();
+        const fetchedTeams = await teamService.getAllTeams();
         const validTeams = fetchedTeams.filter(
           (team) => team.teamId !== undefined
-        ) as { teamId: bigint; name: string }[];
+        ) as TeamData[];
         setTeams(validTeams);
         setFilteredTeams(validTeams);
       } catch (err) {
@@ -161,7 +161,7 @@ export const ProjectTeamsPage: React.FC = () => {
         </InputGroup>
         <SimpleGrid columns={[1, 2, 3]} spacing={6}>
           {filteredTeams.map((team) => (
-            <TeamCard key={team.teamId.toString()} team={team} />
+            <TeamCard key={team.teamId.toString()} team={team}/>
           ))}
         </SimpleGrid>
       </VStack>
