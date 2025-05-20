@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { Layout } from '../components/Layout';
 import { Text, SimpleGrid, VStack, Heading, Spinner } from '@chakra-ui/react';
 import { SponsorCard } from '../components/Sponsors/SponsorsCard';
 import { sponsorService } from '../service/sponsorService';
@@ -27,21 +26,14 @@ export const SponsorPage: React.FC = () => {
 
   if (loading)
     return (
-      <Layout>
-        <VStack flex="1" justify="center" align="center">
-          <Spinner size="xl" />
-        </VStack>
-      </Layout>
+      <VStack flex="1" justify="center" align="center">
+        <Spinner size="xl" />
+      </VStack>
     );
-  if (error)
-    return (
-      <Layout>
-        <Text color="red.500">{error}</Text>
-      </Layout>
-    );
+  if (error) return <Text color="red.500">{error}</Text>;
 
   return (
-    <Layout>
+    <VStack spacing={8} align="stretch">
       <Helmet>
         <title>Sponsors</title>
         <meta
@@ -50,14 +42,12 @@ export const SponsorPage: React.FC = () => {
         />
       </Helmet>
 
-      <VStack spacing={8} align="stretch">
-        <Heading>Sponsors</Heading>
-        <SimpleGrid columns={[1, 2, 3, 4]} spacing={6} gap="40px">
-          {sponsors.map((sponsor) => (
-            <SponsorCard key={sponsor.sponsorId.toString()} sponsor={sponsor} />
-          ))}
-        </SimpleGrid>
-      </VStack>
-    </Layout>
+      <Heading>Sponsors</Heading>
+      <SimpleGrid columns={[1, 2, 3, 4]} spacing={6} gap="40px">
+        {sponsors.map((sponsor) => (
+          <SponsorCard key={sponsor.sponsorId.toString()} sponsor={sponsor} />
+        ))}
+      </SimpleGrid>
+    </VStack>
   );
 };
