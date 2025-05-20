@@ -2,8 +2,6 @@ import React, { useState, useEffect } from 'react';
 import {
   SimpleGrid,
   Heading,
-  Spinner,
-  Text,
   VStack,
   Input,
   InputGroup,
@@ -12,13 +10,13 @@ import {
 import { SearchIcon } from '@chakra-ui/icons';
 import { TeamCard } from '../components/TeamCard';
 import { teamService } from '../service/teamService';
-import { Layout } from '../components/Layout';
 import { InstagramEmbed } from 'react-social-media-embed';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import { Helmet } from 'react-helmet-async';
-
+import Loading from '../components/Loading';
+import Error from '../components/Error';
 
 type TeamData = { teamId: bigint; name: string; logo: string };
 
@@ -88,21 +86,8 @@ export const ProjectTeamsPage: React.FC = () => {
     setFilteredTeams(results);
   }, [searchTerm, teams]);
 
-  if (loading)
-    return (
-      <Layout>
-        <VStack flex="1" justify="center" align="center">
-          <Spinner size="xl" />
-        </VStack>
-      </Layout>
-    );
-
-  if (error)
-    return (
-      <Layout>
-        <Text color="red.500">{error}</Text>
-      </Layout>
-    );
+  if (loading) return <Loading />;
+  if (error) return <Error message={error} />;
 
   // Slider Settings
   const settings = {
@@ -119,7 +104,7 @@ export const ProjectTeamsPage: React.FC = () => {
 
   // TODO: add pagination to Teams section, add members section for Teams Members
   return (
-    <Layout>
+    <VStack spacing={8} align="stretch">
       <Helmet>
         <title>Projects</title>
         <meta
@@ -127,44 +112,39 @@ export const ProjectTeamsPage: React.FC = () => {
           content="Explore the innovative project teams at Husky Coding Project. Discover how our talented developers, designers, and engineers collaborate to build real-world software solutions, drive technical innovation, and create impact at the University of Washington and beyond."
         />
       </Helmet>
-
-      <VStack spacing={8} align="stretch">
-        <Heading>Featured Projects</Heading>
-
-        {/* Instagram Carousel */}
-        <div className="w-full flex justify-center sm:max-w-7xl mx-auto items-center">
-          <Slider {...settings} className="w-full flex justify-center mx-auto">
-            {instagramPosts.map((post, index) => (
-              <div
-                key={index}
-                className="flex justify-center items-center p-4 w-full"
-              >
-                <div className="flex justify-center w-full">
-                  <InstagramEmbed url={post} width={328} />
-                </div>
+      <Heading>Featured Projects</Heading>
+      {/* Instagram Carousel */}
+      <div className="w-full flex justify-center sm:max-w-7xl mx-auto items-center">
+        <Slider {...settings} className="w-full flex justify-center mx-auto">
+          {instagramPosts.map((post, index) => (
+            <div
+              key={index}
+              className="flex justify-center items-center p-4 w-full"
+            >
+              <div className="flex justify-center w-full">
+                <InstagramEmbed url={post} width={328} />
               </div>
-            ))}
-          </Slider>
-        </div>
-
-        <Heading>Teams</Heading>
-        <InputGroup>
-          <InputLeftElement pointerEvents="none">
-            <SearchIcon color="gray.300" />
-          </InputLeftElement>
-          <Input
-            type="text"
-            placeholder="Search teams..."
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-          />
-        </InputGroup>
-        <SimpleGrid columns={[1, 2, 3]} spacing={6}>
-          {filteredTeams.map((team) => (
-            <TeamCard key={team.teamId.toString()} team={team}/>
+            </div>
           ))}
-        </SimpleGrid>
-      </VStack>
-    </Layout>
+        </Slider>
+      </div>
+      <Heading>Teams</Heading>
+      <InputGroup>
+        <InputLeftElement pointerEvents="none">
+          <SearchIcon color="gray.300" />
+        </InputLeftElement>
+        <Input
+          type="text"
+          placeholder="Search teams..."
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+        />
+      </InputGroup>
+      <SimpleGrid columns={[1, 2, 3]} spacing={6}>
+        {filteredTeams.map((team) => (
+          <TeamCard key={team.teamId.toString()} team={team} />
+        ))}
+      </SimpleGrid>
+    </VStack>
   );
 };

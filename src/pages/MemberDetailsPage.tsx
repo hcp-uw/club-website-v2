@@ -5,7 +5,6 @@ import {
   VStack,
   Heading,
   Text,
-  Spinner,
   HStack,
   Button,
   useColorModeValue,
@@ -14,8 +13,9 @@ import {
 import { FaArrowLeft } from 'react-icons/fa';
 import { memberService } from '../service/memberService';
 import { IMember } from '../interfaces/IMember';
-import { Layout } from '../components/Layout';
 import GitHubCalendar from 'react-github-calendar';
+import Loading from '../components/Loading';
+import ErrorMessage from '../components/Error';
 
 interface GHCalProps {
   username: string;
@@ -77,64 +77,51 @@ export const MemberDetailsPage: React.FC = () => {
     fetchMember();
   }, [id]);
 
-  if (loading)
-    return (
-      <Layout>
-        <VStack flex="1" justify="center" align="center">
-          <Spinner size="xl" />
-        </VStack>
-      </Layout>
-    );
+  if (loading) return <Loading />;
   if (error || !member)
-    return (
-      <Layout>
-        <Text color="red.500">{error || 'Member not found'}</Text>
-      </Layout>
-    );
+    return <ErrorMessage message={error || 'Member not found'} />;
 
   return (
-    <Layout>
-      <Box
-        borderWidth="1px"
-        borderRadius="lg"
-        p={6}
-        boxShadow="lg"
-        bg={bgColor}
-        borderColor={borderColor}
-        maxWidth="800px"
-        margin="auto"
-      >
-        <VStack spacing={6} align="stretch">
-          <Button
-            as={RouterLink}
-            to="/members"
-            leftIcon={<FaArrowLeft />}
-            alignSelf="flex-start"
-          >
-            Back to Members
-          </Button>
-          <HStack spacing={6}>
-            <Avatar
-              size="xl"
-              name={`${member.firstName} ${member.lastName}`}
-              src={member.profilePicture}
-            />
-            <VStack align="start" spacing={2}>
-              <Heading size="xl">
-                {member.firstName} {member.lastName}
-              </Heading>
-            </VStack>
-          </HStack>
-          {member.github !== '' ? (
-            <GHCal username={member.github} />
-          ) : (
-            <Text fontSize="lg" color="gray.500">
-              No GitHub calendar available
-            </Text>
-          )}
-          {/* Add more member details here as needed */}
-        </VStack>
-      </Box>
-    </Layout>
+    <Box
+      borderWidth="1px"
+      borderRadius="lg"
+      p={6}
+      boxShadow="lg"
+      bg={bgColor}
+      borderColor={borderColor}
+      maxWidth="800px"
+      margin="auto"
+    >
+      <VStack spacing={6} align="stretch">
+        <Button
+          as={RouterLink}
+          to="/members"
+          leftIcon={<FaArrowLeft />}
+          alignSelf="flex-start"
+        >
+          Back to Members
+        </Button>
+        <HStack spacing={6}>
+          <Avatar
+            size="xl"
+            name={`${member.firstName} ${member.lastName}`}
+            src={member.profilePicture}
+          />
+          <VStack align="start" spacing={2}>
+            <Heading size="xl">
+              {member.firstName} {member.lastName}
+            </Heading>
+          </VStack>
+        </HStack>
+        {member.github !== '' ? (
+          <GHCal username={member.github} />
+        ) : (
+          <Text fontSize="lg" color="gray.500">
+            No GitHub calendar available
+          </Text>
+        )}
+        {/* Add more member details here as needed */}
+      </VStack>
+    </Box>
   );
 };

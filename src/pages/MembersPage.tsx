@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import {
   SimpleGrid,
   Heading,
-  Spinner,
   Text,
   VStack,
   Input,
@@ -14,8 +13,9 @@ import { SearchIcon } from '@chakra-ui/icons';
 import { MemberCard } from '../components/MemberCard';
 import { memberService } from '../service/memberService';
 import { IMember } from '../interfaces/IMember';
-import { Layout } from '../components/Layout';
 import { Helmet } from 'react-helmet-async';
+import Loading from '../components/Loading';
+import Error from '../components/Error';
 
 enum SearchBy {
   FIRST_NAME = 'First Name',
@@ -97,23 +97,11 @@ export const MembersPage: React.FC = () => {
     setFilteredMembers(results);
   }, [searchTerm, members, searchBy]);
 
-  if (loading)
-    return (
-      <Layout>
-        <VStack flex="1" justify="center" align="center">
-          <Spinner size="xl" />
-        </VStack>
-      </Layout>
-    );
-  if (error)
-    return (
-      <Layout>
-        <Text color="red.500">{error}</Text>
-      </Layout>
-    );
+  if (loading) return <Loading />;
+  if (error) return <Error message={error} />;
 
   return (
-    <Layout>
+    <VStack spacing={8} align="stretch">
       <Helmet>
         <title>Members</title>
         <meta
@@ -121,35 +109,33 @@ export const MembersPage: React.FC = () => {
           content="Meet the talented members of Husky Coding Project — a community of developers, designers, and innovators at the University of Washington. Learn more about our team leads and members who collaboratively build impactful software projects, advance their technical skills, and drive innovation through teamwork and creativity."
         />
       </Helmet>
-      <VStack spacing={8} align="stretch">
-        <Heading>Members</Heading>
-        <InputGroup>
-          <InputLeftElement
-            pointerEvents="none"
-            children={<SearchIcon color="gray.300" />}
-          />
-          <Input
-            type="text"
-            placeholder="Search members..."
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-          />
-          <Select
-            value={searchBy}
-            onChange={(e) => setSearchBy(e.target.value as SearchBy)}
-            w="15%"
-            paddingLeft={6}
-          >
-            {Object.values(SearchBy).map((value) => (
-              <option key={value} value={value}>
-                {value}
-              </option>
-            ))}
-          </Select>
-        </InputGroup>
-        {renderMembers({ members: filteredMembers, isLead: true })}
-        {renderMembers({ members: filteredMembers, isLead: false })}
-      </VStack>
-    </Layout>
+      <Heading>Members</Heading>
+      <InputGroup>
+        <InputLeftElement
+          pointerEvents="none"
+          children={<SearchIcon color="gray.300" />}
+        />
+        <Input
+          type="text"
+          placeholder="Search members..."
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+        />
+        <Select
+          value={searchBy}
+          onChange={(e) => setSearchBy(e.target.value as SearchBy)}
+          w="15%"
+          paddingLeft={6}
+        >
+          {Object.values(SearchBy).map((value) => (
+            <option key={value} value={value}>
+              {value}
+            </option>
+          ))}
+        </Select>
+      </InputGroup>
+      {renderMembers({ members: filteredMembers, isLead: true })}
+      {renderMembers({ members: filteredMembers, isLead: false })}
+    </VStack>
   );
 };
