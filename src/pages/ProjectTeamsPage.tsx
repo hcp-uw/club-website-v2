@@ -18,12 +18,12 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
+type teamData = { teamId: bigint; name: string; logo: string };
+
 // TODO: add pagination to
 export const ProjectTeamsPage: React.FC = () => {
-  const [teams, setTeams] = useState<{ teamId: bigint; name: string; logo: string }[]>([]);
-  const [filteredTeams, setFilteredTeams] = useState<
-{ teamId: bigint; name: string; logo:string }[]
-  >([]);
+  const [teams, setTeams] = useState<teamData[]>([]);
+  const [filteredTeams, setFilteredTeams] = useState<teamData[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [searchTerm, setSearchTerm] = useState("");
@@ -65,7 +65,7 @@ export const ProjectTeamsPage: React.FC = () => {
         const fetchedTeams = await teamService.getAllTeams();
         const validTeams = fetchedTeams.filter(
           (team) => team.teamId !== undefined
-        ) as { teamId: bigint; name: string; logo: string }[];
+        ) as teamData[];
         setTeams(validTeams);
         setFilteredTeams(validTeams);
       } catch (err) {
