@@ -1,4 +1,4 @@
-const VALID_TEAMS = [
+export const VALID_TEAMS = [
   'onboarding',
   'education',
   'tech',
@@ -16,10 +16,11 @@ export interface DBEvent {
   description: string;
   location: string;
   image: string;
-  rsvp_link: string | null;
   created_at: string;
   start_time: string;
   end_time: string;
+  link_url?: string | null;
+  link_title?: string | null;
 }
 
 export interface DBMember {
@@ -44,6 +45,7 @@ export interface DBTeam {
   deployLink?: string;
   created_at: string;
   lead: boolean;
+  description: string;
 }
 
 export interface DBSponsor {
@@ -69,7 +71,8 @@ export interface DBCreateEvent {
   image: string;
   start_time: string;
   end_time: string;
-  rsvpLink?: string;
+  link_url?: string;
+  link_title?: string;
 }
 
 export interface DBCreateMember {
@@ -89,4 +92,5 @@ export interface DBCreateTeam {
   logo: string;
   deployLink?: string;
   lead?: boolean;
+  description: string;
 }

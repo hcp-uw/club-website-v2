@@ -18,11 +18,12 @@ export const mapDBEventToIEvent = (dbEvent: DBEvent): IEvent => ({
   createdAt: new Date(dbEvent.created_at),
   name: dbEvent.name,
   description: dbEvent.description,
-  rsvpLink: dbEvent.rsvp_link || undefined,
   location: dbEvent.location,
   image: dbEvent.image,
-  start_time: new Date(dbEvent.start_time),
-  end_time: new Date(dbEvent.end_time),
+  startTime: new Date(dbEvent.start_time),
+  endTime: new Date(dbEvent.end_time),
+  linkURL: dbEvent.link_url || undefined,
+  linkTitle: dbEvent.link_title || undefined,
 });
 
 export const mapIEventToDBCreateEvent = (event: IEvent): DBCreateEvent => ({
@@ -30,9 +31,10 @@ export const mapIEventToDBCreateEvent = (event: IEvent): DBCreateEvent => ({
   description: event.description,
   location: event.location,
   image: event.image,
-  start_time: event.start_time.toISOString(),
-  end_time: event.end_time.toISOString(),
-  rsvpLink: event.rsvpLink || undefined,
+  start_time: event.startTime.toISOString(),
+  end_time: event.endTime.toISOString(),
+  link_url: event.linkURL || undefined,
+  link_title: event.linkTitle || undefined,
 });
 
 export const mapDBMemberToIMember = (dbMember: DBMember): IMember => ({
@@ -57,6 +59,7 @@ export const mapDBTeamToITeam = (dbTeam: DBTeam): ITeam => ({
   deployLink: dbTeam.deployLink,
   githubRepo: dbTeam.githubRepo,
   lead: dbTeam.lead,
+  description: dbTeam.description,
 });
 
 export const mapDBSponsorToISponsor = (dbSponsor: DBSponsor): ISponsor => ({
@@ -74,6 +77,7 @@ export const mapITeamToDBCreateTeam = (team: ITeam): DBCreateTeam => ({
   logo: team.logo || '',
   deployLink: team.deployLink,
   lead: team.lead || false,
+  description: team.description || '',
 });
 
 export const mapDBTeamMemberRelationToITeamMemberRelation = (

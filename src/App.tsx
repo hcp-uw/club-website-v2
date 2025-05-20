@@ -8,7 +8,6 @@ import { MemberDetailsPage } from "./pages/MemberDetailsPage";
 import { AboutPage } from "./pages/AboutPage";
 import { JoinPage } from "./pages/JoinPage";
 import { SponsorPage } from "./pages/SponsorPage";
-// import { GitHubTeams } from "./pages/GithubTeams";
 import "./App.css";
 
 function App() {

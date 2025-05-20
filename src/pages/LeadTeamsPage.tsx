@@ -1,24 +1,24 @@
-import React, { useState, useEffect } from 'react';
-import { SimpleGrid, Heading, Spinner, Text, VStack, Input, InputGroup, InputLeftElement } from '@chakra-ui/react';
-import { SearchIcon } from '@chakra-ui/icons';
-import { TeamCard } from '../components/TeamCard';
+import { SimpleGrid, Heading, VStack, Spinner, Text } from '@chakra-ui/react';
+import { TeamLeadCard } from '../components/TeamLeadCard';
+import { Layout } from '../components/Layout';
+import { useEffect, useState } from 'react';
 import { teamService } from '../service/teamService';
 import { ITeam } from '../interfaces/ITeam';
-import { Layout } from '../components/Layout';
+import { Helmet } from 'react-helmet-async';
 
 export const LeadTeamsPage: React.FC = () => {
   const [teams, setTeams] = useState<ITeam[]>([]);
-  const [filteredTeams, setFilteredTeams] = useState<ITeam[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | undefined>(undefined);
-  const [searchTerm, setSearchTerm] = useState('');
+  const leadershipTeams = teams
+    .filter((team) => team.lead)
+    .sort((a, b) => Number(a.teamId - b.teamId));
 
   useEffect(() => {
     const fetchTeams = async () => {
       try {
         const fetchedTeams = await teamService.getAllTeams(true);
         setTeams(fetchedTeams);
-        setFilteredTeams(fetchedTeams);
       } catch (err) {
         console.error(err);
         setError('Failed to fetch teams');
@@ -30,32 +30,35 @@ export const LeadTeamsPage: React.FC = () => {
     fetchTeams();
   }, []);
 
-  useEffect(() => {
-    const results = teams.filter(team =>
-      team.name?.toLowerCase().includes(searchTerm.toLowerCase())
+  if (loading)
+    return (
+      <Layout>
+        <VStack flex="1" justify="center" align="center">
+          <Spinner size="xl" />
+        </VStack>
+      </Layout>
     );
-    setFilteredTeams(results);
-  }, [searchTerm, teams]);
-
-  if (loading) return <Layout><Spinner size="xl" /></Layout>;
-  if (error) return <Layout><Text color="red.500">{error}</Text></Layout>;
+  if (error)
+    return (
+      <Layout>
+        <Text color="red.500">{error}</Text>
+      </Layout>
+    );
 
   return (
     <Layout>
+      <Helmet>
+        <title>Leadership</title>
+        <meta
+          name="description"
+          content="Meet the leadership teams of Husky Coding Project. Learn about our dedicated team leads and their roles in guiding our community."
+        />
+      </Helmet>
       <VStack spacing={8} align="stretch">
-        <Heading>Teams</Heading>
-        <InputGroup>
-          <InputLeftElement pointerEvents="none" children={<SearchIcon color="gray.300" />} />
-          <Input
-            type="text"
-            placeholder="Search teams..."
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-          />
-        </InputGroup>
+        <Heading>Leadership</Heading>
         <SimpleGrid columns={[1, 2, 3]} spacing={6}>
-          {filteredTeams.map(team => (
-            <TeamCard key={team.teamId?.toString()} team={team} />
+          {leadershipTeams.map((team) => (
+            <TeamLeadCard key={team.name} team={team} />
           ))}
         </SimpleGrid>
       </VStack>

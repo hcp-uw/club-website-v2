@@ -1,16 +1,22 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, Link as RouterLink } from 'react-router-dom';
 import {
-  Box, VStack, Heading, Text, Spinner, Image, HStack, Icon, Link, Button,
-  useColorModeValue
+  Box,
+  VStack,
+  Heading,
+  Text,
+  Spinner,
+  HStack,
+  Button,
+  useColorModeValue,
+  Avatar,
 } from '@chakra-ui/react';
-import { FaDiscord, FaLinkedin, FaEnvelope, FaArrowLeft } from 'react-icons/fa';
+import { FaArrowLeft } from 'react-icons/fa';
 import { memberService } from '../service/memberService';
 import { IMember } from '../interfaces/IMember';
 import { Layout } from '../components/Layout';
 import GitHubCalendar from 'react-github-calendar';
 
-1
 interface GHCalProps {
   username: string;
 }
@@ -20,22 +26,27 @@ const GHCal: React.FC<GHCalProps> = ({ username }) => {
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
+  };
+
+  const content = (
+    <GitHubCalendar
+      username={extractGithubUsername(username)}
+      colorScheme="light"
+    />
+  );
+
+  return <Box style={centered}>{content}</Box>;
+};
+
+const extractGithubUsername = (maybeUrl: string) => {
+  if (maybeUrl.startsWith('https://')) {
+    return maybeUrl.split('/')[3];
   }
 
-  const content = <GitHubCalendar username={extractUsername(username)} colorScheme='light' />
-
-  return (
-    <Box style={centered}>
-      {content}
-    </Box>
-  )
-}
-
-const extractUsername = (maybeUrl: string) =>
-  (maybeUrl.indexOf("/") === -1)
+  return maybeUrl.indexOf('/') === -1
     ? maybeUrl
-    : new URL(maybeUrl).pathname.split('/')[1]
-
+    : new URL(`https://${maybeUrl}`).pathname.split('/')[1];
+};
 
 export const MemberDetailsPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -66,8 +77,20 @@ export const MemberDetailsPage: React.FC = () => {
     fetchMember();
   }, [id]);
 
-  if (loading) return <Layout><Spinner size="xl" /></Layout>;
-  if (error || !member) return <Layout><Text color="red.500">{error || 'Member not found'}</Text></Layout>;
+  if (loading)
+    return (
+      <Layout>
+        <VStack flex="1" justify="center" align="center">
+          <Spinner size="xl" />
+        </VStack>
+      </Layout>
+    );
+  if (error || !member)
+    return (
+      <Layout>
+        <Text color="red.500">{error || 'Member not found'}</Text>
+      </Layout>
+    );
 
   return (
     <Layout>
@@ -82,33 +105,33 @@ export const MemberDetailsPage: React.FC = () => {
         margin="auto"
       >
         <VStack spacing={6} align="stretch">
-          <Button as={RouterLink} to="/members" leftIcon={<FaArrowLeft />} alignSelf="flex-start">
+          <Button
+            as={RouterLink}
+            to="/members"
+            leftIcon={<FaArrowLeft />}
+            alignSelf="flex-start"
+          >
             Back to Members
           </Button>
           <HStack spacing={6}>
-            <Image
-              borderRadius="full"
-              boxSize="150px"
+            <Avatar
+              size="xl"
+              name={`${member.firstName} ${member.lastName}`}
               src={member.profilePicture}
-              alt={`${member.firstName} ${member.lastName}`}
             />
             <VStack align="start" spacing={2}>
-              <Heading size="xl">{member.firstName} {member.lastName}</Heading>
-              <Text fontSize="lg" color="gray.500">{member.email}</Text>
+              <Heading size="xl">
+                {member.firstName} {member.lastName}
+              </Heading>
             </VStack>
           </HStack>
-          <GHCal username={member.github} />
-          <HStack spacing={4}>
-            <Link href={`mailto:${member.email}`} isExternal>
-              <Icon as={FaEnvelope} w={6} h={6} color="gray.500" _hover={{ color: 'blue.500' }} />
-            </Link>
-            <Link href={`https://discord.com/users/${member.discord}`} isExternal>
-              <Icon as={FaDiscord} w={6} h={6} color="gray.500" _hover={{ color: 'blue.500' }} />
-            </Link>
-            <Link href={member.linkedin} isExternal>
-              <Icon as={FaLinkedin} w={6} h={6} color="gray.500" _hover={{ color: 'blue.500' }} />
-            </Link>
-          </HStack>
+          {member.github !== '' ? (
+            <GHCal username={member.github} />
+          ) : (
+            <Text fontSize="lg" color="gray.500">
+              No GitHub calendar available
+            </Text>
+          )}
           {/* Add more member details here as needed */}
         </VStack>
       </Box>

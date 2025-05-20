@@ -1,4 +1,4 @@
-import { VStack, Text } from '@chakra-ui/react';
+import { VStack, Text, useColorModeValue } from '@chakra-ui/react';
 
 const monthNames = [
   'JAN',
@@ -16,12 +16,15 @@ const monthNames = [
 ];
 
 const EventDate = ({ date }: { date: Date }) => {
+  const dateColor = useColorModeValue('gray.700', 'gray.100');
+  const monthColor = useColorModeValue('purple.600', 'purple.400');
+
   return (
     <VStack gap="0" align="center">
-      <Text color="purple.600" fontSize="sm" fontWeight="bold">
+      <Text color={monthColor} fontSize="sm" fontWeight="bold">
         {monthNames[date.getMonth()]}
       </Text>
-      <Text color="gray.700" fontSize="2xl" fontWeight="bold" lineHeight="0.9">
+      <Text color={dateColor} fontSize="2xl" fontWeight="bold" lineHeight="0.9">
         {date.getDate()}
       </Text>
     </VStack>

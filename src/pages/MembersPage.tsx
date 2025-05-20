@@ -15,12 +15,11 @@ import { MemberCard } from '../components/MemberCard';
 import { memberService } from '../service/memberService';
 import { IMember } from '../interfaces/IMember';
 import { Layout } from '../components/Layout';
+import { Helmet } from 'react-helmet-async';
 
 enum SearchBy {
   FIRST_NAME = 'First Name',
   LAST_NAME = 'Last Name',
-  EMAIL = 'Email',
-  DISCORD = 'Discord',
 }
 
 const leadSortingFunction = (a: IMember, b: IMember) => {
@@ -32,9 +31,11 @@ const leadSortingFunction = (a: IMember, b: IMember) => {
 const renderMembers = (data: { members: IMember[]; isLead: boolean }) => {
   const { members, isLead } = data;
 
-  const filteredMembers = members.filter((member) => member.lead === isLead);
+  const processedMembers = members
+    .filter((member) => member.lead === isLead)
+    .sort((a, b) => a.firstName.localeCompare(b.firstName));
 
-  if (filteredMembers.length === 0) {
+  if (processedMembers.length === 0) {
     return <></>;
   }
   return (
@@ -43,7 +44,7 @@ const renderMembers = (data: { members: IMember[]; isLead: boolean }) => {
         {isLead ? 'Team Leads' : 'All Members'}
       </Text>
       <SimpleGrid columns={[1, 2, 3, 4]} spacing={6}>
-        {filteredMembers.map((member) => (
+        {processedMembers.map((member) => (
           <MemberCard key={member.memberId?.toString()} member={member} />
         ))}
       </SimpleGrid>
@@ -89,16 +90,6 @@ export const MembersPage: React.FC = () => {
           member.lastName.toLowerCase().includes(searchTerm.toLowerCase())
         );
         break;
-      case SearchBy.EMAIL:
-        results = members.filter((member) =>
-          member.email.toLowerCase().includes(searchTerm.toLowerCase())
-        );
-        break;
-      case SearchBy.DISCORD:
-        results = members.filter((member) =>
-          member.discord.toLowerCase().includes(searchTerm.toLowerCase())
-        );
-        break;
       default:
         results = members;
     }
@@ -109,7 +100,9 @@ export const MembersPage: React.FC = () => {
   if (loading)
     return (
       <Layout>
-        <Spinner size="xl" />
+        <VStack flex="1" justify="center" align="center">
+          <Spinner size="xl" />
+        </VStack>
       </Layout>
     );
   if (error)
@@ -121,6 +114,13 @@ export const MembersPage: React.FC = () => {
 
   return (
     <Layout>
+      <Helmet>
+        <title>Members</title>
+        <meta
+          name="description"
+          content="Meet the talented members of Husky Coding Project — a community of developers, designers, and innovators at the University of Washington. Learn more about our team leads and members who collaboratively build impactful software projects, advance their technical skills, and drive innovation through teamwork and creativity."
+        />
+      </Helmet>
       <VStack spacing={8} align="stretch">
         <Heading>Members</Heading>
         <InputGroup>

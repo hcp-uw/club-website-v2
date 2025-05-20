@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from "react";
-import { Layout } from "../components/Layout";
-import { Text, SimpleGrid, VStack, Heading, Spinner } from "@chakra-ui/react";
-import { SponsorCard } from "../components/Sponsors/SponsorsCard";
-import { sponsorService } from "../service/sponsorService";
-import { ISponsor } from "../interfaces/ISponsor";
+import React, { useEffect, useState } from 'react';
+import { Layout } from '../components/Layout';
+import { Text, SimpleGrid, VStack, Heading, Spinner } from '@chakra-ui/react';
+import { SponsorCard } from '../components/Sponsors/SponsorsCard';
+import { sponsorService } from '../service/sponsorService';
+import { ISponsor } from '../interfaces/ISponsor';
+import { Helmet } from 'react-helmet-async';
 
 export const SponsorPage: React.FC = () => {
   const [sponsors, setSponsors] = useState<ISponsor[]>([]);
@@ -16,7 +17,7 @@ export const SponsorPage: React.FC = () => {
         const data = await sponsorService.getAllSponsors();
         setSponsors(data);
       } catch (err) {
-        setError("Failed to fetch sponsors");
+        setError('Failed to fetch sponsors');
       } finally {
         setLoading(false);
       }
@@ -27,7 +28,9 @@ export const SponsorPage: React.FC = () => {
   if (loading)
     return (
       <Layout>
-        <Spinner size="xl" />
+        <VStack flex="1" justify="center" align="center">
+          <Spinner size="xl" />
+        </VStack>
       </Layout>
     );
   if (error)
@@ -39,6 +42,14 @@ export const SponsorPage: React.FC = () => {
 
   return (
     <Layout>
+      <Helmet>
+        <title>Sponsors</title>
+        <meta
+          name="description"
+          content="Meet the sponsors who support Husky Coding Project’s mission to empower student developers and innovators. Learn how our sponsors help drive technical education, community projects, and career growth at the University of Washington."
+        />
+      </Helmet>
+
       <VStack spacing={8} align="stretch">
         <Heading>Sponsors</Heading>
         <SimpleGrid columns={[1, 2, 3, 4]} spacing={6} gap="40px">

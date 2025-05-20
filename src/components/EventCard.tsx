@@ -1,16 +1,18 @@
 import React from 'react';
 import {
-  Box,
   Image,
   Heading,
   Text,
   VStack,
   HStack,
   useColorModeValue,
+  Button,
+  Icon,
 } from '@chakra-ui/react';
 import { FaMapMarkerAlt, FaRegClock } from 'react-icons/fa';
 import { IEvent } from '../interfaces/IEvent';
 import EventDate from './EventDate';
+import { FiExternalLink } from 'react-icons/fi';
 
 interface EventCardProps {
   event: IEvent;
@@ -35,24 +37,31 @@ const getTimeString = (startTime: Date, endTime: Date) => {
 
 export const EventCard: React.FC<EventCardProps> = ({ event }) => {
   const bgColor = useColorModeValue('white', 'gray.800');
-  const borderColor = useColorModeValue('gray.200', 'gray.600');
+  const headerColor = useColorModeValue('gray.700', 'gray.200');
+  const descriptionColor = useColorModeValue('gray.600', 'gray.300');
+  const footerColor = useColorModeValue('gray.500', 'gray.400');
+
+  const now = new Date();
+  const isOngoing =
+    now >= new Date(event.startTime) && now <= new Date(event.endTime);
 
   return (
     <VStack
+      position="relative"
       borderWidth="1px"
       borderRadius="lg"
       overflow="hidden"
       boxShadow="lg"
       transition="all 0.3s"
-      _hover={{ transform: 'translateY(-5px)', boxShadow: 'xl' }}
       bg={bgColor}
-      borderColor={borderColor}
       width={{ base: 'sm', md: '100%' }}
       maxWidth="100%" // for mobile
       height="100%"
       minHeight="sm"
       gap="0"
+      _hover={{ transform: 'translateY(-5px)', boxShadow: 'xl' }}
     >
+      {/* Event Image */}
       <Image
         src={event.image}
         alt={event.name}
@@ -60,33 +69,76 @@ export const EventCard: React.FC<EventCardProps> = ({ event }) => {
         height="36"
         width="100%"
       />
-      <Box p="5" paddingTop="4" flex="1" width="100%">
-        <VStack align="start" spacing="2" height="100%">
-          <HStack spacing="5" height="3em">
-            <EventDate date={new Date(event.start_time)} />
-            <Heading size="md" noOfLines={2} color="gray.700" lineHeight="1.4">
-              {event.name}
-            </Heading>
-          </HStack>
-          <Text color="gray.600" whiteSpace="pre-line">
-            {event.description}
-          </Text>
-          <HStack spacing="4" marginTop="auto">
+      {/* Ongoing Badge */}
+      {isOngoing && (
+        <Text
+          position="absolute"
+          top="2"
+          left="2"
+          padding="1"
+          borderRadius="md"
+          color="white"
+          backgroundColor="purple.500"
+          fontSize="sm"
+          fontWeight="500"
+        >
+          Ongoing
+        </Text>
+      )}
+      <VStack
+        align="start"
+        spacing="3"
+        p="5"
+        paddingTop="4"
+        width="100%"
+        height="100%"
+      >
+        {/* Event Title and Date */}
+        <HStack spacing="5" height="3em">
+          <EventDate date={new Date(event.startTime)} />
+          <Heading size="md" noOfLines={2} color={headerColor} lineHeight="1.4">
+            {event.name}
+          </Heading>
+        </HStack>
+        {/* Event Description */}
+        <Text color={descriptionColor} whiteSpace="pre-line">
+          {event.description}
+        </Text>
+        <VStack marginTop="auto" width="100%" align="start" spacing="3">
+          {/* Event Link */}
+          {event.linkURL && event.linkTitle && (
+            <Button
+              as="a"
+              href={event.linkURL}
+              target="_blank"
+              backgroundColor="purple.500"
+              color="white"
+              size="sm"
+              rightIcon={<FiExternalLink color="white" />}
+              _hover={{
+                cursor: 'pointer',
+              }}
+            >
+              {event.linkTitle}
+            </Button>
+          )}
+          {/* Card Footer */}
+          <HStack spacing="4">
             <HStack>
-              <FaMapMarkerAlt color="gray" />
-              <Text fontSize="sm" color="gray.500" noOfLines={1}>
+              <Icon as={FaMapMarkerAlt} color={footerColor} />
+              <Text fontSize="sm" color={footerColor} noOfLines={1}>
                 {event.location}
               </Text>
             </HStack>
             <HStack>
-              <FaRegClock color="gray" />
-              <Text fontSize="sm" color="gray.500" whiteSpace="nowrap">
-                {getTimeString(event.start_time, event.end_time)}
+              <Icon as={FaRegClock} color={footerColor} />
+              <Text fontSize="sm" color={footerColor} whiteSpace="nowrap">
+                {getTimeString(event.startTime, event.endTime)}
               </Text>
             </HStack>
           </HStack>
         </VStack>
-      </Box>
+      </VStack>
     </VStack>
   );
 };

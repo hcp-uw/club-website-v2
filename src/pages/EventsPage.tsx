@@ -14,6 +14,7 @@ import { EventCard } from '../components/EventCard';
 import { eventService } from '../service/eventService';
 import { IEvent } from '../interfaces/IEvent';
 import { Layout } from '../components/Layout';
+import { Helmet } from 'react-helmet-async';
 
 export const EventsPage: React.FC = () => {
   const [events, setEvents] = useState<IEvent[]>([]);
@@ -28,7 +29,7 @@ export const EventsPage: React.FC = () => {
         const fetchedEvents = await eventService.getAllEvents();
         fetchedEvents.sort((a, b) => {
           return (
-            new Date(a.start_time).getTime() - new Date(b.start_time).getTime()
+            new Date(a.startTime).getTime() - new Date(b.startTime).getTime()
           );
         });
         setEvents(fetchedEvents);
@@ -55,7 +56,9 @@ export const EventsPage: React.FC = () => {
   if (loading)
     return (
       <Layout>
-        <Spinner size="xl" />
+        <VStack flex="1" justify="center" align="center">
+          <Spinner size="xl" />
+        </VStack>
       </Layout>
     );
   if (error)
@@ -67,6 +70,13 @@ export const EventsPage: React.FC = () => {
 
   return (
     <Layout>
+      <Helmet>
+        <title>Events</title>
+        <meta
+          name="description"
+          content="Stay updated on upcoming and past events hosted by Husky Coding Project. Join workshops, hackathons, info sessions, and networking opportunities designed to empower student developers and foster a thriving tech community at the University of Washington."
+        />
+      </Helmet>
       <VStack spacing={8} align="stretch">
         <Heading>Events</Heading>
         <InputGroup>
@@ -90,7 +100,7 @@ export const EventsPage: React.FC = () => {
             placeItems="center"
           >
             {filteredEvents
-              .filter((event) => new Date(event.start_time) >= new Date())
+              .filter((event) => new Date() <= new Date(event.endTime))
               .map((event) => (
                 <EventCard key={event.id?.toString()} event={event} />
               ))}
@@ -105,7 +115,7 @@ export const EventsPage: React.FC = () => {
             placeItems="center"
           >
             {filteredEvents
-              .filter((event) => new Date(event.start_time) < new Date())
+              .filter((event) => new Date() > new Date(event.endTime))
               .reverse()
               .map((event) => (
                 <EventCard key={event.id?.toString()} event={event} />
