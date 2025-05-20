@@ -2,8 +2,6 @@ import React, { useState, useEffect } from 'react';
 import {
   SimpleGrid,
   Heading,
-  Spinner,
-  Text,
   VStack,
   Input,
   InputGroup,
@@ -14,6 +12,8 @@ import { EventCard } from '../components/EventCard';
 import { eventService } from '../service/eventService';
 import { IEvent } from '../interfaces/IEvent';
 import { Helmet } from 'react-helmet-async';
+import Error from '../components/Error';
+import Loading from '../components/Loading';
 
 export const EventsPage: React.FC = () => {
   const [events, setEvents] = useState<IEvent[]>([]);
@@ -52,13 +52,8 @@ export const EventsPage: React.FC = () => {
     setFilteredEvents(results);
   }, [searchTerm, events]);
 
-  if (loading)
-    return (
-      <VStack flex="1" justify="center" align="center">
-        <Spinner size="xl" />
-      </VStack>
-    );
-  if (error) return <Text color="red.500">{error}</Text>;
+  if (loading) return <Loading />;
+  if (error) return <Error message={error} />;
 
   return (
     <VStack spacing={8} align="stretch">

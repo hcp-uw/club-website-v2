@@ -5,7 +5,6 @@ import {
   VStack,
   Heading,
   Text,
-  Spinner,
   HStack,
   Button,
   useColorModeValue,
@@ -15,6 +14,8 @@ import { FaArrowLeft } from 'react-icons/fa';
 import { memberService } from '../service/memberService';
 import { IMember } from '../interfaces/IMember';
 import GitHubCalendar from 'react-github-calendar';
+import Loading from '../components/Loading';
+import ErrorMessage from '../components/Error';
 
 interface GHCalProps {
   username: string;
@@ -76,14 +77,9 @@ export const MemberDetailsPage: React.FC = () => {
     fetchMember();
   }, [id]);
 
-  if (loading)
-    return (
-      <VStack flex="1" justify="center" align="center">
-        <Spinner size="xl" />
-      </VStack>
-    );
+  if (loading) return <Loading />;
   if (error || !member)
-    return <Text color="red.500">{error || 'Member not found'}</Text>;
+    return <ErrorMessage message={error || 'Member not found'} />;
 
   return (
     <Box

@@ -2,8 +2,6 @@ import React, { useState, useEffect } from 'react';
 import {
   SimpleGrid,
   Heading,
-  Spinner,
-  Text,
   VStack,
   Input,
   InputGroup,
@@ -17,6 +15,8 @@ import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import { Helmet } from 'react-helmet-async';
+import Loading from '../components/Loading';
+import Error from '../components/Error';
 
 type TeamData = { teamId: bigint; name: string; logo: string };
 
@@ -86,14 +86,8 @@ export const ProjectTeamsPage: React.FC = () => {
     setFilteredTeams(results);
   }, [searchTerm, teams]);
 
-  if (loading)
-    return (
-      <VStack flex="1" justify="center" align="center">
-        <Spinner size="xl" />
-      </VStack>
-    );
-
-  if (error) return <Text color="red.500">{error}</Text>;
+  if (loading) return <Loading />;
+  if (error) return <Error message={error} />;
 
   // Slider Settings
   const settings = {

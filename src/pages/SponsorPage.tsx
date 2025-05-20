@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { Text, SimpleGrid, VStack, Heading, Spinner } from '@chakra-ui/react';
+import { SimpleGrid, VStack, Heading } from '@chakra-ui/react';
 import { SponsorCard } from '../components/Sponsors/SponsorsCard';
 import { sponsorService } from '../service/sponsorService';
 import { ISponsor } from '../interfaces/ISponsor';
 import { Helmet } from 'react-helmet-async';
+import Loading from '../components/Loading';
+import Error from '../components/Error';
 
 export const SponsorPage: React.FC = () => {
   const [sponsors, setSponsors] = useState<ISponsor[]>([]);
@@ -24,13 +26,8 @@ export const SponsorPage: React.FC = () => {
     fetchSponsors();
   }, []);
 
-  if (loading)
-    return (
-      <VStack flex="1" justify="center" align="center">
-        <Spinner size="xl" />
-      </VStack>
-    );
-  if (error) return <Text color="red.500">{error}</Text>;
+  if (loading) return <Loading />;
+  if (error) return <Error message={error} />;
 
   return (
     <VStack spacing={8} align="stretch">

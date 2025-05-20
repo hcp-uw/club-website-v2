@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import {
   SimpleGrid,
   Heading,
-  Spinner,
   Text,
   VStack,
   Input,
@@ -15,6 +14,8 @@ import { MemberCard } from '../components/MemberCard';
 import { memberService } from '../service/memberService';
 import { IMember } from '../interfaces/IMember';
 import { Helmet } from 'react-helmet-async';
+import Loading from '../components/Loading';
+import Error from '../components/Error';
 
 enum SearchBy {
   FIRST_NAME = 'First Name',
@@ -96,13 +97,8 @@ export const MembersPage: React.FC = () => {
     setFilteredMembers(results);
   }, [searchTerm, members, searchBy]);
 
-  if (loading)
-    return (
-      <VStack flex="1" justify="center" align="center">
-        <Spinner size="xl" />
-      </VStack>
-    );
-  if (error) return <Text color="red.500">{error}</Text>;
+  if (loading) return <Loading />;
+  if (error) return <Error message={error} />;
 
   return (
     <VStack spacing={8} align="stretch">

@@ -1,9 +1,11 @@
-import { SimpleGrid, Heading, VStack, Spinner, Text } from '@chakra-ui/react';
+import { SimpleGrid, Heading, VStack } from '@chakra-ui/react';
 import { TeamLeadCard } from '../components/TeamLeadCard';
 import { useEffect, useState } from 'react';
 import { teamService } from '../service/teamService';
 import { ITeam } from '../interfaces/ITeam';
 import { Helmet } from 'react-helmet-async';
+import Loading from '../components/Loading';
+import Error from '../components/Error';
 
 export const LeadTeamsPage: React.FC = () => {
   const [teams, setTeams] = useState<ITeam[]>([]);
@@ -29,13 +31,8 @@ export const LeadTeamsPage: React.FC = () => {
     fetchTeams();
   }, []);
 
-  if (loading)
-    return (
-      <VStack flex="1" justify="center" align="center">
-        <Spinner size="xl" />
-      </VStack>
-    );
-  if (error) return <Text color="red.500">{error}</Text>;
+  if (loading) return <Loading />;
+  if (error) return <Error message={error} />;
 
   return (
     <VStack spacing={8} align="stretch">
