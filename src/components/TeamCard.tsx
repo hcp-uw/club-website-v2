@@ -4,8 +4,6 @@ import {
   Image,
   Text,
   VStack,
-  Link,
-  Badge,
   Button,
   Modal,
   ModalOverlay,
@@ -163,11 +161,7 @@ export const TeamCard: React.FC<TeamCardProps> = ({ team }) => {
               {teamMembers.length === 0 && <Text>No team members found.</Text>}
             </VStack>
           </ModalBody>
-          <ModalFooter>
-            <Button colorScheme="blue" mr={3} onClick={onClose}>
-              Close
-            </Button>
-          </ModalFooter>
+          <ModalFooter></ModalFooter>
         </ModalContent>
       </Modal>
     </>
