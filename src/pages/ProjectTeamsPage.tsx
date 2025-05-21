@@ -6,6 +6,8 @@ import {
   Input,
   InputGroup,
   InputLeftElement,
+  Box,
+  Divider,
 } from '@chakra-ui/react';
 import { SearchIcon } from '@chakra-ui/icons';
 import { TeamCard } from '../components/TeamCard';
@@ -23,31 +25,28 @@ type TeamData = { teamId: bigint; name: string; logo: string };
 export const ProjectTeamsPage: React.FC = () => {
   const [teams, setTeams] = useState<TeamData[]>([]);
   const [filteredTeams, setFilteredTeams] = useState<TeamData[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
   const [searchTerm, setSearchTerm] = useState('');
-
-  // State to track screen width
   const [slidesToShow, setSlidesToShow] = useState(3);
+
+  const defaultLogoUrl =
+    'https://wivolixjgzmaigovvchs.supabase.co/storage/v1/object/public/club-website-assets/Teams/default.png';
 
   const updateSlidesToShow = () => {
     if (window.innerWidth < 640) {
-      setSlidesToShow(1); // Mobile
+      setSlidesToShow(1);
     } else if (window.innerWidth < 1024) {
-      setSlidesToShow(2); // Tablet
+      setSlidesToShow(2);
     } else {
-      setSlidesToShow(3); // Desktop
+      setSlidesToShow(3);
     }
   };
 
-  // Effect to update state when window resizes
   useEffect(() => {
     updateSlidesToShow();
     window.addEventListener('resize', updateSlidesToShow);
     return () => window.removeEventListener('resize', updateSlidesToShow);
   }, []);
 
-  // Instagram Post URLs
   const instagramPosts = [
     'https://www.instagram.com/p/DGetPdiJqgx/?img_index=1',
     'https://www.instagram.com/p/DF7IDobx8Mz/?img_index=1',
@@ -57,7 +56,6 @@ export const ProjectTeamsPage: React.FC = () => {
     'https://www.instagram.com/p/DCkoN2LSqtw/?img_index=1',
   ];
 
-  // Fetch teams from Supabase and GitHub
   useEffect(() => {
     const fetchTeams = async () => {
       try {
@@ -68,17 +66,13 @@ export const ProjectTeamsPage: React.FC = () => {
         setTeams(validTeams);
         setFilteredTeams(validTeams);
       } catch (err) {
-        setError('Failed to fetch teams.');
         console.error('Team Fetch Error:', err);
-      } finally {
-        setLoading(false);
       }
     };
 
     fetchTeams();
   }, []);
 
-  // Search filtering
   useEffect(() => {
     const results = teams.filter((team) =>
       team.name.toLowerCase().includes(searchTerm.toLowerCase())
@@ -86,10 +80,13 @@ export const ProjectTeamsPage: React.FC = () => {
     setFilteredTeams(results);
   }, [searchTerm, teams]);
 
-  if (loading) return <Loading />;
-  if (error) return <Error message={error} />;
+  const showcaseTeams = filteredTeams.filter(
+    (team) => team.logo !== defaultLogoUrl
+  );
+  const otherTeams = filteredTeams.filter(
+    (team) => team.logo === defaultLogoUrl
+  );
 
-  // Slider Settings
   const settings = {
     dots: true,
     arrows: true,
@@ -102,7 +99,15 @@ export const ProjectTeamsPage: React.FC = () => {
     swipeToSlide: true,
   };
 
-  // TODO: add pagination to Teams section, add members section for Teams Members
+  const showcaseHeaderStyle = {
+    bgGradient: 'linear(to-r, purple.500, blue.400)', // Remove this to disable gradient
+    color: 'white',
+    px: 4,
+    py: 2,
+    borderRadius: 'md',
+    width: 'fit-content',
+  };
+
   return (
     <VStack spacing={8} align="stretch">
       <Helmet>
@@ -112,8 +117,8 @@ export const ProjectTeamsPage: React.FC = () => {
           content="Explore the innovative project teams at Husky Coding Project. Discover how our talented developers, designers, and engineers collaborate to build real-world software solutions, drive technical innovation, and create impact at the University of Washington and beyond."
         />
       </Helmet>
+
       <Heading>Featured Projects</Heading>
-      {/* Instagram Carousel */}
       <div className="w-full flex justify-center sm:max-w-7xl mx-auto items-center">
         <Slider {...settings} className="w-full flex justify-center mx-auto">
           {instagramPosts.map((post, index) => (
@@ -128,6 +133,7 @@ export const ProjectTeamsPage: React.FC = () => {
           ))}
         </Slider>
       </div>
+
       <Heading>Teams</Heading>
       <InputGroup>
         <InputLeftElement pointerEvents="none">
@@ -140,11 +146,35 @@ export const ProjectTeamsPage: React.FC = () => {
           onChange={(e) => setSearchTerm(e.target.value)}
         />
       </InputGroup>
-      <SimpleGrid columns={[1, 2, 3]} spacing={6}>
-        {filteredTeams.map((team) => (
-          <TeamCard key={team.teamId.toString()} team={team} />
-        ))}
-      </SimpleGrid>
+
+      {showcaseTeams.length > 0 && (
+        <>
+          <Box mt={10} mb={2}>
+            <Box {...showcaseHeaderStyle}>
+              <Heading size="md">Showcase 2025</Heading>
+            </Box>
+          </Box>
+          <SimpleGrid columns={[1, 2, 3]} spacing={6}>
+            {showcaseTeams.map((team) => (
+              <TeamCard key={team.teamId.toString()} team={team} />
+            ))}
+          </SimpleGrid>
+        </>
+      )}
+
+      {otherTeams.length > 0 && (
+        <>
+          <Divider mt={12} mb={4} />
+          <Heading size="md" mb={2}>
+            All Teams
+          </Heading>
+          <SimpleGrid columns={[1, 2, 3]} spacing={6}>
+            {otherTeams.map((team) => (
+              <TeamCard key={team.teamId.toString()} team={team} />
+            ))}
+          </SimpleGrid>
+        </>
+      )}
     </VStack>
   );
 };
