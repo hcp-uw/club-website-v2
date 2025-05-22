@@ -116,7 +116,7 @@ export const TeamCard: React.FC<TeamCardProps> = ({ team }) => {
             {team.githubRepo && (
               <Button
                 as="a"
-                href={`https://github.com/hcp-uw/${team.githubRepo}`}
+                href={team.githubRepo}
                 target="_blank"
                 size="sm"
                 rightIcon={<FaGithub />}
