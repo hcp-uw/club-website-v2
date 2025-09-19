@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import {
   Box,
   Flex,
@@ -73,6 +73,9 @@ export const Layout: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const [showNavbar, setShowNavbar] = useState(true);
+  const lastScrollY = useRef(0);
+
   const footerBgColor = useColorModeValue('gray.50', 'gray.900');
 
   const navLinks = [
@@ -85,9 +88,32 @@ export const Layout: React.FC<{ children: React.ReactNode }> = ({
     { to: '/sponsors', label: 'Sponsors' },
   ];
 
+  // Shows/hides navbar on scroll
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+      if (currentScrollY > lastScrollY.current && currentScrollY > 80) {
+        setShowNavbar(false);
+      } else {
+        setShowNavbar(true);
+      }
+      lastScrollY.current = currentScrollY;
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   return (
     <Box minH="100vh" bg="white" display="flex" flexDirection="column">
-      <Box bg="white" position="fixed" w="full" zIndex={10}>
+      <Box
+        bg="white"
+        position="fixed"
+        w="full"
+        zIndex={10}
+        transition="top 0.5s ease-in-out"
+        top={showNavbar ? '0' : '-76px'}
+      >
         <Container maxW="container.xl">
           <Flex h="76px" alignItems="center" justifyContent="space-between">
             <Flex alignItems="center">
