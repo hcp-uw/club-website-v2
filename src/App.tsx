@@ -11,6 +11,7 @@ import { SponsorPage } from './pages/SponsorPage';
 import './App.css';
 import Layout from './components/Layout';
 import theme from './theme';
+import LandingPage from './pages/LandingPage';
 
 function App() {
   return (
@@ -26,7 +27,7 @@ function App() {
             <Route path="/about" element={<AboutPage />} />
             <Route path="/join" element={<JoinPage />} />
             <Route path="/sponsors" element={<SponsorPage />} />
-            <Route path="/" element={<AboutPage />} />
+            <Route path="/" element={<LandingPage />} />
           </Routes>
         </Layout>
       </Router>

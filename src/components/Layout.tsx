@@ -79,7 +79,7 @@ export const Layout: React.FC<{ children: React.ReactNode }> = ({
   const footerBgColor = useColorModeValue('gray.50', 'gray.900');
 
   const navLinks = [
-    { to: '/', label: 'About' },
+    { to: '/about', label: 'About' },
     { to: '/teams/members', label: 'Projects' },
     { to: '/teams/leadership', label: 'Leadership' },
     // { to: '/members', label: 'Members' },
