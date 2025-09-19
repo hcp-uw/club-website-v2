@@ -27,6 +27,7 @@ import {
   FaBars,
 } from 'react-icons/fa';
 import HcpLogo from '../assets/logo-with-outline-without-tags.png';
+import PurpleButton from './PurpleButton';
 
 const NavItem = ({
   children,
@@ -115,6 +116,12 @@ export const Layout: React.FC<{ children: React.ReactNode }> = ({
 
             {/* Mobile Menu Button */}
             <Flex gap="2">
+              {/* TODO: Update link */}
+              <RouterLink to="/">
+                <Box display={{ base: 'none', lg: 'flex' }}>
+                  <PurpleButton text="Join Us" />
+                </Box>
+              </RouterLink>
               <IconButton
                 display={{ base: 'flex', lg: 'none' }}
                 onClick={onOpen}
