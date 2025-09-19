@@ -32,18 +32,14 @@ export const AnimatedTerminal: React.FC = () => {
   const [commandIndex, setCommandIndex] = useState(0);
   const [charIndex, setCharIndex] = useState(0);
 
-
-  const bgColor = useColorModeValue('gray.100', 'gray.700');
-  const textColor = useColorModeValue('green.500', 'green.300');
-
   useEffect(() => {
     if (commandIndex < commands.length) {
       const timer = setTimeout(() => {
         if (charIndex < commands[commandIndex].length) {
-          setCurrentCommand(prev => prev + commands[commandIndex][charIndex]);
+          setCurrentCommand((prev) => prev + commands[commandIndex][charIndex]);
           setCharIndex(charIndex + 1);
         } else if (commandIndex < commands.length - 1) {
-          setCurrentCommand(prev => prev + '\n$ ');
+          setCurrentCommand((prev) => prev + '\n$ ');
           setCommandIndex(commandIndex + 1);
           setCharIndex(0);
         } else {
@@ -59,17 +55,13 @@ export const AnimatedTerminal: React.FC = () => {
 
   return (
     <Box
-      bg={bgColor}
-      p={4}
-      borderRadius="md"
-      fontFamily="monospace"
+      bg="none"
+      fontSize="12px"
+      fontFamily="Space Mono, monospace"
       whiteSpace="pre-wrap"
-      overflow="hidden"
-      marginTop="5em"
-      minHeight="95vh"
       width="100%"
     >
-      <Text color={textColor}>{currentCommand}</Text>
+      <Text color="green.400">{currentCommand}</Text>
     </Box>
   );
 };
