@@ -1,6 +1,5 @@
 import { Box, Flex, Text, Grid, GridItem } from '@chakra-ui/react';
 import { Helmet } from 'react-helmet-async';
-import { AnimatedTerminal } from '../components/AnimatedTerminal'; // Make sure to import the AnimatedTerminal component
 
 export const AboutPage: React.FC = () => {
   return (
@@ -77,12 +76,6 @@ export const AboutPage: React.FC = () => {
             </Text>
           </Box>
         </Flex>
-      </GridItem>
-
-      <GridItem>
-        <Box position="sticky" top="20px">
-          <AnimatedTerminal />
-        </Box>
       </GridItem>
     </Grid>
   );
