@@ -2,6 +2,7 @@ import { Box, Grid, GridItem, Heading, Image, Text } from '@chakra-ui/react';
 import PurpleButton from '../components/PurpleButton';
 import { Link } from 'react-router-dom';
 import HuskyLaptop from '../assets/HCP-husky-laptop.png';
+import Computer from '../assets/HCP-computer.png';
 import Window from '../components/Window';
 import { AnimatedTerminal } from '../components/AnimatedTerminal';
 
@@ -12,14 +13,11 @@ const LandingPage = () => {
         templateColumns={{ base: '1fr', lg: '1fr 1fr' }}
         gap={12}
         alignItems="center"
-        w="100%"
         mt={{ base: 0, lg: '212px' }}
-        h={{ base: '100%', lg: '500px' }}
       >
         {/* Left side */}
         <GridItem
           order={{ base: 2, lg: 1 }}
-          h="100%"
           justifySelf={{ base: 'center', lg: 'start' }}
           w={{ base: '90%', md: '500px', lg: '100%' }}
         >
@@ -43,7 +41,7 @@ const LandingPage = () => {
           </Text>
           {/* TODO: Update link */}
           <Link to="/">
-            <Box>
+            <Box mb="77px">
               <PurpleButton text="Join Us" />
             </Box>
           </Link>
@@ -54,7 +52,7 @@ const LandingPage = () => {
           order={{ base: 1, lg: 2 }}
           position="relative"
           w={{ base: '100%', lg: '550px' }}
-          h="100%"
+          h={{ lg: '460px' }}
           justifySelf="end"
         >
           <Window
@@ -85,10 +83,104 @@ const LandingPage = () => {
             top={{ lg: '240px' }}
             left={{ lg: '160px' }}
             w={{ base: '80%', md: '350px' }}
-            mx={{ base: 'auto', lg: 0 }}
+            mx="auto"
             transform="rotate(3deg)"
             zIndex={3}
           />
+        </GridItem>
+      </Grid>
+      <Grid
+        templateColumns={{ base: '1fr', lg: '1fr 1fr' }}
+        alignItems="center"
+        mt={{ base: 0, lg: '175px' }}
+      >
+        {/* Left side */}
+        <GridItem
+          w={{ base: '90%', md: '500px', lg: '100%' }}
+          mx="auto"
+          display="grid"
+        >
+          <Box order={{ base: 2, lg: 1 }}>
+            <Window title="To solve this" left={{ lg: '20px' }} mb="22px">
+              <Box
+                px={{ base: '32px', lg: '60px' }}
+                py={{ base: '24px', lg: '40px' }}
+              >
+                <Heading fontSize={{ base: '28px', lg: '32px' }} mb="16px">
+                  The Problem
+                </Heading>
+                <Text fontSize="18px" mb="12px">
+                  <b>“We&apos;re looking for someone with experience.”</b>
+                </Text>
+                <Text fontSize="18px" mb="12px">
+                  Getting internships is a great way to gain real world
+                  experience on the job. However, it&apos;s difficult for us to
+                  obtain without having some prior experience.
+                </Text>
+                <Text fontSize="18px" mb="12px">
+                  <b>“Assignments and projects will be individual work.”</b>
+                </Text>
+                <Text fontSize="18px" mb="12px">
+                  The majority of university assigned work are solo or in pairs,
+                  so we miss out on the invaluable experience of working in
+                  larger teams.
+                </Text>
+              </Box>
+            </Window>
+          </Box>
+          <Box
+            position="relative"
+            height={{ lg: '260px' }}
+            order={{ base: 1, lg: 2 }}
+          >
+            <Image
+              src={Computer}
+              alt="Animated old fashioned computer"
+              position={{ base: 'relative', lg: 'absolute' }}
+              bottom={{ lg: '0px' }}
+              right={{ lg: '-10px' }}
+              w={{ base: '70%', md: '336px' }}
+              mx="auto"
+              zIndex={1}
+              mb={{ base: '77px', lg: 0 }}
+            />
+          </Box>
+        </GridItem>
+
+        {/* Right side */}
+        <GridItem
+          w={{ base: '90%', md: '500px', lg: '100%' }}
+          h="100%"
+          position="relative"
+          mx="auto"
+        >
+          <Window
+            title="We do this"
+            w={{ base: '100%', md: '500px', lg: '100%' }}
+            position={{ base: 'relative', lg: 'absolute' }}
+            left={{ lg: '-20px' }}
+            top={{ lg: '106px' }}
+          >
+            <Box
+              px={{ base: '32px', lg: '60px' }}
+              py={{ base: '24px', lg: '40px' }}
+            >
+              <Heading fontSize={{ base: '28px', lg: '32px' }} mb="16px">
+                The Mission.
+              </Heading>
+              <Text fontSize="18px" mb="12px">
+                Our mission is to create a{' '}
+                <b>tech internship-like environment</b> that promotes the growth
+                and development of our club members.
+              </Text>
+              <Text fontSize="18px" mb="12px">
+                We provide <b>team-based</b> programming project experience and
+                encourage peer-to-peer learning to provide the next generation
+                of programmers, designers, and managers with the tools and
+                experience to succeed in their future careers.
+              </Text>
+            </Box>
+          </Window>
         </GridItem>
       </Grid>
     </Box>
