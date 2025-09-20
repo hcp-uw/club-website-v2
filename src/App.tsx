@@ -1,4 +1,4 @@
-import { ChakraProvider, theme } from '@chakra-ui/react';
+import { ChakraProvider } from '@chakra-ui/react';
 import { HashRouter as Router, Route, Routes } from 'react-router-dom';
 import { MembersPage } from './pages/MembersPage';
 import { LeadTeamsPage } from './pages/LeadTeamsPage';
@@ -10,6 +10,8 @@ import { JoinPage } from './pages/JoinPage';
 import { SponsorPage } from './pages/SponsorPage';
 import './App.css';
 import Layout from './components/Layout';
+import theme from './theme';
+import LandingPage from './pages/LandingPage';
 
 function App() {
   return (
@@ -25,7 +27,7 @@ function App() {
             <Route path="/about" element={<AboutPage />} />
             <Route path="/join" element={<JoinPage />} />
             <Route path="/sponsors" element={<SponsorPage />} />
-            <Route path="/" element={<AboutPage />} />
+            <Route path="/" element={<LandingPage />} />
           </Routes>
         </Layout>
       </Router>

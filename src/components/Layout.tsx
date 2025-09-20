@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import {
   Box,
   Flex,
@@ -16,21 +16,18 @@ import {
   DrawerContent,
   DrawerCloseButton,
   useDisclosure,
-  useBreakpointValue,
-  Button,
-  useColorMode,
-  Icon,
+  Image,
 } from '@chakra-ui/react';
 import { Link as RouterLink } from 'react-router-dom';
 import {
   FaGithub,
   FaEnvelope,
-  FaTwitter,
   FaLinkedin,
   FaInstagram,
   FaBars,
 } from 'react-icons/fa';
-import { MdOutlineDarkMode, MdOutlineLightMode } from 'react-icons/md';
+import HcpLogo from '../assets/logo-with-outline-without-tags.png';
+import PurpleButton from './PurpleButton';
 
 const NavItem = ({
   children,
@@ -45,15 +42,13 @@ const NavItem = ({
 }) => (
   <RouterLink to={to}>
     <Box
-      px={4}
-      py={2}
-      rounded="md"
+      px={1}
+      py={1}
       w={isMobile ? 'full' : 'auto'}
-      _hover={{
-        textDecoration: 'none',
-        bg: useColorModeValue('gray.100', 'gray.700'),
-      }}
       onClick={onClick}
+      color="palette.darkPurple"
+      fontSize="16px"
+      fontWeight="500"
     >
       {children}
     </Box>
@@ -74,66 +69,69 @@ const FooterLink = ({
   </Link>
 );
 
-const Logo = () => {
-  const logoText = useBreakpointValue({
-    base: '<HCP/>', // Mobile version
-    sm: '<HCP/>', // Still short version for small screens
-    md: '<Husky Coding Project/>', // Full version for medium screens and up
-  });
-
-  return (
-    <Box
-      fontSize="1.5rem"
-      fontWeight="bold"
-      marginRight="1em"
-      whiteSpace="nowrap" // Prevents wrapping
-      fontFamily="monospace" // Optional: gives it more of a code-like appearance
-    >
-      {logoText}
-    </Box>
-  );
-};
-
 export const Layout: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
-  const { colorMode, setColorMode } = useColorMode();
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const bgColor = useColorModeValue('gray.50', 'gray.900');
-  const navBgColor = useColorModeValue('white', 'gray.800');
+  const [showNavbar, setShowNavbar] = useState(true);
+  const lastScrollY = useRef(0);
+
   const footerBgColor = useColorModeValue('gray.50', 'gray.900');
 
   const navLinks = [
-    { to: '/teams/leadership', label: 'Leadership' },
+    { to: '/about', label: 'About' },
     { to: '/teams/members', label: 'Projects' },
-    { to: '/members', label: 'Members' },
+    { to: '/teams/leadership', label: 'Leadership' },
+    // { to: '/members', label: 'Members' },
     { to: '/events', label: 'Events' },
-    { to: '/join', label: 'Join' },
+    // { to: '/join', label: 'Join' },
     { to: '/sponsors', label: 'Sponsors' },
   ];
 
-  const handleToggle = () => {
-    setColorMode(colorMode === 'light' ? 'dark' : 'light');
-  };
+  // Shows/hides navbar on scroll
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+      if (currentScrollY > lastScrollY.current && currentScrollY > 80) {
+        setShowNavbar(false);
+      } else {
+        setShowNavbar(true);
+      }
+      lastScrollY.current = currentScrollY;
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   return (
-    <Box minH="100vh" bg={bgColor} display="flex" flexDirection="column">
+    <Box minH="100vh" bg="white" display="flex" flexDirection="column">
       <Box
-        bg={navBgColor}
-        boxShadow="sm"
+        bg="white"
         position="fixed"
-        width="full"
+        w="full"
         zIndex={10}
+        transition="top 0.5s ease-in-out"
+        top={showNavbar ? '0' : '-76px'}
       >
         <Container maxW="container.xl">
-          <Flex h={16} alignItems="center" justifyContent="space-between">
+          <Flex h="76px" alignItems="center" justifyContent="space-between">
             <Flex alignItems="center">
               <RouterLink to="/">
-                <Logo />
+                <Image
+                  src={HcpLogo}
+                  alt="HCP Logo"
+                  w="70px"
+                  objectFit="contain"
+                />
               </RouterLink>
 
               {/* Desktop Navigation */}
-              <HStack spacing={1} display={{ base: 'none', lg: 'flex' }}>
+              <HStack
+                spacing="66px"
+                display={{ base: 'none', lg: 'flex' }}
+                ml="83px"
+              >
                 {navLinks.map((link) => (
                   <NavItem key={link.to} to={link.to}>
                     {link.label}
@@ -144,15 +142,12 @@ export const Layout: React.FC<{ children: React.ReactNode }> = ({
 
             {/* Mobile Menu Button */}
             <Flex gap="2">
-              <Button onClick={handleToggle}>
-                <Icon
-                  as={
-                    colorMode === 'light'
-                      ? MdOutlineLightMode
-                      : MdOutlineDarkMode
-                  }
-                />
-              </Button>
+              {/* TODO: Update link */}
+              <RouterLink to="/">
+                <Box display={{ base: 'none', lg: 'flex' }}>
+                  <PurpleButton text="Join Us" />
+                </Box>
+              </RouterLink>
               <IconButton
                 display={{ base: 'flex', lg: 'none' }}
                 onClick={onOpen}
