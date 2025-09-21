@@ -105,7 +105,13 @@ export const Layout: React.FC<{ children: React.ReactNode }> = ({
   }, []);
 
   return (
-    <Box minH="100vh" bg="white" display="flex" flexDirection="column">
+    <Box
+      minH="100vh"
+      bg="white"
+      display="flex"
+      flexDirection="column"
+      overflowX="hidden"
+    >
       <Box
         bg="white"
         position="fixed"
