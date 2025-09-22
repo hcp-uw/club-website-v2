@@ -7,20 +7,23 @@ import {
   Heading,
   Image,
   Text,
+  VStack,
 } from '@chakra-ui/react';
 import PurpleButton from '../components/PurpleButton';
 import { Link } from 'react-router-dom';
-import HuskyLaptop from '../assets/HCP-husky-laptop.png';
-import Computer from '../assets/HCP-computer.png';
-import GradientTop from '../assets/HCP-gradient-top.png';
-import GradientBottom from '../assets/HCP-gradient-bottom.png';
 import Window from '../components/Window';
 import FeaturedProjectsCarousel from '../components/FeaturedProjectsCarousel';
 import { AnimatedTerminal } from '../components/AnimatedTerminal';
+import HuskyLaptop from '../assets/HCP-husky-laptop.png';
+import HuskyDuck from '../assets/HCP-husky-duck.png';
+import Computer from '../assets/HCP-computer.png';
+import GradientTop from '../assets/HCP-gradient-top.png';
+import GradientBottom from '../assets/HCP-gradient-bottom.png';
 
 const LandingPage = () => {
   return (
     <Flex color="black" w="100%" flexDirection={'column'} alignItems="center">
+      {/* What is HCP? section */}
       <Grid
         templateColumns={{ base: '1fr', lg: '1fr 1fr' }}
         gap={12}
@@ -53,9 +56,7 @@ const LandingPage = () => {
           </Text>
           {/* TODO: Update link */}
           <Link to="/">
-            <Box mb="77px">
-              <PurpleButton text="Join Us" />
-            </Box>
+            <PurpleButton text="Join Us" mb="77px" />
           </Link>
         </GridItem>
 
@@ -101,6 +102,7 @@ const LandingPage = () => {
           />
         </GridItem>
       </Grid>
+      {/* Problem and mission section */}
       <Grid
         templateColumns={{ base: '1fr', lg: '1fr 1fr' }}
         alignItems="center"
@@ -245,6 +247,101 @@ const LandingPage = () => {
           h="95px"
           w="100%"
         />
+      </Flex>
+      {/* Join HCP section */}
+      <Flex
+        mt={{ base: '100px', lg: '157px' }}
+        mb={{ base: '50px', lg: '146px' }}
+        direction="column"
+        align="center"
+      >
+        <Text
+          fontFamily="Space Mono, monospace"
+          fontSize="12px"
+          textTransform="uppercase"
+          color="palette.darkPurple"
+          mb="5px"
+        >
+          Find your community
+        </Text>
+        <Heading
+          fontSize={{ base: '36px', lg: '48px' }}
+          mb={{ base: '57px', lg: '50px' }}
+        >
+          Join HCP now!
+        </Heading>
+        <Grid
+          templateColumns={{ base: '1fr', lg: '1fr 1fr 1fr' }}
+          alignItems="flex-start"
+        >
+          <VStack spacing={0} mr={{ lg: '-25px' }} zIndex={1}>
+            <Window
+              title="Step 1"
+              w={{ base: '80%', md: '500px', lg: '306px' }}
+            >
+              <Box
+                px={{ base: '32px', lg: '58px' }}
+                py={{ base: '24px', lg: '40px' }}
+              >
+                <Heading fontSize="24px">
+                  Join the official HCP Discord community.
+                </Heading>
+              </Box>
+            </Window>
+            <Link to="https://discord.gg/WDh6VPmjyY" target="_blank">
+              <PurpleButton text="Our Discord!" transform="translateY(-50%)" />
+            </Link>
+          </VStack>
+          <VStack mt={{ lg: '88px' }} mb="33px" zIndex={2}>
+            <Window
+              title="Step 2"
+              w={{ base: '80%', md: '500px', lg: '306px' }}
+            >
+              <Box
+                px={{ base: '32px', lg: '58px' }}
+                py={{ base: '24px', lg: '40px' }}
+              >
+                <Heading fontSize="24px">
+                  Complete the HCP application form.
+                </Heading>
+              </Box>
+            </Window>
+          </VStack>
+          <VStack
+            spacing={0}
+            ml={{ lg: '-25px' }}
+            mt={{ lg: '176px' }}
+            zIndex={3}
+            display="flex"
+          >
+            <Image
+              src={HuskyDuck}
+              alt="Animated husky holding a duck"
+              position={{ base: 'relative', lg: 'absolute' }}
+              bottom={{ lg: '165px' }}
+              w={{ base: '60%', md: '186px' }}
+              mx="auto"
+              zIndex={1}
+              order={2}
+            />
+            <Window
+              title="Step 3"
+              w={{ base: '80%', md: '500px', lg: '306px' }}
+              zIndex={2}
+              order={1}
+              mb={{ base: '53px', lg: 0 }}
+            >
+              <Box
+                px={{ base: '32px', lg: '58px' }}
+                py={{ base: '24px', lg: '40px' }}
+              >
+                <Heading fontSize="24px">
+                  Attend Project Formation Day on 9/26/2025.
+                </Heading>
+              </Box>
+            </Window>
+          </VStack>
+        </Grid>
       </Flex>
     </Flex>
   );
