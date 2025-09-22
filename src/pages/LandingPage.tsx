@@ -12,6 +12,8 @@ import PurpleButton from '../components/PurpleButton';
 import { Link } from 'react-router-dom';
 import HuskyLaptop from '../assets/HCP-husky-laptop.png';
 import Computer from '../assets/HCP-computer.png';
+import GradientTop from '../assets/HCP-gradient-top.png';
+import GradientBottom from '../assets/HCP-gradient-bottom.png';
 import Window from '../components/Window';
 import FeaturedProjectsCarousel from '../components/FeaturedProjectsCarousel';
 import { AnimatedTerminal } from '../components/AnimatedTerminal';
@@ -199,10 +201,16 @@ const LandingPage = () => {
         w="100vw"
         color="white"
         mt={{ base: 6, lg: 12 }}
-        py={{ base: 10, lg: 16 }}
         flexDir="column"
         alignItems="center"
       >
+        <Box
+          bgImage={`url(${GradientTop})`}
+          bgRepeat="repeat-x"
+          bgSize="auto 95px"
+          h="95px"
+          w="100%"
+        />
         <Container
           maxW="container.xl"
           w={{ base: '90%', md: '500px', lg: '100%' }}
@@ -212,23 +220,31 @@ const LandingPage = () => {
             fontSize="12px"
             textTransform="uppercase"
             color="palette.lightPurple"
+            mt={{ base: '62px', lg: '100px' }}
             mb={2}
           >
             Sneak peak of member works
           </Text>
 
-          <Heading fontSize={{ base: '28px', lg: '36px' }} color="white" mb={6}>
+          <Heading fontSize={{ base: '36px', lg: '48px' }} color="white" mb={6}>
             Featured Projects.
           </Heading>
 
           <FeaturedProjectsCarousel />
 
           <Link to="/teams/members">
-            <Box mt={6}>
+            <Box mt={6} mb={{ base: '62px', lg: '100px' }}>
               <PurpleButton text="See More" />
             </Box>
           </Link>
         </Container>
+        <Box
+          bgImage={`url(${GradientBottom})`}
+          bgRepeat="repeat-x"
+          bgSize="auto 95px"
+          h="95px"
+          w="100%"
+        />
       </Flex>
     </Flex>
   );
