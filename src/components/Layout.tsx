@@ -18,7 +18,7 @@ import {
   useDisclosure,
   Image,
 } from '@chakra-ui/react';
-import { Link as RouterLink } from 'react-router-dom';
+import { HashLink as RouterLink } from 'react-router-hash-link';
 import {
   FaGithub,
   FaEnvelope,
@@ -148,8 +148,7 @@ export const Layout: React.FC<{ children: React.ReactNode }> = ({
 
             {/* Mobile Menu Button */}
             <Flex gap="2">
-              {/* TODO: Update link */}
-              <RouterLink to="/">
+              <RouterLink to="/#join">
                 <Box display={{ base: 'none', lg: 'flex' }}>
                   <PurpleButton text="Join Us" />
                 </Box>

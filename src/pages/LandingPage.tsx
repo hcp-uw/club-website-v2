@@ -10,7 +10,7 @@ import {
   VStack,
 } from '@chakra-ui/react';
 import PurpleButton from '../components/PurpleButton';
-import { Link } from 'react-router-dom';
+import { HashLink as Link } from 'react-router-hash-link';
 import Window from '../components/Window';
 import FeaturedProjectsCarousel from '../components/FeaturedProjectsCarousel';
 import { AnimatedTerminal } from '../components/AnimatedTerminal';
@@ -54,8 +54,7 @@ const LandingPage = () => {
             major or background, to gain group project work experience within
             the tech field.
           </Text>
-          {/* TODO: Update link */}
-          <Link to="/">
+          <Link to="#join">
             <PurpleButton text="Join Us" mb="77px" />
           </Link>
         </GridItem>
@@ -93,11 +92,10 @@ const LandingPage = () => {
             src={HuskyLaptop}
             alt="Animated husky typing on laptop"
             position={{ base: 'relative', lg: 'absolute' }}
-            top={{ lg: '240px' }}
+            top={{ lg: '248px' }}
             left={{ lg: '160px' }}
             w={{ base: '80%', md: '350px' }}
             mx="auto"
-            transform="rotate(3deg)"
             zIndex={3}
           />
         </GridItem>
@@ -115,7 +113,7 @@ const LandingPage = () => {
           display="grid"
         >
           <Box order={{ base: 2, lg: 1 }}>
-            <Window title="To solve this" left={{ lg: '20px' }} mb="22px">
+            <Window title="To solve this" mr={{ lg: '-20px' }} mb="22px">
               <Box
                 px={{ base: '32px', lg: '60px' }}
                 py={{ base: '24px', lg: '40px' }}
@@ -152,7 +150,7 @@ const LandingPage = () => {
               alt="Animated old fashioned computer"
               position={{ base: 'relative', lg: 'absolute' }}
               bottom={{ lg: '0px' }}
-              right={{ lg: '-10px' }}
+              right={{ lg: '-20px' }}
               w={{ base: '70%', md: '336px' }}
               mx="auto"
               zIndex={1}
@@ -165,15 +163,13 @@ const LandingPage = () => {
         <GridItem
           w={{ base: '90%', md: '500px', lg: '100%' }}
           h="100%"
-          position="relative"
           mx="auto"
         >
           <Window
             title="We do this"
             w={{ base: '100%', md: '500px', lg: '100%' }}
-            position={{ base: 'relative', lg: 'absolute' }}
-            left={{ lg: '-20px' }}
-            top={{ lg: '106px' }}
+            ml={{ lg: '-20px' }}
+            mt={{ lg: '106px' }}
           >
             <Box
               px={{ base: '32px', lg: '60px' }}
@@ -249,6 +245,7 @@ const LandingPage = () => {
         />
       </Flex>
       {/* Join HCP section */}
+      <Flex id="join"></Flex>
       <Flex
         mt={{ base: '100px', lg: '157px' }}
         mb={{ base: '50px', lg: '146px' }}
@@ -281,7 +278,8 @@ const LandingPage = () => {
             >
               <Box
                 px={{ base: '32px', lg: '58px' }}
-                py={{ base: '24px', lg: '40px' }}
+                pt={{ base: '24px', lg: '40px' }}
+                pb={{ base: '44px', lg: '58px' }}
               >
                 <Heading fontSize="24px">
                   Join the official HCP Discord community.
@@ -299,7 +297,8 @@ const LandingPage = () => {
             >
               <Box
                 px={{ base: '32px', lg: '58px' }}
-                py={{ base: '24px', lg: '40px' }}
+                pt={{ base: '24px', lg: '40px' }}
+                pb={{ base: '44px', lg: '58px' }}
               >
                 <Heading fontSize="24px">
                   Complete the HCP application form.
@@ -312,14 +311,15 @@ const LandingPage = () => {
             ml={{ lg: '-25px' }}
             mt={{ lg: '176px' }}
             zIndex={3}
+            position="relative"
             display="flex"
           >
             <Image
               src={HuskyDuck}
               alt="Animated husky holding a duck"
               position={{ base: 'relative', lg: 'absolute' }}
-              bottom={{ lg: '165px' }}
-              w={{ base: '60%', md: '186px' }}
+              bottom={{ lg: '180px' }}
+              w={{ base: '60%', md: '250px', lg: '186px' }}
               mx="auto"
               zIndex={1}
               order={2}
@@ -333,7 +333,8 @@ const LandingPage = () => {
             >
               <Box
                 px={{ base: '32px', lg: '58px' }}
-                py={{ base: '24px', lg: '40px' }}
+                pt={{ base: '24px', lg: '40px' }}
+                pb={{ base: '44px', lg: '58px' }}
               >
                 <Heading fontSize="24px">
                   Attend Project Formation Day on 9/26/2025.

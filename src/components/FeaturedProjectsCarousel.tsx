@@ -43,6 +43,12 @@ const FeaturedProjectsCarousel: React.FC = () => {
             slidesToShow: 1,
           },
         },
+        {
+          breakpoint: 1120,
+          settings: {
+            slidesToShow: 2,
+          },
+        },
       ],
     }),
     []
