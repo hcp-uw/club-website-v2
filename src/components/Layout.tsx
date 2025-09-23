@@ -17,8 +17,9 @@ import {
   DrawerCloseButton,
   useDisclosure,
   Image,
+  useColorMode,
 } from '@chakra-ui/react';
-import { Link as RouterLink } from 'react-router-dom';
+import { HashLink as RouterLink } from 'react-router-hash-link';
 import {
   FaGithub,
   FaEnvelope,
@@ -76,8 +77,6 @@ export const Layout: React.FC<{ children: React.ReactNode }> = ({
   const [showNavbar, setShowNavbar] = useState(true);
   const lastScrollY = useRef(0);
 
-  const footerBgColor = useColorModeValue('gray.50', 'gray.900');
-
   const navLinks = [
     { to: '/about', label: 'About' },
     { to: '/teams/members', label: 'Projects' },
@@ -87,6 +86,12 @@ export const Layout: React.FC<{ children: React.ReactNode }> = ({
     // { to: '/join', label: 'Join' },
     { to: '/sponsors', label: 'Sponsors' },
   ];
+
+  // Force light mode
+  const { setColorMode } = useColorMode();
+  useEffect(() => {
+    setColorMode('light');
+  }, [setColorMode]);
 
   // Shows/hides navbar on scroll
   useEffect(() => {
@@ -105,7 +110,13 @@ export const Layout: React.FC<{ children: React.ReactNode }> = ({
   }, []);
 
   return (
-    <Box minH="100vh" bg="white" display="flex" flexDirection="column">
+    <Box
+      minH="100vh"
+      bg="white"
+      display="flex"
+      flexDirection="column"
+      overflowX="hidden"
+    >
       <Box
         bg="white"
         position="fixed"
@@ -142,8 +153,7 @@ export const Layout: React.FC<{ children: React.ReactNode }> = ({
 
             {/* Mobile Menu Button */}
             <Flex gap="2">
-              {/* TODO: Update link */}
-              <RouterLink to="/">
+              <RouterLink to="/#join">
                 <Box display={{ base: 'none', lg: 'flex' }}>
                   <PurpleButton text="Join Us" />
                 </Box>
@@ -188,33 +198,56 @@ export const Layout: React.FC<{ children: React.ReactNode }> = ({
         {children}
       </Container>
 
-      <Box as="footer" bg={footerBgColor} py={6} mt={6}>
+      <Box as="footer" py={6} mt={6}>
         <Container maxW="container.xl">
           <Flex
-            direction={{ base: 'column', md: 'row' }}
             justifyContent="space-between"
             alignItems={{ base: 'flex-start', md: 'center' }}
             gap={4}
           >
-            <HStack spacing={{ base: 4, md: 10 }} pl="4">
-              <FooterLink
-                href="mailto:huskycodingproject@gmail.com"
-                icon={<FaEnvelope />}
-              />
-              <FooterLink
-                href="https://github.com/hcp-uw"
-                icon={<FaGithub />}
-              />
-              <FooterLink
-                href="https://www.linkedin.com/company/hcp-uw"
-                icon={<FaLinkedin />}
-              />
-              <FooterLink
-                href="https://www.instagram.com/hcp.uw/"
-                icon={<FaInstagram />}
-              />
-            </HStack>
-            <Text pl="4" pr="4">
+            <Flex
+              gap={{ base: '32px', md: '56px' }}
+              direction={{ base: 'column', md: 'row' }}
+              w={{ base: '100%', md: 'auto' }}
+            >
+              <RouterLink to="/">
+                <Image
+                  src={HcpLogo}
+                  alt="HCP Logo"
+                  w="70px"
+                  objectFit="contain"
+                />
+              </RouterLink>
+              <HStack
+                spacing={{ base: 4, md: '27px' }}
+                pl="4"
+                alignSelf="flex-end"
+              >
+                <FooterLink
+                  href="mailto:huskycodingproject@gmail.com"
+                  icon={<FaEnvelope size="22px" color="#422f7e" />}
+                />
+                <FooterLink
+                  href="https://www.instagram.com/hcp.uw/"
+                  icon={<FaInstagram size="22px" color="#422f7e" />}
+                />
+                <FooterLink
+                  href="https://www.linkedin.com/company/hcp-uw"
+                  icon={<FaLinkedin size="22px" color="#422f7e" />}
+                />
+                <FooterLink
+                  href="https://github.com/hcp-uw"
+                  icon={<FaGithub size="22px" color="#422f7e" />}
+                />
+              </HStack>
+            </Flex>
+            <Text
+              fontSize="12px"
+              fontFamily="Space Mono, monospace"
+              color="palette.darkPurple"
+              casing="uppercase"
+              display={{ base: 'none', md: 'block' }}
+            >
               &copy; {new Date().getFullYear()} Husky Coding Project. All rights
               reserved.
             </Text>

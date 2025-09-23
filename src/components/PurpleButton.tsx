@@ -2,9 +2,10 @@ import { Button } from '@chakra-ui/react';
 
 interface PurpleButtonProps {
   text: string;
+  [key: string]: any;
 }
 
-const PurpleButton: React.FC<PurpleButtonProps> = ({ text }) => {
+const PurpleButton: React.FC<PurpleButtonProps> = ({ text, ...props }) => {
   return (
     <Button
       bgColor="palette.lightPurple"
@@ -21,6 +22,7 @@ const PurpleButton: React.FC<PurpleButtonProps> = ({ text }) => {
         color: 'palette.lightPurple',
         transition: '0.3s',
       }}
+      {...props}
     >
       {text}
     </Button>

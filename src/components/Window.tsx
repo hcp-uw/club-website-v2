@@ -1,15 +1,13 @@
 import { Box, Flex, Text } from '@chakra-ui/react';
 import { ReactNode } from 'react';
 
-export default function Window({
-  title,
-  children,
-  ...props
-}: {
+interface WindowProps {
   title?: string;
   children?: ReactNode;
   [key: string]: any;
-}) {
+}
+
+const Window: React.FC<WindowProps> = ({ title, children, ...props }) => {
   return (
     <Box
       borderWidth="2px"
@@ -73,4 +71,6 @@ export default function Window({
       {children}
     </Box>
   );
-}
+};
+
+export default Window;
