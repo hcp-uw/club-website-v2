@@ -17,6 +17,7 @@ import {
   DrawerCloseButton,
   useDisclosure,
   Image,
+  useColorMode,
 } from '@chakra-ui/react';
 import { HashLink as RouterLink } from 'react-router-hash-link';
 import {
@@ -85,6 +86,12 @@ export const Layout: React.FC<{ children: React.ReactNode }> = ({
     // { to: '/join', label: 'Join' },
     { to: '/sponsors', label: 'Sponsors' },
   ];
+
+  // Force light mode
+  const { setColorMode } = useColorMode();
+  useEffect(() => {
+    setColorMode('light');
+  }, [setColorMode]);
 
   // Shows/hides navbar on scroll
   useEffect(() => {
