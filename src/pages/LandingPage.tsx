@@ -337,7 +337,7 @@ const LandingPage = () => {
                 pb={{ base: '44px', lg: '58px' }}
               >
                 <Heading fontSize="24px">
-                  Attend Project Formation Day on 9/26/2025.
+                  Attend Project Formation Day on 10/10/2025.
                 </Heading>
               </Box>
             </Window>
