@@ -1,5 +1,5 @@
 import { ChakraProvider } from '@chakra-ui/react';
-import { HashRouter as Router, Route, Routes } from 'react-router-dom';
+import { HashRouter, BrowserRouter, Route, Routes } from 'react-router-dom';
 import { MembersPage } from './pages/MembersPage';
 import { LeadTeamsPage } from './pages/LeadTeamsPage';
 import { ProjectTeamsPage } from './pages/ProjectTeamsPage';
@@ -12,6 +12,8 @@ import './App.css';
 import Layout from './components/Layout';
 import theme from './theme';
 import LandingPage from './pages/LandingPage';
+
+const Router = import.meta.env.VITE_USE_HASH_ROUTER ? HashRouter : BrowserRouter;
 
 function App() {
   return (

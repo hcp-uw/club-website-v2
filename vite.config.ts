@@ -6,9 +6,16 @@ import tailwindcss from '@tailwindcss/vite'
 let plugins = [react(), viteSingleFile()]
 
 // https://vitejs.dev/config/
-export default defineConfig({
-  plugins: [
-    tailwindcss(),
-  ],
-  base: '/'
+export default defineConfig(({ mode }) => {
+  const isVergil = mode === 'vergil';
+
+  return {
+    plugins: [
+      tailwindcss(),
+    ],
+    base: isVergil ? '/hcpuw/' : '/',
+    define: {
+      'import.meta.env.VITE_USE_HASH_ROUTER': isVergil,
+    },
+  };
 })
