@@ -7,7 +7,7 @@
     "update-types": "npx supabase gen types --lang=typescript --project-id \"$PROJECT_REF\" > src/database.types.ts",
     "dev": "vite",
     "build": "CI=false && tsc -b && vite build",
-    "build-for-vergil": "cross-env BUILD_FOR_VERGIL=true && tsc -b && vite build",
+    "build-for-vergil": "cross-env BUILD_FOR_VERGIL=true && tsc -b && vite build --mode vergil",
     "serve": "vite preview",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
