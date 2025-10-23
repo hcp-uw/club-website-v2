@@ -19,10 +19,18 @@ import HuskyDuck from '../assets/HCP-husky-duck.png';
 import Computer from '../assets/HCP-computer.png';
 import GradientTop from '../assets/HCP-gradient-top.png';
 import GradientBottom from '../assets/HCP-gradient-bottom.png';
+import { Helmet } from 'react-helmet-async';
 
 const LandingPage = () => {
   return (
     <Flex color="black" w="100%" flexDirection={'column'} alignItems="center">
+      <Helmet>
+        <title>Husky Coding Project</title>
+        <meta
+          name="description"
+          content="The Husky Coding Project objective is to break the circular reasoning of 'needing experience to get experience' that prevents hundreds of students from landing their first software internship or job."
+        />
+      </Helmet>
       {/* What is HCP? section */}
       <Grid
         templateColumns={{ base: '1fr', lg: '1fr 1fr' }}
