@@ -24,7 +24,7 @@ function App() {
             <Route path="/members" element={<MembersPage />} />
             <Route path="/members/:id" element={<MemberDetailsPage />} />
             <Route path="/teams/leadership" element={<LeadTeamsPage />} />
-            <Route path="/teams/members" element={<ProjectTeamsPage />} />
+            <Route path="/projects" element={<ProjectTeamsPage />} />
             <Route path="/events" element={<EventsPage />} />
             <Route path="/about" element={<AboutPage />} />
             <Route path="/join" element={<JoinPage />} />

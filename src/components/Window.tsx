@@ -38,7 +38,7 @@ const Window: React.FC<WindowProps> = ({ title, children, ...props }) => {
         </Text>
         <Flex gap="14px" align="center">
           {/* Minimize*/}
-          <Box w="15px" h="0px" borderWidth="1.5px" borderColor="black" />
+          <Box w="15px" h="0px" borderWidth="1px" borderColor="black" />
 
           {/* Maximize */}
           <Box w="14px" h="13px" border="2px" borderColor="black" />

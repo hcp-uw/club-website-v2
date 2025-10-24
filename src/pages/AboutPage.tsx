@@ -5,7 +5,7 @@ export const AboutPage: React.FC = () => {
   return (
     <Grid templateColumns={['1fr', '1fr', '2fr 1fr']} gap={6}>
       <Helmet>
-        <title>Husky Coding Project</title>
+        <title>About</title>
         <meta
           name="description"
           content="Learn about the Husky Coding Project's mission to provide real-world, team-based programming experience and bridge the gap for aspiring software developers."
@@ -61,10 +61,10 @@ export const AboutPage: React.FC = () => {
               display="inline"
               color="brand.pink"
             >
-              {} peer-to-peer learning
+              { } peer-to-peer learning
             </Text>
             <Text fontSize={['md', 'xl', '2xl']} display="inline">
-              {} to provide the next generation of programmers & designers with
+              { } to provide the next generation of programmers & designers with
               the tools and experience to
             </Text>
             <Text
@@ -72,7 +72,7 @@ export const AboutPage: React.FC = () => {
               display="inline"
               color="brand.pink"
             >
-              {} succeed in future tech careers.
+              { } succeed in future tech careers.
             </Text>
           </Box>
         </Flex>

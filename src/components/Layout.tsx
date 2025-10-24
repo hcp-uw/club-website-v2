@@ -3,7 +3,6 @@ import {
   Box,
   Flex,
   Container,
-  useColorModeValue,
   Text,
   Link,
   HStack,
@@ -34,7 +33,7 @@ const NavItem = ({
   children,
   to,
   isMobile = false,
-  onClick = () => {},
+  onClick = () => { },
 }: {
   children: React.ReactNode;
   to: string;
@@ -79,7 +78,7 @@ export const Layout: React.FC<{ children: React.ReactNode }> = ({
 
   const navLinks = [
     { to: '/about', label: 'About' },
-    { to: '/teams/members', label: 'Projects' },
+    { to: '/projects', label: 'Projects' },
     { to: '/teams/leadership', label: 'Leadership' },
     // { to: '/members', label: 'Members' },
     { to: '/events', label: 'Events' },
