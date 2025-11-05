@@ -238,7 +238,7 @@ const LandingPage = () => {
 
           <FeaturedProjectsCarousel />
 
-          <Link to="/teams/members">
+          <Link to="/projects">
             <Box mt={6} mb={{ base: '62px', lg: '100px' }}>
               <PurpleButton text="See More" />
             </Box>
