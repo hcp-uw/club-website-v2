@@ -46,6 +46,7 @@ export interface DBTeam {
   created_at: string;
   lead: boolean;
   description: string;
+  project_year: number;
 }
 
 export interface DBSponsor {

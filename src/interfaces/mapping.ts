@@ -60,6 +60,7 @@ export const mapDBTeamToITeam = (dbTeam: DBTeam): ITeam => ({
   githubRepo: dbTeam.githubRepo,
   lead: dbTeam.lead,
   description: dbTeam.description,
+  projectYear: dbTeam.project_year,
 });
 
 export const mapDBSponsorToISponsor = (dbSponsor: DBSponsor): ISponsor => ({
