@@ -41,7 +41,8 @@ export const ProjectTeamsPage: React.FC = () => {
 
   useEffect(() => {
     const results = teams.filter((team) =>
-      team.name.toLowerCase().includes(searchTerm.toLowerCase())
+      team.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      team.description.toLowerCase().includes(searchTerm.toLowerCase())
     );
     setFilteredTeams(results);
   }, [searchTerm, teams]);
