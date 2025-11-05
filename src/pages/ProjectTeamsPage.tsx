@@ -6,14 +6,14 @@ import {
   Input,
   InputGroup,
   InputLeftElement,
-  Box,
-  Divider,
 } from "@chakra-ui/react";
 import { SearchIcon } from "@chakra-ui/icons";
 import { teamService } from "../service/teamService";
 // import FeaturedProjectsCarousel from "../components/FeaturedProjectsCarousel";
 import { Helmet } from "react-helmet-async";
 import { ProjectCard } from "../components/ProjectCard";
+import Loading from "../components/Loading";
+import Error from "../components/Error";
 
 type TeamData = { teamId: bigint; name: string; logo: string; projectYear?: number; description: string };
 
@@ -21,6 +21,8 @@ export const ProjectTeamsPage: React.FC = () => {
   const [teams, setTeams] = useState<TeamData[]>([]);
   const [filteredTeams, setFilteredTeams] = useState<TeamData[]>([]);
   const [searchTerm, setSearchTerm] = useState("");
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchTeams = async () => {
@@ -32,7 +34,9 @@ export const ProjectTeamsPage: React.FC = () => {
         setTeams(validTeams);
         setFilteredTeams(validTeams);
       } catch (err) {
-        console.error("Team Fetch Error:", err);
+        setError('Failed to fetch project teams');
+      } finally {
+        setLoading(false);
       }
     };
 
@@ -71,6 +75,9 @@ export const ProjectTeamsPage: React.FC = () => {
   //   borderRadius: "md",
   //   width: "fit-content",
   // };
+
+  if (loading) return <Loading />;
+  if (error) return <Error message={error} />;
 
   return (
     <VStack spacing={8} align="stretch">
