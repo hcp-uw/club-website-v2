@@ -238,11 +238,11 @@ const LandingPage = () => {
 
           <FeaturedProjectsCarousel />
 
-          <Link to="/projects">
-            <Box mt={6} mb={{ base: '62px', lg: '100px' }}>
+          <Box mt={6} mb={{ base: '62px', lg: '100px' }}>
+            <Link to="/projects">
               <PurpleButton text="See More" />
-            </Box>
-          </Link>
+            </Link>
+          </Box>
         </Container>
         <Box
           bgImage={`url(${GradientBottom})`}

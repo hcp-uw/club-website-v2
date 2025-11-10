@@ -9,6 +9,7 @@ export interface ITeam {
   githubRepo?: string;
   lead?: boolean;
   description?: string;
+  projectYear?: number;
 }
 
 export interface ITeamMemberRelation {
