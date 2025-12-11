@@ -39,7 +39,7 @@ export const EventCard: React.FC<EventCardProps> = ({ event }) => {
   const bgColor = useColorModeValue('white', 'gray.800');
   const headerColor = useColorModeValue('gray.700', 'gray.200');
   const descriptionColor = useColorModeValue('gray.600', 'gray.300');
-  const footerColor = useColorModeValue('gray.500', 'gray.400');
+  const footerColor = useColorModeValue('gray.600', 'gray.300');
 
   const now = new Date();
   const isOngoing =
@@ -118,6 +118,7 @@ export const EventCard: React.FC<EventCardProps> = ({ event }) => {
               _hover={{
                 cursor: 'pointer',
               }}
+              aria-label={`Link to ${event.linkTitle}`}
             >
               {event.linkTitle}
             </Button>

@@ -58,11 +58,13 @@ const NavItem = ({
 const FooterLink = ({
   href,
   icon,
+  label,
 }: {
   href: string;
   icon: React.ReactElement;
+  label: string;
 }) => (
-  <Link href={href} isExternal>
+  <Link href={href} isExternal aria-label={label}>
     <Box as="span" fontSize="xl">
       {icon}
     </Box>
@@ -224,18 +226,22 @@ export const Layout: React.FC<{ children: React.ReactNode }> = ({
               >
                 <FooterLink
                   href="mailto:huskycodingproject@gmail.com"
+                  label="Email"
                   icon={<FaEnvelope size="22px" color="#422f7e" />}
                 />
                 <FooterLink
                   href="https://www.instagram.com/hcp.uw/"
+                  label="Instagram"
                   icon={<FaInstagram size="22px" color="#422f7e" />}
                 />
                 <FooterLink
                   href="https://www.linkedin.com/company/hcp-uw"
+                  label="LinkedIn"
                   icon={<FaLinkedin size="22px" color="#422f7e" />}
                 />
                 <FooterLink
                   href="https://github.com/hcp-uw"
+                  label="GitHub"
                   icon={<FaGithub size="22px" color="#422f7e" />}
                 />
               </HStack>
