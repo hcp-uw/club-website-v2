@@ -1,6 +1,6 @@
 import React from "react";
 import { ISponsor } from "../../interfaces/ISponsor";
-import { Box, useColorModeValue, Text, Image, Link } from "@chakra-ui/react";
+import { Box, useColorModeValue, Text, Image, Link, Button } from "@chakra-ui/react";
 import { FiExternalLink } from "react-icons/fi";
 import { Link as RouterLink } from "react-router-dom";
 
@@ -36,17 +36,21 @@ export const SponsorCard: React.FC<SponsorsCardProps> = ({ sponsor }) => {
         <Text mt={2}>{sponsor.description}</Text>
       </Box>
       <Box mt={2}>
-        <Link
+        <Button
+          as="a"
           href={sponsor.website}
-          isExternal
-          rel="noopener noreferrer"
-          color="blue.500"
-          fontWeight="semibold"
-          display="flex"
-          alignItems="center"
+          target="_blank"
+          backgroundColor="purple.500"
+          color="white"
+          size="sm"
+          rightIcon={<FiExternalLink color="white" />}
+          _hover={{
+            cursor: 'pointer',
+          }}
+          aria-label={`Link to ${sponsor.name} website`}
         >
-          Website <FiExternalLink style={{ marginLeft: "4px" }} />
-        </Link>
+          Website
+        </Button>
       </Box>
     </Box>
   );

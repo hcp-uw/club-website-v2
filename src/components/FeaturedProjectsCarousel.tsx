@@ -54,7 +54,10 @@ const FeaturedProjectsCarousel: React.FC = () => {
     []
   );
 
-  const embedWidth = 328;
+  const getInstagramEmbedUrl = (postUrl: string) => {
+    const baseUrl = postUrl.split('?')[0];
+    return `${baseUrl}embed/captioned/?cr=1&v=14`;
+  };
 
   return (
     <Box
@@ -89,10 +92,22 @@ const FeaturedProjectsCarousel: React.FC = () => {
         },
       }}
     >
-      <Slider {...settings}>
+      <Slider accessibility={false} focusOnSelect={false} {...settings}>
         {instagramPosts.map((post, index) => (
           <Box key={index} display="flex" justifyContent="center">
-            <InstagramEmbed url={post} width={embedWidth} />
+            <Box w={{ base: "230px", sm: "328px" }} h={{ base: "280px", sm: "380px" }}>
+              <iframe
+                src={getInstagramEmbedUrl(post)}
+                width="100%"
+                height="100%"
+                frameBorder="0"
+                scrolling="no"
+                allowTransparency={true}
+                allowFullScreen={true}
+                title={`Instagram post ${index + 1}`}
+                aria-label={`Instagram post ${index + 1}`}
+              />
+            </Box>
           </Box>
         ))}
       </Slider>

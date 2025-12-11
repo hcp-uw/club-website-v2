@@ -61,7 +61,7 @@ export const AnimatedTerminal: React.FC = () => {
       whiteSpace="pre-wrap"
       width="100%"
     >
-      <Text color="green.400">{currentCommand}</Text>
+      <Text color="green.700">{currentCommand}</Text>
     </Box>
   );
 };
