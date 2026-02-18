@@ -24,22 +24,33 @@ export const MemberCard: React.FC<MemberCardProps> = ({ member }) => {
   const navigate = useNavigate();
   return (
     <Box
-      onClick={() => navigate(`/members/${member.memberId}`)}
-      borderWidth={borderWidth}
-      borderRadius="lg"
+      // onClick={() => navigate(`/members/${member.memberId}`)}
+      // borderWidth={borderWidth}
+      // borderRadius="lg"
       p={6}
-      boxShadow="md"
+      // boxShadow="md"
+      // transition="all 0.3s"
+      // _hover={{ transform: 'translateY(-5px)', boxShadow: 'xl' }}
+      // bg={bgColor}
+      // borderColor={borderColor}
+      // textDecoration="none"
+      position="relative"
+      borderWidth="1px"
+      borderRadius="lg"
+      overflow="hidden"
+      boxShadow="lg"
       transition="all 0.3s"
-      _hover={{ transform: 'translateY(-5px)', boxShadow: 'xl' }}
       bg={bgColor}
-      borderColor={borderColor}
-      textDecoration="none"
+      maxWidth="100%" // for mobile
+      gap="0"
+      _hover={{ transform: 'translateY(-5px)', boxShadow: 'xl' }}
     >
       <VStack spacing={4} align="center">
         <Avatar
-          size="xl"
+          size="2xl"
           name={`${member.firstName} ${member.lastName}`}
-          src={member.profilePicture}
+          src={`https://wivolixjgzmaigovvchs.supabase.co/storage/v1/object/public/club-website-assets/Members/${member.memberId}.jpg`}
+        // src={member.profilePicture}
         />
         <VStack spacing={1} textAlign="center">
           <Text
