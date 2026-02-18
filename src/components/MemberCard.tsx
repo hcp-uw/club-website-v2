@@ -47,7 +47,7 @@ export const MemberCard: React.FC<MemberCardProps> = ({ member }) => {
     >
       <VStack spacing={4} align="center">
         <Avatar
-          size="2xl"
+          size={{ base: "xl", md: "2xl" }}
           name={`${member.firstName} ${member.lastName}`}
           src={`https://wivolixjgzmaigovvchs.supabase.co/storage/v1/object/public/club-website-assets/Members/${member.memberId}.jpg`}
         // src={member.profilePicture}
