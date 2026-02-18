@@ -1,4 +1,4 @@
-import { Box, Flex, Text, Grid, GridItem, VStack, SimpleGrid } from '@chakra-ui/react';
+import { Box, Flex, Text, Grid, GridItem, VStack, SimpleGrid, Heading } from '@chakra-ui/react';
 import { useEffect, useState } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { memberService } from '../service/memberService';
@@ -44,14 +44,10 @@ export const AboutPage: React.FC = () => {
         />
       </Helmet>
       <Flex direction="column" w={{ base: '90%', md: '500px', lg: '100%' }} marginTop={'3em'}>
-        <Text
-          fontSize={['3xl', '4xl', '5xl', '6xl']}
-          fontWeight="semibold"
-          marginTop="1em"
-        >
+        <Heading fontSize={{ base: '4xl', md: '5xl' }}>
           The Problem
-        </Text>
-        <Text fontSize={['md', 'xl', '2xl']} marginTop="1em">
+        </Heading>
+        <Text fontSize={{ base: 'xl', md: '2xl' }} marginTop="1em">
           The majority of projects offered by CS coursework are solo or in
           pairs, so future programmers miss out on the invaluable experience of
           working in larger teams. Additionally, the leading motivation to do CS
@@ -60,26 +56,25 @@ export const AboutPage: React.FC = () => {
         </Text>
       </Flex>
       <Flex direction="column" w={{ base: '90%', md: '500px', lg: '100%' }} marginTop={'3em'}>
-        <Text fontSize={['3xl', '4xl', '5xl', '6xl']} fontWeight="semibold">
+        <Heading fontSize={{ base: '4xl', md: '5xl' }}>
           The Why
-        </Text>
-
-        <Text fontSize={['md', 'xl', '2xl']} marginTop="1em">
+        </Heading>
+        <Text fontSize={{ base: 'xl', md: '2xl' }} marginTop="1em">
           Getting internships is the best ways to gain real world experience
           on the job. However, it is also quite difficult to obtain without
           having some prior experience.
         </Text>
-        <Text fontSize={['md', 'xl', '2xl']} marginTop="1em">
+        <Text fontSize={{ base: 'xl', md: '2xl' }} marginTop="1em">
           This circular logic plagues every generation of programmers.
         </Text>
       </Flex>
       <Flex direction="column" w={{ base: '90%', md: '500px', lg: '100%' }} marginTop={'3em'}>
-        <Text fontSize={['3xl', '4xl', '5xl', '6xl']} fontWeight="semibold">
+        <Heading fontSize={{ base: '4xl', md: '5xl' }}>
           Our Mission
-        </Text>
+        </Heading>
         <Box marginBottom={'3em'}>
           <Text
-            fontSize={['md', 'xl', '2xl']}
+            fontSize={{ base: 'xl', md: '2xl' }}
             display="inline"
             marginTop="1em"
           >
@@ -88,30 +83,30 @@ export const AboutPage: React.FC = () => {
             programming project experience and encourage
           </Text>
           <Text
-            fontSize={['md', 'xl', '2xl']}
+            fontSize={{ base: 'xl', md: '2xl' }}
             display="inline"
-            color="brand.pink"
+            color="purple.600"
           >
             { } peer-to-peer learning
           </Text>
-          <Text fontSize={['md', 'xl', '2xl']} display="inline">
+          <Text fontSize={{ base: 'xl', md: '2xl' }} display="inline">
             { } to provide the next generation of programmers & designers with
             the tools and experience to
           </Text>
           <Text
-            fontSize={['md', 'xl', '2xl']}
+            fontSize={{ base: 'xl', md: '2xl' }}
             display="inline"
-            color="brand.pink"
+            color="purple.600"
           >
             { } succeed in future tech careers.
           </Text>
         </Box>
       </Flex>
       <Flex direction="column" w={{ base: '90%', md: '500px', lg: '100%' }} marginTop={'3em'}>
-        <Text fontSize={['3xl', '4xl', '5xl', '6xl']} fontWeight="semibold">
+        <Heading fontSize={{ base: '4xl', md: '5xl' }}>
           Our Team
-        </Text>
-        <SimpleGrid columns={{ base: 1, sm: 2, lg: 4 }} spacing={6}>
+        </Heading>
+        <SimpleGrid columns={{ base: 1, sm: 2, lg: 4 }} spacing={6} marginTop="1em">
           {processedMembers.map((member) => (
             <MemberCard key={member.memberId?.toString()} member={member} />
           ))}
