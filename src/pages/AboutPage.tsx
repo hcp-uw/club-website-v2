@@ -72,7 +72,7 @@ export const AboutPage: React.FC = () => {
         <Heading fontSize={{ base: '4xl', md: '5xl' }}>
           Our Mission
         </Heading>
-        <Box marginBottom={'3em'}>
+        <Box>
           <Text
             fontSize={{ base: 'xl', md: '2xl' }}
             display="inline"
@@ -102,7 +102,7 @@ export const AboutPage: React.FC = () => {
           </Text>
         </Box>
       </Flex>
-      <Flex direction="column" w={{ base: '90%', md: '500px', lg: '100%' }} marginTop={'3em'}>
+      <Flex direction="column" w={{ base: '90%', md: '500px', lg: '100%' }} marginTop={'3em'} marginBottom={'3em'}>
         <Heading fontSize={{ base: '4xl', md: '5xl' }}>
           Our Team
         </Heading>

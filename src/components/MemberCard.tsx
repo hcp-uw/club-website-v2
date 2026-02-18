@@ -41,7 +41,7 @@ export const MemberCard: React.FC<MemberCardProps> = ({ member }) => {
       boxShadow="lg"
       transition="all 0.3s"
       bg={bgColor}
-      maxWidth="95%" // for mobile
+      maxWidth="100%" // for mobile
       gap="0"
       _hover={{ transform: 'translateY(-5px)', boxShadow: 'xl' }}
     >
