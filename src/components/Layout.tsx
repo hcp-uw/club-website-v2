@@ -81,7 +81,7 @@ export const Layout: React.FC<{ children: React.ReactNode }> = ({
   const navLinks = [
     { to: '/about', label: 'About' },
     { to: '/projects', label: 'Projects' },
-    { to: '/teams/leadership', label: 'Leadership' },
+    // { to: '/teams/leadership', label: 'Leadership' },
     // { to: '/members', label: 'Members' },
     { to: '/events', label: 'Events' },
     // { to: '/join', label: 'Join' },
