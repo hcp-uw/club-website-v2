@@ -6,6 +6,8 @@ export const VALID_TEAMS = [
   'design',
   'finance',
   'co-chair',
+  'media',
+  'project development',
 ] as const;
 
 export type Team = (typeof VALID_TEAMS)[number];

@@ -15,12 +15,14 @@ export interface IMember {
 }
 
 export const COLOR_MAP: Record<Team, string> = {
-  communications: 'red',
-  design: 'blue',
-  finance: 'green',
-  education: 'purple',
-  onboarding: 'pink',
-  tech: 'yellow',
+  'communications': 'red',
+  'design': 'blue',
+  'finance': 'green',
+  'education': 'purple',
+  'onboarding': 'pink',
+  'tech': 'yellow',
   'co-chair': 'orange',
+  'media': 'blue',
+  'project development': 'pink',
 };
 
