@@ -6,6 +6,10 @@ import {
   Input,
   InputGroup,
   InputLeftElement,
+  Flex,
+  Box,
+  Container,
+  Text,
 } from "@chakra-ui/react";
 import { SearchIcon } from "@chakra-ui/icons";
 import { teamService } from "../service/teamService";
@@ -14,6 +18,8 @@ import { Helmet } from "react-helmet-async";
 import { ProjectCard } from "../components/ProjectCard";
 import Loading from "../components/Loading";
 import Error from "../components/Error";
+import GradientTop from '../assets/HCP-gradient-top.png';
+import GradientBottom from '../assets/HCP-gradient-bottom.png';
 
 type TeamData = { teamId: bigint; name: string; logo: string; projectYear?: number; description: string };
 
@@ -23,6 +29,7 @@ export const ProjectTeamsPage: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const showcaseYear = 2026;
 
   useEffect(() => {
     const fetchTeams = async () => {
@@ -80,7 +87,7 @@ export const ProjectTeamsPage: React.FC = () => {
   if (error) return <Error message={error} />;
 
   return (
-    <VStack spacing={8} align="stretch">
+    <VStack w="100%" spacing={8} align="stretch">
       <Helmet>
         <title>Projects</title>
         <meta
@@ -103,12 +110,60 @@ export const ProjectTeamsPage: React.FC = () => {
           onChange={(e) => setSearchTerm(e.target.value)}
         />
       </InputGroup>
+      {teamsByYear.get(showcaseYear) && (
+        <Flex
+          bg="palette.darkGray"
+          w="100vw"
+          color="white"
+          flexDir="column"
+          alignItems="center"
+          alignSelf="center"
+        >
+          <Box
+            bgImage={`url(${GradientTop})`}
+            bgRepeat="repeat-x"
+            bgSize="auto 95px"
+            h="95px"
+            w="100%"
+          />
+          <Container
+            maxW="container.xl"
+            mt={{ base: '48px', lg: '64px' }}
+            mb={{ base: '48px', lg: '64px' }}
+          >
+            <Text
+              fontFamily="Space Mono, monospace"
+              fontSize="12px"
+              textTransform="uppercase"
+              color="palette.lightPurple"
+            >
+              Check out these projects at
+            </Text>
+
+            <Heading size="lg" color="white" mb={6}>
+              Showcase {showcaseYear}.
+            </Heading>
+            <SimpleGrid columns={[1, 2, 3]} spacing={6}>
+              {teamsByYear.get(showcaseYear)?.map((team) => (
+                <ProjectCard key={team.teamId.toString()} project={team} />
+              ))}
+            </SimpleGrid>
+          </Container>
+          <Box
+            bgImage={`url(${GradientBottom})`}
+            bgRepeat="repeat-x"
+            bgSize="auto 95px"
+            h="95px"
+            w="100%"
+          />
+        </Flex>)}
       {Array.from(teamsByYear.keys())
+        .filter((year) => year !== showcaseYear && year !== 0) // Exclude Showcase year and teams without year
         .sort((a, b) => b - a) // newest year first
         .map((year) => (
           <React.Fragment key={year}>
             <Heading size="lg" mt="6">
-              {year === 0 ? "Other Projects" : year}
+              {year}
             </Heading>
 
             <SimpleGrid columns={[1, 2, 3]} spacing={6}>
@@ -118,6 +173,6 @@ export const ProjectTeamsPage: React.FC = () => {
             </SimpleGrid>
           </React.Fragment>
         ))}
-    </VStack >
+    </VStack>
   );
 };
