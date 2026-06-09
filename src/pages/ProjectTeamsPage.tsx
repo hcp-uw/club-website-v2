@@ -29,7 +29,7 @@ export const ProjectTeamsPage: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const showcaseYear = 2026;
+  const showcaseYear = 2027;
 
   useEffect(() => {
     const fetchTeams = async () => {
