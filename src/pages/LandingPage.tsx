@@ -313,6 +313,9 @@ const LandingPage = () => {
                 </Heading>
               </Box>
             </Window>
+            {/* <Link to="" target="_blank"> */}
+            <PurpleButton text="Coming Soon!" transform="translateY(-50%)" />
+            {/* </Link> */}
           </VStack>
           <VStack
             spacing={0}
@@ -345,7 +348,7 @@ const LandingPage = () => {
                 pb={{ base: '44px', lg: '58px' }}
               >
                 <Heading fontSize="24px">
-                  Attend Project Formation Day on 10/10/2025.
+                  Attend Project Formation Day on 10/20/2026.
                 </Heading>
               </Box>
             </Window>
