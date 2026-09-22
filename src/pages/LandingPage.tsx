@@ -298,7 +298,7 @@ const LandingPage = () => {
               <PurpleButton text="Our Discord!" transform="translateY(-50%)" />
             </Link>
           </VStack>
-          <VStack mt={{ lg: '88px' }} mb="33px" zIndex={2}>
+          <VStack spacing={0} mt={{ lg: '88px' }} mb="33px" zIndex={2}>
             <Window
               title="Step 2"
               w={{ base: '80%', md: '500px', lg: '306px' }}
