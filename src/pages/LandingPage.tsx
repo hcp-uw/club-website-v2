@@ -309,7 +309,7 @@ const LandingPage = () => {
                 pb={{ base: '44px', lg: '58px' }}
               >
                 <Heading fontSize="24px">
-                  Complete the HCP application form.
+                  Complete the HCP application form by 10/9/2026.
                 </Heading>
               </Box>
             </Window>
