@@ -298,7 +298,7 @@ const LandingPage = () => {
               <PurpleButton text="Our Discord!" transform="translateY(-50%)" />
             </Link>
           </VStack>
-          <VStack mt={{ lg: '88px' }} mb="33px" zIndex={2}>
+          <VStack spacing={0} mt={{ lg: '88px' }} mb="33px" zIndex={2}>
             <Window
               title="Step 2"
               w={{ base: '80%', md: '500px', lg: '306px' }}
@@ -309,10 +309,13 @@ const LandingPage = () => {
                 pb={{ base: '44px', lg: '58px' }}
               >
                 <Heading fontSize="24px">
-                  Complete the HCP application form.
+                  Complete the HCP application form by 10/9/2026.
                 </Heading>
               </Box>
             </Window>
+            {/* <Link to="" target="_blank"> */}
+            <PurpleButton text="Coming Soon!" transform="translateY(-50%)" />
+            {/* </Link> */}
           </VStack>
           <VStack
             spacing={0}
@@ -345,7 +348,7 @@ const LandingPage = () => {
                 pb={{ base: '44px', lg: '58px' }}
               >
                 <Heading fontSize="24px">
-                  Attend Project Formation Day on 10/10/2025.
+                  Attend Project Formation Day on 10/20/2026.
                 </Heading>
               </Box>
             </Window>

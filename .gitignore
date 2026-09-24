@@ -133,3 +133,6 @@ dist
 .yarn/install-state.gz
 .pnp.*
 .vscode/settings.json
+
+# Mac System files
+.DS_Store
