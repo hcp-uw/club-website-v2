@@ -313,9 +313,9 @@ const LandingPage = () => {
                 </Heading>
               </Box>
             </Window>
-            {/* <Link to="" target="_blank"> */}
-            <PurpleButton text="Coming Soon!" transform="translateY(-50%)" />
-            {/* </Link> */}
+            <Link to="https://docs.google.com/forms/d/e/1FAIpQLSeOnMHo8rQ4YMbk8Su41uIdAB9wh_0_6f0oiJardRrxpgf0Sg/viewform?usp=dialog" target="_blank">
+              <PurpleButton text="Apply here!" transform="translateY(-50%)" />
+            </Link>
           </VStack>
           <VStack
             spacing={0}
