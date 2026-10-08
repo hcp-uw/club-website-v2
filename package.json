@@ -21,7 +21,7 @@
     "@emotion/styled": "^11.14.0",
     "@octokit/core": "^6.1.4",
     "@supabase/supabase-js": "^2.46.0",
-    "@tailwindcss/vite": "^4.0.9",
+    "@tailwindcss/vite": "^4.3.1",
     "bootstrap": "^5.3.3",
     "framer-motion": "^11.18.2",
     "react": "^18.3.1",
@@ -44,7 +44,7 @@
     "@types/react-slick": "^0.23.13",
     "@typescript-eslint/eslint-plugin": "^7.15.0",
     "@typescript-eslint/parser": "^7.15.0",
-    "@vitejs/plugin-react": "^4.3.1",
+    "@vitejs/plugin-react": "^6.0.2",
     "cross-env": "^7.0.3",
     "eslint": "^8.57.0",
     "eslint-plugin-react-hooks": "^4.6.2",
@@ -52,7 +52,7 @@
     "gh-pages": "^6.1.1",
     "supabase": "^2.78.1",
     "typescript": "^5.2.2",
-    "vite": "^5.3.4",
-    "vite-plugin-singlefile": "^2.0.2"
+    "vite": "^8.0.16",
+    "vite-plugin-singlefile": "^2.3.3"
   }
 }
